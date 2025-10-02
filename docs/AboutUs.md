@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/yourface1746.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Yourface1746)]
 [[portfolio](team/yourface1746)]
 
 * Role: Developer
