@@ -9,46 +9,37 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jaeyoun Jeon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jaey0un.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jaey0un)]
+[[portfolio](team/jaeyoun.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Storage
 
-### Jean Doe
+### Ng Shouhe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yourface1746.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Yourface1746)]
+[[portfolio](team/yourface1746)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI, Testing
 
-### James Doe
+### Thambad Samarth Shivanand
+
+<img src="images/samthambad.png" width="200px">
+
+[[github](https://github.com/samthambad)]
+[[portfolio](team/samthambad.md)]
+
+* Role: Developer
+* Responsibilities: Logic
+
+### Ding Feng
 
 <img src="images/dingfeng.png" width="200px">
 
@@ -57,3 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Moey Sean Jean
+
+<img src="images/moeyseanjean.png" width="200px">
+
+[[github](https://github.com/moeyseanjean)]
+[[portfolio](team/moeyseanjean.md)]
+
+* Role: Developer
+* Responsibilities: Model

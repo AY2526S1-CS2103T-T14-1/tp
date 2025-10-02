@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2526S1-CS2103T-T14-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-T14-1/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
 
@@ -35,3 +35,6 @@
 * Save time on administrative tasks.
 * Ensure payments and notes are never missed.
 * Provide a more professional, organized experience.
+
+## Acknowledgements
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
