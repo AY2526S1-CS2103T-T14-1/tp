@@ -296,7 +296,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -311,6 +310,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Student**: A person receiving tuition from the tutor.
+* **Lesson**: A scheduled teaching session between tutor and one or more students.
+* **Attendance**: A record of whether a student was present or absent for a lesson.
+* **Progress Tracking**: A feature that allows tutors to note student learning milestones and monitor improvement.
+* **Outstanding Fees**: Tuition fees owed by a student that are not yet paid.
+* **MVP (Minimum Viable Product)**: The smallest functional version of StudentConnect that delivers core value to users.
 
 --------------------------------------------------------------------------------------------------------------------
 
