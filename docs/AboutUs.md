@@ -18,3 +18,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Logic
+
+### Moey Sean Jean
+
+<img src="images/moeyseanjean.png" width="200px">
+
+[[github](https://github.com/moeyseanjean)]
+[[portfolio](team/moeyseanjean.md)]
+
+* Role: Developer
+* Responsibilities: Model
