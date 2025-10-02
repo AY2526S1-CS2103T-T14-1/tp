@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ding Feng
 
 <img src="images/dingfeng.png" width="200px">
 
@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/dingfeng.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Dev
