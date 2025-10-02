@@ -275,14 +275,18 @@ Enable tutors and teachers to manage student contacts, notes, and tuition record
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                       | So that I can…​ |
+|----------|---------|----------------------------------------------------|--------------|
+| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system |
+| `* * *`  | tutor   | delete a student permanently                       | reduce clutter |
+| `* * *`  | tutor   | add a lesson with date, time, and location         | track when and where I teach |
+| `* *`    | tutor   | mark attendance for a lesson                       | know if the student showed up |
+| `* *`    | tutor   | add tuition fees per lesson or per month           | track income |
+| `* * *`  | tutor   | record fee payments                                | know who has paid |
+| `* * *`  | tutor   | see outstanding payments                           | follow up with students/parents |
+| `* *`    | tutor   | see a daily/weekly schedule                        | plan my teaching |
+| `* * *`  | tutor   | search by student name                             | quickly find their record |
+| `* *`    | tutor   | view a student’s details                           | reach them easily |
 
 *{More to be added}*
 
