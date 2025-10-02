@@ -292,9 +292,202 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+(For all use cases below, the **System** is the `StudentConnect` and the **Actor** is the `user`, unless specified otherwise)
+
+**UC1: Add New Student**
+
 **MSS**
 
+1. Actor chooses to add a new student.
+2. System requests student details (name, contact, subject, hourly rate).
+3. Actor enters the details.
+4. System saves the details and displays a success message.
+
+    Use case ends.
+
 **Extensions**
+
+* 3a. System detects missing or invalid details.
+
+    * 3a1. System requests correct details.
+
+    * 3a2. Actor re-enters details.
+
+      Use case resumes at step 4.
+
+* *a. At any time, Actor cancels the operation.
+
+    * *a1. System requests confirmation.
+
+    * *a2. Actor confirms.
+
+      Use case ends.
+
+**UC2: Delete Student**
+
+**MSS**
+
+1. Actor selects a student to delete.
+2. System requests confirmation.
+3. Actor confirms deletion.
+4. System deletes the student and shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Actor cancels deletion.
+
+    * 2a1. System closes deletion process.
+
+      Use case ends.
+
+**UC3: Add Lesson**
+
+**MSS**
+
+1. Actor chooses to add a new lesson.
+2. System requests details (date, time, location, student).
+3. Actor enters lesson details.
+4. System saves the lesson and confirms creation.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects invalid/missing lesson details.
+
+    * 3a1. System requests correction.
+
+      Use case resumes at step 3.
+
+**UC4: Mark Attendance**
+
+**MSS**
+
+1. Actor selects a lesson.
+2. System displays the lesson and attendance options.
+3. Actor marks student as present or absent.
+4. System saves attendance record.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Actor changes attendance after marking.
+
+    * 3a1. System updates the record accordingly.
+
+      Use case resumes at step 4.
+
+**UC5: Add Tuition Fees**
+
+**MSS**
+
+1. Actor selects student and chooses to add tuition fees.
+2. System requests fee details (per lesson or per month).
+3. Actor enters fee details.
+4. System saves fee record.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Invalid or incomplete fee details.
+
+    * 3a1. System prompts for correction.
+
+      Use case resumes at step 3.
+
+**UC6: Record Fee Payment**
+
+**MSS**
+
+1. Actor selects a student with fees.
+2. System shows outstanding fees.
+3. Actor enters payment details (amount, date, method).
+4. System records payment and updates balance.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Payment details invalid.
+
+    * 3a1. System prompts for correction.
+
+      Use case resumes at step 3.
+
+**UC7: View Outstanding Payments**
+
+**MSS**
+
+1. Actor chooses to view outstanding payments.
+2. System retrieves and displays a list of unpaid fees by student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No outstanding payments.
+
+    * 2a1. System displays “No pending fees.”
+
+      Use case ends.
+
+**UC8: View Schedule**
+
+**MSS**
+
+1. Actor chooses to view schedule.
+2. System displays daily/weekly schedule of lessons. 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No lessons scheduled.
+
+    * 2a1. System displays “No lessons scheduled.”
+
+      Use case ends.
+
+**UC9: Search Student**
+
+**MSS**
+
+1. Actor enters student name into search bar.
+2. System searches for matching student records.
+3. System displays results.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No matching student found.
+
+    * 2a1. System displays “No student found.”
+
+      Use case ends.
+
+**UC10: View Student Details**
+
+**MSS**
+
+1. Actor selects a student.
+2. System displays student details (name, contact, subject, fees, history).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Student record is missing/corrupted.
+
+    * 2a1. System displays error message.
+
+      Use case ends.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
