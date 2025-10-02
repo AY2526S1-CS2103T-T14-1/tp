@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/moeyseanjean)]
 [[portfolio](team/moeyseanjean.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: Model
 
 ### Jane Doe
