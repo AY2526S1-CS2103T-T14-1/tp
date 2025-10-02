@@ -324,9 +324,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor selects a student to delete.
-2. TMS requests confirmation.
+2. System requests confirmation.
 3. Tutor confirms deletion.
-4. TMS deletes the student and shows a success message.
+4. System deletes the student and shows a success message.
 
     Use case ends.
 
@@ -334,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Tutor cancels deletion.
 
-    * 2a1. TMS closes deletion process.
+    * 2a1. System closes deletion process.
 
       Use case ends.
 
@@ -343,17 +343,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor chooses to add a new lesson.
-2. TMS requests details (date, time, location, student).
+2. System requests details (date, time, location, student).
 3. Tutor enters lesson details.
-4. TMS saves the lesson and confirms creation.
+4. System saves the lesson and confirms creation.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. TMS detects invalid/missing lesson details.
+* 3a. System detects invalid/missing lesson details.
 
-    * 3a1. TMS requests correction.
+    * 3a1. System requests correction.
 
       Use case resumes at step 3.
 
@@ -362,9 +362,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor selects a lesson.
-2. TMS displays the lesson and attendance options.
+2. System displays the lesson and attendance options.
 3. Tutor marks student as present or absent.
-4. TMS saves attendance record.
+4. System saves attendance record.
 
     Use case ends.
 
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. Tutor changes attendance after marking.
 
-    * 3a1. TMS updates the record accordingly.
+    * 3a1. System updates the record accordingly.
 
       Use case resumes at step 4.
 
@@ -381,9 +381,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor selects student and chooses to add tuition fees.
-2. TMS requests fee details (per lesson or per month).
+2. System requests fee details (per lesson or per month).
 3. Tutor enters fee details.
-4. TMS saves fee record.
+4. System saves fee record.
 
     Use case ends.
 
@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. Invalid or incomplete fee details.
 
-    * 3a1. TMS prompts for correction.
+    * 3a1. System prompts for correction.
 
       Use case resumes at step 3.
 
@@ -400,9 +400,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor selects a student with fees.
-2. TMS shows outstanding fees.
+2. System shows outstanding fees.
 3. Tutor enters payment details (amount, date, method).
-4. TMS records payment and updates balance.
+4. System records payment and updates balance.
 
     Use case ends.
 
@@ -410,7 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. Payment details invalid.
 
-    * 3a1. TMS prompts for correction.
+    * 3a1. System prompts for correction.
 
       Use case resumes at step 3.
 
@@ -419,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor chooses to view outstanding payments.
-2. TMS retrieves and displays a list of unpaid fees by student.
+2. System retrieves and displays a list of unpaid fees by student.
 
     Use case ends.
 
@@ -427,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. No outstanding payments.
 
-    * 2a1. TMS displays “No pending fees.”
+    * 2a1. System displays “No pending fees.”
 
       Use case ends.
 
@@ -436,7 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor chooses to view schedule.
-2. TMS displays daily/weekly schedule of lessons. 
+2. System displays daily/weekly schedule of lessons. 
 
     Use case ends.
 
@@ -444,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. No lessons scheduled.
 
-    * 2a1. TMS displays “No lessons scheduled.”
+    * 2a1. System displays “No lessons scheduled.”
 
       Use case ends.
 
@@ -453,8 +453,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor enters student name into search bar.
-2. TMS searches for matching student records.
-3. TMS displays results.
+2. System searches for matching student records.
+3. System displays results.
 
     Use case ends.
 
@@ -462,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. No matching student found.
 
-    * 2a1. TMS displays “No student found.”
+    * 2a1. System displays “No student found.”
 
       Use case ends.
 
@@ -471,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tutor selects a student.
-2. TMS displays student details (name, contact, subject, fees, history).
+2. System displays student details (name, contact, subject, fees, history).
 
     Use case ends.
 
@@ -479,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Student record is missing/corrupted.
 
-    * 2a1. TMS displays error message.
+    * 2a1. System displays error message.
 
       Use case ends.
 
