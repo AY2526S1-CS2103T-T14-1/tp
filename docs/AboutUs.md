@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Moey Sean Jean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/moeyseanjean.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/moeyseanjean)]
+[[portfolio](team/moeyseanjean.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Model
 
 ### Jane Doe
 
