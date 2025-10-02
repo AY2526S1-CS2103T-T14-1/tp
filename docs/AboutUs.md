@@ -16,7 +16,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/samthambad)]
 [[portfolio](team/samthambad.md)]
 
-* Role: Project Advisor
-
 * Role: Developer
 * Responsibilities: Logic
