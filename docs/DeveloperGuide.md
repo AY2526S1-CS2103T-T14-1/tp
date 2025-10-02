@@ -258,14 +258,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* has a need to manage a significant number of contacts
+* Needs to manage a large number of student contacts
+* Prefers desktop applications over mobile/web
+* Types quickly and efficiently
+* Prefers keyboard input over mouse-driven interactions
+* Comfortable using command-line style applications
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value Proposition**:
+Enable tutors and teachers to manage student contacts, notes, and tuition records **faster and more efficiently** than traditional GUI-based apps.
 
 ### User stories
 
@@ -298,6 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
 6. The data should be stored locally and should be in a human editable text file.
 7. Package everything into a single JAR file.
+
 *{More to be added}*
 
 ### Glossary
