@@ -275,14 +275,18 @@ Enable tutors and teachers to manage student contacts, notes, and tuition record
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                       | So that I can…​ |
+|----------|---------|----------------------------------------------------|--------------|
+| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system |
+| `* * *`  | tutor   | delete a student permanently                       | reduce clutter |
+| `* * *`  | tutor   | add a lesson with date, time, and location         | track when and where I teach |
+| `* *`    | tutor   | mark attendance for a lesson                       | know if the student showed up |
+| `* *`    | tutor   | add tuition fees per lesson or per month           | track income |
+| `* * *`  | tutor   | record fee payments                                | know who has paid |
+| `* * *`  | tutor   | see outstanding payments                           | follow up with students/parents |
+| `* *`    | tutor   | see a daily/weekly schedule                        | plan my teaching |
+| `* * *`  | tutor   | search by student name                             | quickly find their record |
+| `* *`    | tutor   | view a student’s details                           | reach them easily |
 
 *{More to be added}*
 
@@ -490,13 +494,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The interface should follow familiar patterns (e.g., similar to phone contacts apps) with clear navigation, searchable fields, and minimal clicks to add/view a student. Aim for a learnability time of under 5 minutes for new users.
+5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
+6. The data should be stored locally and should be in a human editable text file.
+7. Package everything into a single JAR file.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
