@@ -14,6 +14,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jaey0un.png" width="200px">
 
 [[github](https://github.com/jaey0un)]
-[[portfolio](team/jaey0un.md)]
+[[portfolio](team/jaeyoun.md)]
 
 * Role: Developer
