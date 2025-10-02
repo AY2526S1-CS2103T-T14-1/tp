@@ -278,7 +278,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​ | I want to …​                                                               | So that I can…​                               |
 |----------|---------|----------------------------------------------------------------------------|-----------------------------------------------|
 | `* * *`  | tutor   | I can add a new student with details (name, contact, subject, hourly rate) | so that I can manage them in the system       |
-| `* * *`  | tutor   | I can edit student details                                                 | so that I can keep their profile up-to-date   |
 | `* * *`  | tutor   | I can delete a student permanently                                         | so that I can reduce clutter                  |
 | `* * *`  | tutor   | I can add a lesson with date, time, and location                           | so that I can track when and where I teach    |
 | `* *`    | tutor   | I can mark attendance for a lesson                                         | so that I know if the student showed up       |
