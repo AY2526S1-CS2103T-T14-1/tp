@@ -29,6 +29,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Logic
 
+### Ding Feng
+
+<img src="images/dingfeng.png" width="200px">
+
+[[github](http://github.com/dingf3ng)]
+[[portfolio](team/dingfeng.md)]
+
+* Role: Developer
+* Responsibilities: Dev
+
 ### Moey Sean Jean
 
 <img src="images/moeyseanjean.png" width="200px">
