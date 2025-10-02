@@ -275,14 +275,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                               | So that I can…​                               |
+|----------|---------|----------------------------------------------------------------------------|-----------------------------------------------|
+| `* * *`  | tutor   | I can add a new student with details (name, contact, subject, hourly rate) | so that I can manage them in the system       |
+| `* * *`  | tutor   | I can edit student details                                                 | so that I can keep their profile up-to-date   |
+| `* * *`  | tutor   | I can delete a student permanently                                         | so that I can reduce clutter                  |
+| `* * *`  | tutor   | I can add a lesson with date, time, and location                           | so that I can track when and where I teach    |
+| `* *`    | tutor   | I can mark attendance for a lesson                                         | so that I know if the student showed up       |
+| `* *`    | tutor   | I can add tuition fees per lesson or per month                             | so that I can track income                    |
+| `* * *`  | tutor   | I can record fee payments                                                  | so that I know who has paid                   |
+| `* * *`  | tutor   | I can see outstanding payments                                             | so that I can follow up with students/parents |
+| `* *`    | tutor   | I can see a daily/weekly schedule                                          | so that I can plan my teaching                |
+| `* * *`  | tutor   | I can search by student name                                               | so that I can quickly find their record       |
+| `* *`    | tutor   | I can view a student’s details                                             | so that I can reach them easily               |
 
 *{More to be added}*
 
