@@ -5,7 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Lesson in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidLessonName(String)}
+ * Guarantees:
+ *  immutable;
+ *  name is valid as declared in {@link #isValidLessonName(String)};
+ *  time is valid as declared in {@link #isValidTime(String)};
+ *  location is valid as declared in {@link #isValidLocation(String)};
  */
 public class Lesson {
 
