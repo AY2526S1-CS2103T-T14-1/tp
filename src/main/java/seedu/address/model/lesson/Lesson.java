@@ -43,7 +43,7 @@ public class Lesson {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.tag.Tag)) {
+        if (!(other instanceof Lesson)) {
             return false;
         }
 
