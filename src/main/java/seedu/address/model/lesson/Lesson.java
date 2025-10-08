@@ -12,6 +12,9 @@ public class Lesson {
     public static final String MESSAGE_CONSTRAINTS = "Lessons names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
+    public static final String TIME_MESSAGE_CONSTRAINTS = "Lesson time should be in 24-hour format (HH:MM)";
+    public static final String TIME_VALIDATION_REGEX = "([01]\\d|2[0-3]):[0-5]\\d";
+
     public final String lessonName;
     public final String time;
     public final String location;
@@ -20,10 +23,14 @@ public class Lesson {
      * Constructs a {@code Lesson}.
      *
      * @param lessonName A valid lesson name.
+     * @param time A valid time.
+     * @param location A valid location.
      */
     public Lesson(String lessonName, String time, String location) {
         requireAllNonNull(lessonName, time, location);
         checkArgument(isValidLessonName(lessonName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), TIME_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
         this.lessonName = lessonName;
         this.time = time;
         this.location = location;
@@ -33,6 +40,20 @@ public class Lesson {
      * Returns true if a given string is a valid lesson name.
      */
     public static boolean isValidLessonName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid time in 24-hour format.
+     */
+    public static boolean isValidTime(String test) {
+        return test.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid location.
+     */
+    public static boolean isValidLocation(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -48,19 +69,21 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return lessonName.equals(otherLesson.lessonName);
+        return lessonName.equals(otherLesson.lessonName)
+                && time.equals(otherLesson.time)
+                && location.equals(otherLesson.location);
     }
 
     @Override
     public int hashCode() {
-        return lessonName.hashCode();
+        return (lessonName + time + location).hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + lessonName + ']';
+        return String.format("[Lesson: %s | Time: %s | Location: %s]", lessonName, time, location);
     }
 
 }
