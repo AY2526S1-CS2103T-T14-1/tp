@@ -35,7 +35,7 @@ public class Finance {
             return false;
         }
         double value = Double.parseDouble(trimmed);
-        return value >= 0 && value <= 1_000_000.0;
+        return value >= 0 && value <= 1000000;
     }
 
     @Override
