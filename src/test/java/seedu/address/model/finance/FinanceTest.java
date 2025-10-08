@@ -28,8 +28,10 @@ public class FinanceTest {
 
     @Test
     public void constructor_invalidAmount_throwsIllegalArgumentException() {
-        String invalidAmount = "";
-        assertThrows(IllegalArgumentException.class, () -> new Finance(invalidAmount));
+        String invalidAmount1 = "";
+        String invalidAmount2 = "2000000.00";
+        assertThrows(IllegalArgumentException.class, () -> new Finance(invalidAmount1));
+        assertThrows(IllegalArgumentException.class, () -> new Finance(invalidAmount2));
     }
 
     @Test
