@@ -75,12 +75,14 @@ public class LessonTest {
         Lesson lesson5 = new Lesson("test", "00:00", "Different");
 
         // same content → should be equal
+        assertEquals(lesson1, lesson1);
         assertEquals(lesson1, lesson2);
 
         // different lesson name/time/location → not equal
         assertNotEquals(lesson1, lesson3);
         assertNotEquals(lesson1, lesson4);
         assertNotEquals(lesson1, lesson5);
+        assertNotEquals(lesson1, null);
     }
 
     @Test
