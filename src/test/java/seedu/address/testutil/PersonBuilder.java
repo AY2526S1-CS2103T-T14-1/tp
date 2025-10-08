@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.lesson.Date;
@@ -56,7 +57,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        lesson = personToCopy.getLesson();
+        lesson = personToCopy.getLesson().orElse(null);
     }
 
     /**
@@ -108,7 +109,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, lesson);
+        return new Person(name, phone, email, address, tags, Optional.ofNullable(lesson));
     }
 
 }
