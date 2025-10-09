@@ -30,8 +30,8 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
 
         LocalDate today = LocalDate.now();
-        LocalDate MONDAY = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate SUNDAY = MONDAY.plusDays(6);
+        LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate sunday = monday.plusDays(6);
 
         List<Person> personList = model.getFilteredPersonList();
         List<Row> rows = new ArrayList<>();
@@ -45,7 +45,7 @@ public class ScheduleCommand extends Command {
             Lesson lesson = optional.get();
 
             DayOfWeek dayOfWeek = lesson.getDate().asDayOfWeek();
-            LocalDate lessonDate = MONDAY.plusDays(dayOfWeek.getValue() - DayOfWeek.MONDAY.getValue());
+            LocalDate lessonDate = monday.plusDays(dayOfWeek.getValue() - DayOfWeek.MONDAY.getValue());
             LocalDateTime lessonStart = LocalDateTime.of(lessonDate, lesson.getTime().asLocalTime());
 
             rows.add(new Row(lessonStart, p, lesson));
@@ -54,10 +54,10 @@ public class ScheduleCommand extends Command {
         rows.sort(Comparator.comparing(Row::getStart));
 
         if (rows.isEmpty()) {
-            return new CommandResult("No lessons found for this week.");
+            return new CommandResult("NO LESSONS FOUND THIS WEEK!");
         }
 
-        String output = "Weekly schedule (" + MONDAY + " to " + SUNDAY + "):\n";
+        String output = "Weekly schedule (" + monday + " to " + sunday + "):\n";
 
         DayOfWeek current = null;
         for (Row r : rows) {
