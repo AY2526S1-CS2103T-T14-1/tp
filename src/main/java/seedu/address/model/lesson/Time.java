@@ -3,6 +3,8 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalTime;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -36,6 +38,12 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns this time as a {@link LocalTime}.
+     */
+    public LocalTime asLocalTime() {
+        return LocalTime.parse(value);
+    }
 
     @Override
     public String toString() {
