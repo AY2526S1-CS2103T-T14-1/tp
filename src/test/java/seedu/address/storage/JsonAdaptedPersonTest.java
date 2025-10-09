@@ -32,8 +32,9 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final JsonAdaptedFinance VALID_FINANCE =
-            new JsonAdaptedFinance(BENSON.getFinance().orElse(null));
+    private static final JsonAdaptedFinance VALID_FINANCE = BENSON.getFinance()
+            .map(JsonAdaptedFinance::new)
+            .orElse(null);
     private static final Lesson VALID_LESSON = BENSON.getLesson().orElse(null);
 
     @Test

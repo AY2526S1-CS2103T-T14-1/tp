@@ -55,8 +55,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        finance = DEFAULT_FINANCE;
-        lesson = new Lesson(DEFAULT_LESSON);
+        finance = Optional.empty();
+        lesson = null;
     }
 
     /**
