@@ -1,41 +1,40 @@
 package seedu.address.model.finance;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Finance record in the address book.
- * Guarantees: immutable; amount is valid as declared in {@link #isValidAmount(String)}
+ * Guarantees: immutable;
  */
 public class Finance {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Amount must be a positive number up to 2 decimal places, between 0 and 1,000,000.00.";
-    private static final String VALIDATION_REGEX = "^\\s*(\\d{1,7})(\\.\\d{1,2})?\\s*$";
+    private final FinanceAmount amount;
+    private final FinanceType type;
+    private final FinanceStatus status;
 
-    public final double amount;
 
     /**
      * Constructs a {@code Finance}.
      *
      * @param amount A valid amount.
      */
-    public Finance(String amount) {
-        requireNonNull(amount);
-        checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.amount = Double.parseDouble(amount.trim());
+    public Finance(FinanceAmount amount, FinanceType type, FinanceStatus status) {
+        requireAllNonNull(amount, type, status);
+        this.amount = amount;
+        this.type = type;
+        this.status = status;
     }
 
-    /**
-     * Returns true if a given string is a valid amount.
-     */
-    public static boolean isValidAmount(String test) {
-        String trimmed = test.trim();
-        if (!trimmed.matches(VALIDATION_REGEX)) {
-            return false;
-        }
-        double value = Double.parseDouble(trimmed);
-        return value <= 1000000;
+    public FinanceAmount getAmount() {
+        return amount;
+    }
+
+    public FinanceType getType() {
+        return type;
+    }
+
+    public FinanceStatus getStatus() {
+        return status;
     }
 
     @Override
@@ -45,24 +44,26 @@ public class Finance {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Finance)) {
+        if (!(other instanceof Finance otherFinance)) {
             return false;
         }
 
-        Finance otherFinance = (Finance) other;
-        return amount == otherFinance.amount;
+        return amount.equals(otherFinance.amount)
+                && type.equals(otherFinance.type)
+                && status.equals(otherFinance.status);
     }
 
     @Override
     public int hashCode() {
-        return Double.hashCode(amount);
+        return Long.hashCode((long) amount.hashCode() + (long) type.hashCode() + (long) status.hashCode());
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return String.format("[Amount: %.2f]", amount);
+        return String.format("[Amount: %.2f, Type: %s, Status: %s]",
+                amount.getAmount(), type.toString(), status.toString());
     }
 
 }

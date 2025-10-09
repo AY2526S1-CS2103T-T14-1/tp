@@ -1,8 +1,13 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.finance.Finance;
+import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.FinanceStatus;
+import seedu.address.model.finance.FinanceType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -20,12 +25,18 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Optional<Finance> DEFAULT_FINANCE = Optional.of(new Finance(
+            new FinanceAmount("0"),
+            FinanceType.PER_MONTH,
+            FinanceStatus.UNPAID
+    ));
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Optional<Finance> finance;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +47,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        finance = DEFAULT_FINANCE;
     }
 
     /**
@@ -47,6 +59,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        finance = personToCopy.getFinance();
     }
 
     /**
@@ -89,8 +102,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Finance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFinance(Finance finance) {
+        this.finance = Optional.of(finance);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Finance} of the {@code Person} that we are building to empty.
+     */
+    public PersonBuilder withoutFinance() {
+        this.finance = Optional.empty();
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, finance);
     }
 
 }
