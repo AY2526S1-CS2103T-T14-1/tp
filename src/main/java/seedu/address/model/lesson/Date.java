@@ -1,6 +1,7 @@
 package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
+import java.time.DayOfWeek;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,6 +19,18 @@ public class Date {
             "^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)$";
 
     public final String value;
+    public DayOfWeek asDayOfWeek() {
+        switch(value) {
+            case "monday":    return DayOfWeek.MONDAY;
+            case "tuesday":   return DayOfWeek.TUESDAY;
+            case "wednesday": return DayOfWeek.WEDNESDAY;
+            case "thursday":  return DayOfWeek.THURSDAY;
+            case "friday":    return DayOfWeek.FRIDAY;
+            case "saturday":  return DayOfWeek.SATURDAY;
+            case "sunday":    return DayOfWeek.SUNDAY;
+            default: throw new AssertionError("Invalid day: " + value);
+        }
+    }
 
     /**
      * Constructs a {@code Date}.
