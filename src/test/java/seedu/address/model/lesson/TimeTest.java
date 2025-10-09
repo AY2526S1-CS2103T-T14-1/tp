@@ -1,8 +1,11 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,5 +53,10 @@ public class TimeTest {
 
         // different values -> returns false
         assertFalse(time.equals(new Time("13:00")));
+    }
+
+    @Test
+    public void asLocalTime_parses() {
+        assertEquals(LocalTime.of(12, 30), new Time("12:30").asLocalTime());
     }
 }

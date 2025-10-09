@@ -1,8 +1,11 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,5 +53,11 @@ public class DateTest {
 
         // different values -> returns false
         assertFalse(date.equals(new Date("Tuesday")));
+    }
+
+    @Test
+    public void asDayOfWeek_mapping() {
+        assertEquals(DayOfWeek.MONDAY, new Date("Monday").asDayOfWeek());
+        assertEquals(DayOfWeek.SUNDAY, new Date("sunday").asDayOfWeek());
     }
 }

@@ -3,6 +3,8 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DayOfWeek;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,6 +40,29 @@ public class Date {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns this date as a {@link DayOfWeek}.
+     */
+    public DayOfWeek asDayOfWeek() {
+        switch (value) {
+        case "monday":
+            return DayOfWeek.MONDAY;
+        case "tuesday":
+            return DayOfWeek.TUESDAY;
+        case "wednesday":
+            return DayOfWeek.WEDNESDAY;
+        case "thursday":
+            return DayOfWeek.THURSDAY;
+        case "friday":
+            return DayOfWeek.FRIDAY;
+        case "saturday":
+            return DayOfWeek.SATURDAY;
+        case "sunday":
+            return DayOfWeek.SUNDAY;
+        default:
+            throw new AssertionError("Invalid weekday: " + value);
+        }
+    }
 
     @Override
     public String toString() {
