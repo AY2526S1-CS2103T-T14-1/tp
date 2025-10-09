@@ -51,6 +51,22 @@ public class Lesson {
         this.location = lesson.location;
     }
 
+    public LessonName getLessonName() {
+        return lessonName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
