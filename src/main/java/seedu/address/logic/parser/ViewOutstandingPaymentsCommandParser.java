@@ -10,6 +10,10 @@ public class ViewOutstandingPaymentsCommandParser implements Parser<ViewOutstand
     
     public ViewOutstandingPaymentsCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
+        if (!args.trim().isEmpty()) {
+            throw new ParseException(String.format(seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT, 
+                    ViewOutstandingPaymentsCommand.MESSAGE_USAGE));
+        }
+        return new ViewOutstandingPaymentsCommand();
     }
 }
