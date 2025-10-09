@@ -127,7 +127,7 @@ public class PersonBuilder {
         this.finance = Optional.empty();
         return this;
     }
-  
+
     /**
      * Sets the {@code Lesson} of the {@code Person} that we are building.
      */

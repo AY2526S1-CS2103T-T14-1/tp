@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to view schedule.
-2. System displays daily/weekly schedule of lessons. 
+2. System displays daily/weekly schedule of lessons.
 
     Use case ends.
 

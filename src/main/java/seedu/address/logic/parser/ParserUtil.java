@@ -188,7 +188,7 @@ public class ParserUtil {
         FinanceStatus financeStatus = parseFinanceStatus(status);
         return new Finance(financeAmount, financeType, financeStatus);
     }
-  
+
     /**
      * Parses a {@code String lessonName} into a {@code LessonName}.
      * Leading and trailing whitespaces will be trimmed.

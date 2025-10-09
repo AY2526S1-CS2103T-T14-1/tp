@@ -40,7 +40,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson,
             @JsonProperty("finance") JsonAdaptedFinance finance) {
         this.name = name;
         this.phone = phone;
@@ -120,7 +120,7 @@ class JsonAdaptedPerson {
         } else {
             modelFinance = Optional.of(finance.toModelType());
         }
-        
+
         final Optional<Lesson> modelLesson = Optional.ofNullable(lesson);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);

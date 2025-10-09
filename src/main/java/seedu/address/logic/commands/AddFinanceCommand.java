@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -90,9 +91,10 @@ public class AddFinanceCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
+        Optional<Lesson> updatedLesson = personToEdit.getLesson();
         Optional<Finance> updatedFinance = Optional.of(addFinanceDescriptor.getFinance());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedFinance);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLesson, updatedFinance);
     }
 
     @Override

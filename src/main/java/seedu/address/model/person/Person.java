@@ -49,12 +49,14 @@ public class Person {
         this.finance = finance;
     }
 
+
     /**
      * Convenience constructor for Person without lesson and finance information.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags, Optional.empty(), Optional.empty());
     }
+
 
     public Name getName() {
         return name;
@@ -83,7 +85,7 @@ public class Person {
     public Optional<Finance> getFinance() {
         return finance;
     }
-  
+
     public Optional<Lesson> getLesson() {
         return lesson;
     }
