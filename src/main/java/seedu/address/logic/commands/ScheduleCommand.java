@@ -54,7 +54,7 @@ public class ScheduleCommand extends Command {
         rows.sort(Comparator.comparing(Row::getStart));
 
         if (rows.isEmpty()) {
-            return new CommandResult("No lessons found for this week.");
+            return new CommandResult("NO LESSONS FOUND THIS WEEK!");
         }
 
         String output = "Weekly schedule (" + monday + " to " + sunday + "):\n";
