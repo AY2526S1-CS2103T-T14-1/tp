@@ -1,108 +1,60 @@
 package seedu.address.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_NAME_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
+import static seedu.address.testutil.TypicalLessons.MATH;
+import static seedu.address.testutil.TypicalLessons.PHYSICS;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.LessonBuilder;
 
 public class LessonTest {
 
     @Test
-    public void constructor_validInputs_success() {
-        // valid lesson name, time, and location
-        String validName = "test";
-        String validTime = "00:00";
-        String validLocation = "test";
+    public void equals() {
+        // same values -> returns true
+        Lesson mathCopy = new LessonBuilder(MATH).build();
+        assertTrue(MATH.equals(mathCopy));
 
-        // should not throw an exception
-        assertDoesNotThrow(() -> new Lesson(validName, validTime, validLocation));
+        // same object -> returns true
+        assertTrue(MATH.equals(MATH));
 
-        Lesson lesson = new Lesson(validName, validTime, validLocation);
-        assertEquals(validName, lesson.lessonName);
-        assertEquals(validTime, lesson.time);
-        assertEquals(validLocation, lesson.location);
+        // null -> returns false
+        assertFalse(MATH.equals(null));
+
+        // different type -> returns false
+        assertFalse(MATH.equals(5));
+
+        // different lesson -> returns false
+        assertFalse(MATH.equals(PHYSICS));
+
+        // different lesson name -> returns false
+        Lesson editedMath = new LessonBuilder(MATH).withLessonName(VALID_LESSON_NAME_PHYSICS).build();
+        assertFalse(MATH.equals(editedMath));
+
+        // different date -> returns false
+        editedMath = new LessonBuilder(MATH).withDate(VALID_DATE).build();
+        assertFalse(MATH.equals(editedMath));
+
+        // different time -> returns false
+        editedMath = new LessonBuilder(MATH).withTime(VALID_TIME).build();
+        assertFalse(MATH.equals(editedMath));
+
+        // different location -> returns false
+        editedMath = new LessonBuilder(MATH).withLocation(VALID_LOCATION).build();
+        assertFalse(MATH.equals(editedMath));
     }
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null));
+    public void toStringMethod() {
+        String expected = String.format("[Lesson Name: %s | Date: %s | Time: %s | Location: %s]",
+                MATH.getLessonName(), MATH.getDate(), MATH.getTime(), MATH.getLocation());
+        assertEquals(expected, MATH.toString());
     }
-
-    @Test
-    public void constructor_invalidLessonName_throwsIllegalArgumentException() {
-        String invalidLessonName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Lesson(invalidLessonName, "00:00", "test"));
-    }
-
-    @Test
-    public void constructor_invalidTime_throwsIllegalArgumentException() {
-        String invalidTime = "";
-        assertThrows(IllegalArgumentException.class, () -> new Lesson("test", invalidTime, "test"));
-    }
-
-    @Test
-    public void constructor_invalidLocation_throwsIllegalArgumentException() {
-        String invalidLocation = "";
-        assertThrows(IllegalArgumentException.class, () -> new Lesson("test", "00:00", invalidLocation));
-    }
-
-    @Test
-    public void isValidLessonName() {
-        // null lesson name
-        assertThrows(NullPointerException.class, () -> Lesson.isValidLessonName(null));
-    }
-
-    @Test
-    public void isValidTime() {
-        // null time
-        assertThrows(NullPointerException.class, () -> Lesson.isValidTime(null));
-    }
-
-    @Test
-    public void isValidLocation() {
-        // null location
-        assertThrows(NullPointerException.class, () -> Lesson.isValidLocation(null));
-    }
-
-    @Test
-    public void equalsTest() {
-        Lesson lesson1 = new Lesson("test", "00:00", "test");
-        Lesson lesson2 = new Lesson("test", "00:00", "test");
-        Lesson lesson3 = new Lesson("Different", "00:00", "test");
-        Lesson lesson4 = new Lesson("test", "01:00", "test");
-        Lesson lesson5 = new Lesson("test", "00:00", "Different");
-
-        // same content → should be equal
-        assertEquals(lesson1, lesson1);
-        assertEquals(lesson1, lesson2);
-
-        // different lesson name/time/location → not equal
-        assertNotEquals(lesson1, lesson3);
-        assertNotEquals(lesson1, lesson4);
-        assertNotEquals(lesson1, lesson5);
-        assertNotEquals(lesson1, null);
-    }
-
-    @Test
-    public void hashCodeTest() {
-        Lesson lesson1 = new Lesson("test", "00:00", "test");
-        Lesson lesson2 = new Lesson("test", "00:00", "test");
-        Lesson lesson3 = new Lesson("Different", "00:00", "test");
-
-        // consistent hashCode for equal objects
-        assertEquals(lesson1.hashCode(), lesson2.hashCode());
-
-        // typically should differ, though not guaranteed strictly by contract
-        assertNotEquals(lesson1.hashCode(), lesson3.hashCode());
-    }
-
-    @Test
-    public void toStringTest() {
-        Lesson lesson = new Lesson("test", "00:00", "test");
-        String expected = "[Lesson: test | Time: 00:00 | Location: test]";
-        assertEquals(expected, lesson.toString());
-    }
-
 }
