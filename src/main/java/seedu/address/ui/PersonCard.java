@@ -60,10 +60,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        String lessonText = person.getLesson().map(Lesson::toString).orElse("");
-        lesson.setVisible(!lessonText.isEmpty());
-        lesson.setManaged(!lessonText.isEmpty());
-        lesson.setText(lessonText);
+        lesson.setText(person.getLesson().map(Lesson::toString).orElse("No Lesson"));
         finance.setText(person.getFinance()
                 .map(f -> f.toString())
                 .orElse("No finance information"));
