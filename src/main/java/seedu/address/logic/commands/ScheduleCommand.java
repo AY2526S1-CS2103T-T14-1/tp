@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,9 +16,10 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-
-public class ScheduleCommand extends Command{
+/**
+ * Shows this week's schedule (Mon..Sun), sorted by date and time.
+ */
+public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Show all lessons in the week, sorted in date and time.\n"
@@ -35,7 +38,9 @@ public class ScheduleCommand extends Command{
 
         for (Person p : personList) {
             Optional<Lesson> optional = p.getLesson();
-            if (optional.isEmpty()) continue;
+            if (optional.isEmpty()) {
+                continue;
+            }
 
             Lesson lesson = optional.get();
 
@@ -59,7 +64,7 @@ public class ScheduleCommand extends Command{
             DayOfWeek day = r.getStart().getDayOfWeek();
             if (current != day) {
                 current = day;
-                output += "\n" + day.name() +  " " + r.getStart().toLocalDate() + "\n";
+                output += "\n" + day.name() + " " + r.getStart().toLocalDate() + "\n";
             }
 
             output += " " + r.getStart().toLocalTime()

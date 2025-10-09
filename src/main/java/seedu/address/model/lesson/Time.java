@@ -2,6 +2,7 @@ package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -38,8 +39,7 @@ public class Time {
     }
 
     /**
-     * Returns time as LocalTime
-     * @return LocalTime
+     * Returns this time as a {@link LocalTime}.
      */
     public LocalTime asLocalTime() {
         return LocalTime.parse(value);

@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-public class ScheduleCommandParser implements Parser<ScheduleCommand>{
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input for the {@code schedule} command (no arguments).
+ */
+public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     @Override
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
