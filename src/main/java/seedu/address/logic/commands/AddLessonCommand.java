@@ -97,7 +97,8 @@ public class AddLessonCommand extends Command {
         Optional<Lesson> updatedLesson = addLessonDescriptor.getLesson();
         Optional<Finance> updatedFinance = personToEdit.getFinance();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLesson, updatedFinance);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedLesson, updatedFinance);
     }
 
     @Override

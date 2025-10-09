@@ -94,7 +94,8 @@ public class AddFinanceCommand extends Command {
         Optional<Lesson> updatedLesson = personToEdit.getLesson();
         Optional<Finance> updatedFinance = Optional.of(addFinanceDescriptor.getFinance());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLesson, updatedFinance);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedLesson, updatedFinance);
     }
 
     @Override
