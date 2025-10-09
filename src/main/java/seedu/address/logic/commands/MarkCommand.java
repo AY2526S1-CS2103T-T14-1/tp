@@ -31,7 +31,8 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Attendance marked for %1$s: %2$s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found with the name \"%1$s\".";
-    public static final String MESSAGE_NO_LESSON_ASSIGNED = "Student %1$s has no lesson assigned to mark attendance for.";
+    public static final String MESSAGE_NO_LESSON_ASSIGNED =
+            "Student %1$s has no lesson assigned to mark attendance for.";
 
     private final Name studentName;
     private final AttendanceStatus status;
