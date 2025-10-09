@@ -70,7 +70,7 @@ public class ScheduleCommandTest {
         CommandResult result = new ScheduleCommand().execute(model);
         String out = result.getFeedbackToUser();
 
-        assertTrue(out.startsWith("No lessons found for this week"),
+        assertTrue(out.startsWith("NO LESSONS FOUND THIS WEEK!"),
                 "Should print the empty-week message.");
     }
 
