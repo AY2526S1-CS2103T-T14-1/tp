@@ -1,14 +1,23 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.finance.Finance;
+import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.FinanceStatus;
+import seedu.address.model.finance.FinanceType;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Location;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,14 +30,21 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final Optional<Finance> DEFAULT_FINANCE = Optional.of(new Finance(
+            new FinanceAmount("0"),
+            FinanceType.PER_MONTH,
+            FinanceStatus.UNPAID
+    ));
+    public static final Lesson DEFAULT_LESSON =
+            new Lesson(new LessonName("Math"), new Date("Monday"), new Time("12:00"), new Location("Online"));
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Remark remark;
     private Set<Tag> tags;
+    private Optional<Finance> finance;
+    private Lesson lesson;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,8 +54,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        finance = Optional.empty();
+        lesson = null;
     }
 
     /**
@@ -50,8 +67,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        finance = personToCopy.getFinance();
+        lesson = personToCopy.getLesson().orElse(null);
     }
 
     /**
@@ -95,17 +113,31 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Finance} of the {@code Person} that we are building.
      */
-    public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
+    public PersonBuilder withFinance(Finance finance) {
+        this.finance = Optional.of(finance);
         return this;
     }
 
+    /**
+     * Sets the {@code Finance} of the {@code Person} that we are building to empty.
+     */
+    public PersonBuilder withoutFinance() {
+        this.finance = Optional.empty();
+        return this;
+    }
 
+    /**
+     * Sets the {@code Lesson} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLesson(String lessonName, String date, String time, String location) {
+        this.lesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, tags, Optional.ofNullable(lesson), finance);
     }
 
 }

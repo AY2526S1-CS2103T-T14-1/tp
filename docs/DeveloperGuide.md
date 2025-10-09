@@ -258,17 +258,248 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
+
+**Target User Profile**:
+
+* Needs to manage a large number of student contacts
+* Prefers desktop applications over mobile/web
+* Types quickly and efficiently
+* Prefers keyboard input over mouse-driven interactions
+* Comfortable using command-line style applications
+
+**Value Proposition**:
+Enable tutors and teachers to manage student contacts, notes, and tuition records **faster and more efficiently** than traditional GUI-based apps.
 
 ### User stories
 
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a …​ | I want to …​                                       | So that I can…​ |
+|----------|---------|----------------------------------------------------|--------------|
+| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system |
+| `* * *`  | tutor   | delete a student permanently                       | reduce clutter |
+| `* * *`  | tutor   | add a lesson with date, time, and location         | track when and where I teach |
+| `* *`    | tutor   | mark attendance for a lesson                       | know if the student showed up |
+| `* *`    | tutor   | add tuition fees per lesson or per month           | track income |
+| `* * *`  | tutor   | record fee payments                                | know who has paid |
+| `* * *`  | tutor   | see outstanding payments                           | follow up with students/parents |
+| `* *`    | tutor   | see a daily/weekly schedule                        | plan my teaching |
+| `* * *`  | tutor   | search by student name                             | quickly find their record |
+| `* *`    | tutor   | view a student’s details                           | reach them easily |
+
+*{More to be added}*
+
 ### Use cases
+
+(For all use cases below, the **System** is the `StudentConnect` and the **Actor** is the `user`, unless specified otherwise)
+
+**UC1: Add New Student**
 
 **MSS**
 
+1. Actor chooses to add a new student.
+2. System requests student details (name, contact, subject, hourly rate).
+3. Actor enters the details.
+4. System saves the details and displays a success message.
+
+    Use case ends.
+
 **Extensions**
 
+* 3a. System detects missing or invalid details.
+
+    * 3a1. System requests correct details.
+
+    * 3a2. Actor re-enters details.
+
+      Use case resumes at step 4.
+
+* *a. At any time, Actor cancels the operation.
+
+    * *a1. System requests confirmation.
+
+    * *a2. Actor confirms.
+
+      Use case ends.
+
+**UC2: Delete Student**
+
+**MSS**
+
+1. Actor selects a student to delete.
+2. System requests confirmation.
+3. Actor confirms deletion.
+4. System deletes the student and shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Actor cancels deletion.
+
+    * 2a1. System closes deletion process.
+
+      Use case ends.
+
+**UC3: Add Lesson**
+
+**MSS**
+
+1. Actor chooses to add a new lesson.
+2. System requests details (date, time, location, student).
+3. Actor enters lesson details.
+4. System saves the lesson and confirms creation.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects invalid/missing lesson details.
+
+    * 3a1. System requests correction.
+
+      Use case resumes at step 3.
+
+**UC4: Mark Attendance**
+
+**MSS**
+
+1. Actor selects a lesson.
+2. System displays the lesson and attendance options.
+3. Actor marks student as present or absent.
+4. System saves attendance record.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Actor changes attendance after marking.
+
+    * 3a1. System updates the record accordingly.
+
+      Use case resumes at step 4.
+
+**UC5: Add Tuition Fees**
+
+**MSS**
+
+1. Actor selects student and chooses to add tuition fees.
+2. System requests fee details (per lesson or per month).
+3. Actor enters fee details.
+4. System saves fee record.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Invalid or incomplete fee details.
+
+    * 3a1. System prompts for correction.
+
+      Use case resumes at step 3.
+
+**UC6: Record Fee Payment**
+
+**MSS**
+
+1. Actor selects a student with fees.
+2. System shows outstanding fees.
+3. Actor enters payment details (amount, date, method).
+4. System records payment and updates balance.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Payment details invalid.
+
+    * 3a1. System prompts for correction.
+
+      Use case resumes at step 3.
+
+**UC7: View Outstanding Payments**
+
+**MSS**
+
+1. Actor chooses to view outstanding payments.
+2. System retrieves and displays a list of unpaid fees by student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No outstanding payments.
+
+    * 2a1. System displays “No pending fees.”
+
+      Use case ends.
+
+**UC8: View Schedule**
+
+**MSS**
+
+1. Actor chooses to view schedule.
+2. System displays daily/weekly schedule of lessons.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No lessons scheduled.
+
+    * 2a1. System displays “No lessons scheduled.”
+
+      Use case ends.
+
+**UC9: Search Student**
+
+**MSS**
+
+1. Actor enters student name into search bar.
+2. System searches for matching student records.
+3. System displays results.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No matching student found.
+
+    * 2a1. System displays “No student found.”
+
+      Use case ends.
+
+**UC10: View Student Details**
+
+**MSS**
+
+1. Actor selects a student.
+2. System displays student details (name, contact, subject, fees, history).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Student record is missing/corrupted.
+
+    * 2a1. System displays error message.
+
+      Use case ends.
+
+*{More to be added}*
+
 ### Non-Functional Requirements
+
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The interface should follow familiar patterns (e.g., similar to phone contacts apps) with clear navigation, searchable fields, and minimal clicks to add/view a student. Aim for a learnability time of under 5 minutes for new users.
+5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
+6. The data should be stored locally and should be in a human editable text file.
+7. Package everything into a single JAR file.
+
+*{More to be added}*
 
 ### Glossary
 

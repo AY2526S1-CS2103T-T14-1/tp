@@ -9,7 +9,16 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.finance.Finance;
+import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.FinanceStatus;
+import seedu.address.model.finance.FinanceType;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Location;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -120,5 +129,139 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code FinanceAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static FinanceAmount parseFinanceAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!FinanceAmount.isValidAmount(trimmedAmount)) {
+            throw new ParseException(FinanceAmount.MESSAGE_CONSTRAINTS);
+        }
+        return new FinanceAmount(trimmedAmount);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code FinanceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static FinanceType parseFinanceType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim().toUpperCase();
+        try {
+            return FinanceType.valueOf(trimmedType);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Finance type must be either PER_MONTH or PER_LESSON.");
+        }
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code FinanceStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static FinanceStatus parseFinanceStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        try {
+            return FinanceStatus.valueOf(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Finance status must be either PAID, UNPAID, or OVERDUE.");
+        }
+    }
+
+    /**
+     * Parses finance details into a {@code Finance}.
+     *
+     * @throws ParseException if any of the finance details are invalid.
+     */
+    public static Finance parseFinance(String amount, String type, String status) throws ParseException {
+        FinanceAmount financeAmount = parseFinanceAmount(amount);
+        FinanceType financeType = parseFinanceType(type);
+        FinanceStatus financeStatus = parseFinanceStatus(status);
+        return new Finance(financeAmount, financeType, financeStatus);
+    }
+
+    /**
+     * Parses a {@code String lessonName} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedLessonName = lessonName.trim();
+        if (!LessonName.isValidLessonName(trimmedLessonName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedLessonName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code AttendanceStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static AttendanceStatus parseAttendanceStatus(String status) throws ParseException {
+        requireNonNull(status);
+        try {
+            return AttendanceStatus.fromString(status);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(AttendanceStatus.MESSAGE_CONSTRAINTS);
+        }
     }
 }

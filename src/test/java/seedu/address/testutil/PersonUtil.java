@@ -1,15 +1,21 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLessonCommand.AddLessonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -57,6 +63,18 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code AddLessonDescriptor}'s details.
+     */
+    public static String getAddLessonDescriptorDetails(AddLessonDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        Optional<Lesson> lesson = descriptor.getLesson();
+        lesson.ifPresent(l -> sb.append(PREFIX_NAME).append(l.lessonName).append(" ").append(PREFIX_DATE)
+                .append(l.date).append(" ").append(PREFIX_TIME).append(l.time).append(" ")
+                .append(PREFIX_LOCATION).append(l.location).append(" "));
         return sb.toString();
     }
 }
