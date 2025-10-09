@@ -33,13 +33,14 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<Lesson> lesson;
     private final Optional<Finance> finance;
+    private final Optional<AttendanceStatus> attendance;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Optional<Lesson> lesson, Optional<Finance> finance) {
-        requireAllNonNull(name, phone, email, address, tags, lesson, finance);
+                  Optional<Lesson> lesson, Optional<Finance> finance, Optional<AttendanceStatus> attendance) {
+        requireAllNonNull(name, phone, email, address, tags, lesson, finance, attendance);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +48,7 @@ public class Person {
         this.tags.addAll(tags);
         this.lesson = lesson;
         this.finance = finance;
+        this.attendance = attendance;
     }
 
 
@@ -54,7 +56,7 @@ public class Person {
      * Convenience constructor for Person without lesson and finance information.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, Optional.empty(), Optional.empty());
+        this(name, phone, email, address, tags, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
 
@@ -92,7 +94,20 @@ public class Person {
 
     public Person setLesson(String lessonName, String date, String time, String location) {
         Lesson lesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
-        return new Person(name, phone, email, address, tags, Optional.of(lesson), Optional.empty());
+        return new Person(name, phone, email, address, tags, Optional.of(lesson), Optional.empty(), Optional.empty());
+    }
+
+    public Optional<AttendanceStatus> getAttendance() {
+        return attendance;
+    }
+
+    /**
+     * Returns a new Person object with the updated attendance status.
+     * This respects the immutability of the Person class.
+     */
+    public Person withAttendance(AttendanceStatus status) {
+        return new Person(this.name, this.phone, this.email, this.address, this.tags,
+                this.lesson, this.finance, Optional.of(status));
     }
 
     /**

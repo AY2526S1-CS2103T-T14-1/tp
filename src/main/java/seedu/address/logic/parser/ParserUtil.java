@@ -18,6 +18,7 @@ import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
 import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -247,5 +248,20 @@ public class ParserUtil {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code AttendanceStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static AttendanceStatus parseAttendanceStatus(String status) throws ParseException {
+        requireNonNull(status);
+        try {
+            return AttendanceStatus.fromString(status);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(AttendanceStatus.MESSAGE_CONSTRAINTS);
+        }
     }
 }

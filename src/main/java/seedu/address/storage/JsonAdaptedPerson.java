@@ -123,7 +123,8 @@ class JsonAdaptedPerson {
 
         final Optional<Lesson> modelLesson = Optional.ofNullable(lesson);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelTags, modelLesson, modelFinance, Optional.empty());
     }
 
 }

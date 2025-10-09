@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -96,9 +97,10 @@ public class AddLessonCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Lesson> updatedLesson = addLessonDescriptor.getLesson();
         Optional<Finance> updatedFinance = personToEdit.getFinance();
+        Optional<AttendanceStatus> updatedAttendance = Optional.empty();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedLesson, updatedFinance);
+                updatedAddress, updatedTags, updatedLesson, updatedFinance, updatedAttendance);
     }
 
     @Override
