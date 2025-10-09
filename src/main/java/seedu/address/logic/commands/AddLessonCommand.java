@@ -47,8 +47,6 @@ public class AddLessonCommand extends Command {
             + PREFIX_LOCATION + "RoomA";
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added Lesson to %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_LESSON =
-            "This lesson already exists for the person in the address book.";
 
     private final Index index;
     private final AddLessonDescriptor addLessonDescriptor;
@@ -76,10 +74,6 @@ public class AddLessonCommand extends Command {
 
         Person personToAddLesson = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToAddLesson, addLessonDescriptor);
-
-        if (!personToAddLesson.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-        }
 
         model.setPerson(personToAddLesson, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

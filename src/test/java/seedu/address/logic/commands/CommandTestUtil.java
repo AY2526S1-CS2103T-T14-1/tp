@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AddLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -36,6 +37,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_LESSON_NAME_MATH = "Math";
+    public static final String VALID_LESSON_NAME_PHYSICS = "Physics";
+    public static final String VALID_DATE = "Monday";
+    public static final String VALID_TIME = "12:00";
+    public static final String VALID_LOCATION = "Online";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -59,6 +66,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final AddLessonCommand.AddLessonDescriptor LESSON_MATH;
+    public static final AddLessonCommand.AddLessonDescriptor LESSON_PHYSICS;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -67,6 +76,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        LESSON_MATH = new AddLessonDescriptorBuilder().withLesson(VALID_LESSON_NAME_MATH, VALID_DATE, VALID_TIME,
+                VALID_LOCATION).build();
+        LESSON_PHYSICS = new AddLessonDescriptorBuilder().withLesson(VALID_LESSON_NAME_PHYSICS, VALID_DATE, VALID_TIME,
+                VALID_LOCATION).build();
     }
 
     /**

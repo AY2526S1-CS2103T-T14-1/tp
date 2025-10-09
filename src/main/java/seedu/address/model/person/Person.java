@@ -9,7 +9,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Location;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -69,6 +73,11 @@ public class Person {
 
     public Optional<Lesson> getLesson() {
         return lesson;
+    }
+
+    public Person setLesson(String lessonName, String date, String time, String location) {
+        Lesson lesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
+        return new Person(name, phone, email, address, tags, Optional.of(lesson));
     }
 
     /**
