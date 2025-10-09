@@ -5,9 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a Lesson's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
@@ -24,8 +21,7 @@ public class Time {
      *
      * @param time A valid time.
      */
-    @JsonCreator
-    public Time(@JsonProperty("value")String time) {
+    public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         value = time;

@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedFinance finance;
-    private final Lesson lesson;
+    private final JsonAdaptedLesson lesson;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +40,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") JsonAdaptedLesson lesson,
             @JsonProperty("finance") JsonAdaptedFinance finance) {
         this.name = name;
         this.phone = phone;
@@ -65,7 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        lesson = source.getLesson().orElse(null);
+        lesson = source.getLesson().map(JsonAdaptedLesson::new).orElse(null);
     }
 
     /**
@@ -121,7 +121,13 @@ class JsonAdaptedPerson {
             modelFinance = Optional.of(finance.toModelType());
         }
 
-        final Optional<Lesson> modelLesson = Optional.ofNullable(lesson);
+        // Lesson is optional, so it can be null
+        final Optional<Lesson> modelLesson;
+        if (lesson == null) {
+            modelLesson = Optional.empty();
+        } else {
+            modelLesson = Optional.of(lesson.toModelType());
+        }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);
     }
