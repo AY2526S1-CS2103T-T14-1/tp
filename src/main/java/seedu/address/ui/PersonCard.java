@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label lesson;
+    @FXML
     private Label finance;
 
     /**
@@ -57,6 +60,10 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        String lessonText = person.getLesson().map(Lesson::toString).orElse("");
+        lesson.setVisible(!lessonText.isEmpty());
+        lesson.setManaged(!lessonText.isEmpty());
+        lesson.setText(lessonText);
         finance.setText(person.getFinance()
                 .map(f -> f.toString())
                 .orElse("No finance information"));

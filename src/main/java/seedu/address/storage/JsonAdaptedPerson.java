@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedFinance finance;
+    private final Lesson lesson;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson
             @JsonProperty("finance") JsonAdaptedFinance finance) {
         this.name = name;
         this.phone = phone;
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.finance = finance;
+        this.lesson = lesson;
     }
 
     /**
@@ -62,6 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        lesson = source.getLesson().orElse(null);
     }
 
     /**
@@ -116,7 +120,10 @@ class JsonAdaptedPerson {
         } else {
             modelFinance = Optional.of(finance.toModelType());
         }
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelFinance);
+        
+        final Optional<Lesson> modelLesson = Optional.ofNullable(lesson);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);
     }
 
 }

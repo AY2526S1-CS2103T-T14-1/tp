@@ -8,6 +8,11 @@ import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.finance.FinanceStatus;
 import seedu.address.model.finance.FinanceType;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Location;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -30,6 +35,8 @@ public class PersonBuilder {
             FinanceType.PER_MONTH,
             FinanceStatus.UNPAID
     ));
+    public static final Lesson DEFAULT_LESSON =
+            new Lesson(new LessonName("Math"), new Date("Monday"), new Time("12:00"), new Location("Online"));
 
     private Name name;
     private Phone phone;
@@ -37,6 +44,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Optional<Finance> finance;
+    private Lesson lesson;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +56,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         finance = DEFAULT_FINANCE;
+        lesson = new Lesson(DEFAULT_LESSON);
     }
 
     /**
@@ -60,6 +69,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         finance = personToCopy.getFinance();
+        lesson = personToCopy.getLesson().orElse(null);
     }
 
     /**
@@ -117,9 +127,17 @@ public class PersonBuilder {
         this.finance = Optional.empty();
         return this;
     }
+  
+    /**
+     * Sets the {@code Lesson} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLesson(String lessonName, String date, String time, String location) {
+        this.lesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, finance);
+        return new Person(name, phone, email, address, tags, Optional.ofNullable(lesson), finance);
     }
 
 }
