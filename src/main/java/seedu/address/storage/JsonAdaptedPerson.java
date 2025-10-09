@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final JsonAdaptedFinance finance;
     private final Lesson lesson;
 
     /**
@@ -39,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") Lesson lesson,
+            @JsonProperty("finance") JsonAdaptedFinance finance) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +49,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.finance = finance;
         this.lesson = lesson;
     }
 
@@ -58,6 +61,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        finance = source.getFinance().map(JsonAdaptedFinance::new).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -109,9 +113,17 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        // Finance is optional, so it can be null
+        final Optional<seedu.address.model.finance.Finance> modelFinance;
+        if (finance == null) {
+            modelFinance = Optional.empty();
+        } else {
+            modelFinance = Optional.of(finance.toModelType());
+        }
+
         final Optional<Lesson> modelLesson = Optional.ofNullable(lesson);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);
     }
 
 }

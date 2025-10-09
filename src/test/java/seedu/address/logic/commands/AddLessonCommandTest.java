@@ -40,12 +40,14 @@ public class AddLessonCommandTest {
                 .withLesson(VALID_LESSON_NAME_MATH, VALID_DATE, VALID_TIME, VALID_LOCATION).build();
         AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, descriptor);
 
+        Person editedPersonWithLesson = editedPerson.setLesson(
+                VALID_LESSON_NAME_MATH, VALID_DATE, VALID_TIME, VALID_LOCATION);
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_ADD_LESSON_SUCCESS,
-                editedPerson.getName(), editedPerson.getLesson().map(Lesson::toString).orElse(""));
+                editedPersonWithLesson.getName(),
+                editedPersonWithLesson.getLesson().map(Lesson::toString).orElse(""));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0),
-                editedPerson.setLesson(VALID_LESSON_NAME_MATH, VALID_DATE, VALID_TIME, VALID_LOCATION));
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPersonWithLesson);
 
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -59,11 +61,14 @@ public class AddLessonCommandTest {
                 .withLesson(VALID_LESSON_NAME_MATH, VALID_DATE, VALID_TIME, VALID_LOCATION).build();
         AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, descriptor);
 
+        Person editedPersonWithLesson = editedPerson.setLesson(VALID_LESSON_NAME_MATH,
+                VALID_DATE, VALID_TIME, VALID_LOCATION);
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_ADD_LESSON_SUCCESS,
-                editedPerson.getName(), editedPerson.getLesson().map(Lesson::toString).orElse(""));
+                editedPersonWithLesson.getName(),
+                editedPersonWithLesson.getLesson().map(Lesson::toString).orElse(""));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPersonWithLesson);
 
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
     }

@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.finance.Finance;
+import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.FinanceStatus;
+import seedu.address.model.finance.FinanceType;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
@@ -124,6 +128,65 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code FinanceAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static FinanceAmount parseFinanceAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!FinanceAmount.isValidAmount(trimmedAmount)) {
+            throw new ParseException(FinanceAmount.MESSAGE_CONSTRAINTS);
+        }
+        return new FinanceAmount(trimmedAmount);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code FinanceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static FinanceType parseFinanceType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim().toUpperCase();
+        try {
+            return FinanceType.valueOf(trimmedType);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Finance type must be either PER_MONTH or PER_LESSON.");
+        }
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code FinanceStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static FinanceStatus parseFinanceStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        try {
+            return FinanceStatus.valueOf(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Finance status must be either PAID, UNPAID, or OVERDUE.");
+        }
+    }
+
+    /**
+     * Parses finance details into a {@code Finance}.
+     *
+     * @throws ParseException if any of the finance details are invalid.
+     */
+    public static Finance parseFinance(String amount, String type, String status) throws ParseException {
+        FinanceAmount financeAmount = parseFinanceAmount(amount);
+        FinanceType financeType = parseFinanceType(type);
+        FinanceStatus financeStatus = parseFinanceStatus(status);
+        return new Finance(financeAmount, financeType, financeStatus);
     }
 
     /**

@@ -52,7 +52,9 @@ public class ScheduleCommandTest {
                         new Date(weekday),
                         new Time(hhmm),
                         new Location(location)
-                )));
+                )),
+                Optional.empty()
+        );
     }
 
     private static Model emptyModel() {

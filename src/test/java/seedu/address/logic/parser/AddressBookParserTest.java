@@ -93,7 +93,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addLesson() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withLesson("Math", "Monday", "12:00", "Online").build();
         AddLessonDescriptor descriptor = new AddLessonDescriptorBuilder(person).build();
         AddLessonCommand command = (AddLessonCommand) parser.parseCommand(AddLessonCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getAddLessonDescriptorDetails(descriptor));
