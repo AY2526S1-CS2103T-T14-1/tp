@@ -169,7 +169,7 @@ public class ParserUtil {
         try {
             return FinanceStatus.valueOf(trimmedStatus);
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Finance status must be either PAIED, UNPAID, or OVERDUE.");
+            throw new ParseException("Finance status must be either PAID, UNPAID, or OVERDUE.");
         }
     }
 
