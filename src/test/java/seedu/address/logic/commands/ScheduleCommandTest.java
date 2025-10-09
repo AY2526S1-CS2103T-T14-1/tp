@@ -36,7 +36,11 @@ public class ScheduleCommandTest {
 
     // -------- helpers --------
 
-    private static Person withLesson(String studentName, String weekday, String hhmm, String location, String lessonName) {
+    private static Person withLesson(String studentName,
+                                     String weekday,
+                                     String hhmm,
+                                     String location,
+                                     String lessonName) {
         return new Person(
                 new Name(studentName),
                 new Phone("99999999"),
@@ -55,8 +59,6 @@ public class ScheduleCommandTest {
         return new ModelManager(new AddressBook(), new UserPrefs());
     }
 
-    // -------- tests --------
-
     @Test
     public void execute_noLessons_printsEmptyMsg() throws Exception {
         Model model = emptyModel();
@@ -74,28 +76,46 @@ public class ScheduleCommandTest {
     public void execute_sortsWithinSameDay_byTimeAscending() throws Exception {
         Model model = emptyModel();
         // Two on Wednesday, out of chronological insertion order
-        model.addPerson(withLesson("Cara", "Wednesday", "10:30", "Home", "English"));
-        model.addPerson(withLesson("Dan",  "Wednesday", "08:45", "RoomB", "Physics"));
-        model.addPerson(withLesson("Eli",  "Wednesday", "09:15", "Cafe",  "Geog"));
+        model.addPerson(withLesson("Cara",
+                "Wednesday",
+                "10:30",
+                "Home",
+                "English"));
+        model.addPerson(withLesson("Dan",
+                "Wednesday",
+                "08:45",
+                "RoomB",
+                "Physics"));
+        model.addPerson(withLesson("Eli",
+                "Wednesday",
+                "09:15",
+                "Cafe",
+                "Geog"));
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         CommandResult result = new ScheduleCommand().execute(model);
         String out = result.getFeedbackToUser();
 
         // Ensure all three are present
-        int iDan  = out.indexOf("[Dan]");
-        int iEli  = out.indexOf("[Eli]");
+        int iDan = out.indexOf("[Dan]");
+        int iEli = out.indexOf("[Eli]");
         int iCara = out.indexOf("[Cara]");
 
         // All must exist and be ordered by time: Dan (08:45) < Eli (09:15) < Cara (10:30)
-        assertTrue(iDan  != -1 && iEli != -1 && iCara != -1, "All three entries should be printed.");
-        assertTrue(iDan < iEli && iEli < iCara, "Entries should be ordered by time within the same day.");
+        assertTrue(iDan != -1 && iEli != -1 && iCara != -1,
+                "All three entries should be printed.");
+        assertTrue(iDan < iEli && iEli < iCara,
+                "Entries should be ordered by time within the same day.");
     }
 
     @Test
     public void execute_includesTimeNameLessonLocation() throws Exception {
         Model model = emptyModel();
-        model.addPerson(withLesson("Faye", "Friday", "18:20", "Studio", "Art"));
+        model.addPerson(withLesson("Faye",
+                "Friday",
+                "18:20",
+                "Studio",
+                "Art"));
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         CommandResult result = new ScheduleCommand().execute(model);
