@@ -5,6 +5,7 @@ import seedu.address.model.finance.Finance;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 
@@ -17,12 +18,20 @@ public class ViewOutstandingPaymentsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (lastShownList.isEmpty() || outstandingPaymentsList.isEmpty()) {
+        List<Person> personList = model.getFilteredPersonList();
+        if (personList.isEmpty()) {
             return new CommandResult("No outstanding payments found.");
         }
-        // get all people who have finance attached
         // filter those who have outstanding payments
-        return new CommandResult("Listed " + outstandingPaymentsList.size() + " outstanding payments.");
+        List<Person> overduePersonList = new ArrayList<>();
+        for (Person p : personList) {
+            if (p.getFinance().get().isOverdue()) {
+                overduePersonList.add(p);
+            }
+        }
+        if (overduePersonList.isEmpty()) {
+            return new CommandResult("No outstanding payments found.");
+        }
+        return new CommandResult("Listed " + overduePersonList.size() + " outstanding payments.");
     }
 }
