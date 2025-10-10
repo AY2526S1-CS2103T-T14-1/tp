@@ -7,7 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.ViewOutstandingPaymentsCommand;
 
 public class ViewOutstandingPaymentsCommandParser implements Parser<ViewOutstandingPaymentsCommand>{
-    
+
     public ViewOutstandingPaymentsCommand parse(String args) throws ParseException {
         requireNonNull(args);
         if (!args.trim().isEmpty()) {

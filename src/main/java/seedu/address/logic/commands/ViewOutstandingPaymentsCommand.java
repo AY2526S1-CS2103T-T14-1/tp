@@ -14,7 +14,7 @@ public class ViewOutstandingPaymentsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all outstanding payments.\n"
             + "Example: " + COMMAND_WORD;
-    
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
