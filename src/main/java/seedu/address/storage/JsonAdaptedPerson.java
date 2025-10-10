@@ -129,7 +129,8 @@ class JsonAdaptedPerson {
             modelLesson = Optional.of(lesson.toModelType());
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLesson, modelFinance);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelTags, modelLesson, modelFinance, Optional.empty());
     }
 
 }

@@ -137,7 +137,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, Optional.ofNullable(lesson), finance);
+        return new Person(name, phone, email, address, tags, Optional.ofNullable(lesson), finance, Optional.empty());
     }
 
 }

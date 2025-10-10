@@ -50,8 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<Lesson> lesson = Optional.empty();
         Optional<Finance> finance = Optional.empty();
 
-        Person person = new Person(name, phone, email, address, tagList, lesson, finance);
-
+        Person person = new Person(name, phone, email, address, tagList, lesson, finance, Optional.empty());
         return new AddCommand(person);
     }
 
