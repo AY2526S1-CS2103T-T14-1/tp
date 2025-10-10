@@ -3,9 +3,6 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a Lesson's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLessonName(String)}
@@ -28,8 +25,7 @@ public class LessonName {
      *
      * @param lessonName A valid lesson name.
      */
-    @JsonCreator
-    public LessonName(@JsonProperty("fullLessonName") String lessonName) {
+    public LessonName(String lessonName) {
         requireNonNull(lessonName);
         checkArgument(isValidLessonName(lessonName), MESSAGE_CONSTRAINTS);
         fullLessonName = lessonName;

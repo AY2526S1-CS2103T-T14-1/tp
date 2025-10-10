@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,7 +34,8 @@ public class JsonAdaptedPersonTest {
     private static final JsonAdaptedFinance VALID_FINANCE = BENSON.getFinance()
             .map(JsonAdaptedFinance::new)
             .orElse(null);
-    private static final Lesson VALID_LESSON = BENSON.getLesson().orElse(null);
+    private static final JsonAdaptedLesson VALID_LESSON = BENSON.getLesson().map(JsonAdaptedLesson::new)
+            .orElse(null);
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

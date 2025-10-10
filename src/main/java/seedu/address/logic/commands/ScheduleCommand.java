@@ -68,7 +68,7 @@ public class ScheduleCommand extends Command {
             }
 
             output += " " + r.getStart().toLocalTime()
-                    + " - [" + r.getPerson().getName() + "]"
+                    + " - [" + r.getPerson().getName() + "] "
                     + r.getLesson().getLessonName()
                     + " @ " + r.getLesson().getLocation()
                     + "\n";
