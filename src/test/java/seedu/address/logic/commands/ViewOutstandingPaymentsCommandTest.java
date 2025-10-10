@@ -1,4 +1,3 @@
-// filepath: /Users/samt/nus-local/cs2103t/tp/src/test/java/seedu/address/logic/commands/ViewOutstandingPaymentsCommandTest.java
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;

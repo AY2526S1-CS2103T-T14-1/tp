@@ -1,4 +1,3 @@
-// filepath: /Users/samt/nus-local/cs2103t/tp/src/test/java/seedu/address/logic/parser/ViewOutstandingPaymentsCommandParserTest.java
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
