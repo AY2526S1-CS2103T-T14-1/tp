@@ -37,6 +37,13 @@ public class Finance {
         return status;
     }
 
+    public boolean isOverdue() {
+        if (this.getStatus().equals(FinanceStatus.OVERDUE)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
