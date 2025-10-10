@@ -38,9 +38,9 @@ public class AddFinanceCommandParser implements Parser<AddFinanceCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_FINANCE_TYPE, PREFIX_FINANCE_STATUS);
 
-        if (!argMultimap.getValue(PREFIX_AMOUNT).isPresent()
-                || !argMultimap.getValue(PREFIX_FINANCE_TYPE).isPresent()
-                || !argMultimap.getValue(PREFIX_FINANCE_STATUS).isPresent()) {
+        if (argMultimap.getValue(PREFIX_AMOUNT).isEmpty()
+                || argMultimap.getValue(PREFIX_FINANCE_TYPE).isEmpty()
+                || argMultimap.getValue(PREFIX_FINANCE_STATUS).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddFinanceCommand.MESSAGE_USAGE));
         }
