@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 
@@ -15,10 +17,12 @@ public class ViewOutstandingPaymentsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Finance> outstandingPaymentsList = model.getOutstandingPaymentsList();
-        if (outstandingPaymentsList.isEmpty()) {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (lastShownList.isEmpty() || outstandingPaymentsList.isEmpty()) {
             return new CommandResult("No outstanding payments found.");
         }
+        // get all people who have finance attached
+        // filter those who have outstanding payments
         return new CommandResult("Listed " + outstandingPaymentsList.size() + " outstanding payments.");
     }
 }
