@@ -64,7 +64,7 @@ public class AddressBookParser {
         case AddFinanceCommand.COMMAND_WORD:
             return new AddFinanceCommandParser().parse(arguments);
 
-        case ViewOutStandingPaymentsCommand.COMMAND_WORD:
+        case ViewOutstandingPaymentsCommand.COMMAND_WORD:
             return new ViewOutStandingPaymentsCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
