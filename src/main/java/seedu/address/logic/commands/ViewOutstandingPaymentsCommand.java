@@ -24,14 +24,23 @@ public class ViewOutstandingPaymentsCommand extends Command {
         }
         // filter those who have outstanding payments
         List<Person> overduePersonList = new ArrayList<>();
+        StringBuilder outstandingPayments = new StringBuilder();
+        int overdueCount = 0;
         for (Person p : personList) {
             if (p.getFinance().get().isOverdue()) {
+                overdueCount++;
                 overduePersonList.add(p);
+                outstandingPayments.append(overdueCount + ":").append("\n");
+                outstandingPayments.append(p.getName()).append("\n");
+                outstandingPayments.append(p.getEmail()).append("\n");
+                outstandingPayments.append(p.getPhone()).append("\n");
+                outstandingPayments.append(p.getFinance().get()).append("\n");
             }
         }
         if (overduePersonList.isEmpty()) {
             return new CommandResult("No outstanding payments found.");
         }
-        return new CommandResult("Listed " + overduePersonList.size() + " outstanding payments.");
+
+        return new CommandResult(outstandingPayments.toString());
     }
 }
