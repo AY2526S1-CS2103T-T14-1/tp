@@ -5,9 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
@@ -26,8 +23,7 @@ public class Date {
      *
      * @param date A valid date.
      */
-    @JsonCreator
-    public Date(@JsonProperty("value") String date) {
+    public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date.toLowerCase();

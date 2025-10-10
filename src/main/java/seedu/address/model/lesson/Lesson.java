@@ -4,9 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a Lesson in the address book.
  * Guarantees:
@@ -27,11 +24,7 @@ public class Lesson {
      * @param time A valid time.
      * @param location A valid location.
      */
-    @JsonCreator
-    public Lesson(@JsonProperty("lessonName") LessonName lessonName,
-                  @JsonProperty("date") Date date,
-                  @JsonProperty("time") Time time,
-                  @JsonProperty("location") Location location) {
+    public Lesson(LessonName lessonName, Date date, Time time, Location location) {
         this.lessonName = lessonName;
         this.date = date;
         this.time = time;
