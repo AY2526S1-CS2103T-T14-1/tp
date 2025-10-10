@@ -1,20 +1,29 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.finance.Finance;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * Command to show outstanding payments 'outstanding'
+ */
 public class ViewOutstandingPaymentsCommand extends Command {
     public static final String COMMAND_WORD = "outstanding";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all outstanding payments.\n"
             + "Example: " + COMMAND_WORD;
 
+    /**
+     * Executes the command to view outstanding payments.
+     * @param model the model containing the data
+     * @return the result of the command execution
+     * @throws CommandException if an error occurs during execution
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

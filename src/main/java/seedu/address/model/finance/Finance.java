@@ -37,6 +37,9 @@ public class Finance {
         return status;
     }
 
+    /**
+     * Returns true if this finance record is overdue.
+     */
     public boolean isOverdue() {
         if (this.getStatus().equals(FinanceStatus.OVERDUE)) {
             return true;

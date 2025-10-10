@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddFinanceCommand;
-import seedu.address.logic.commands.ViewOutstandingPaymentsCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -22,6 +21,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.ViewOutstandingPaymentsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

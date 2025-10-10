@@ -1,13 +1,23 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import seedu.address.logic.parser.exceptions.ParseException;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ViewOutstandingPaymentsCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
-public class ViewOutstandingPaymentsCommandParser implements Parser<ViewOutstandingPaymentsCommand>{
+/**
+ * Parser for the ViewOutstandingPaymentsCommand.
+ */
+public class ViewOutstandingPaymentsCommandParser implements Parser<ViewOutstandingPaymentsCommand> {
 
+    /**
+     * Parses the given {@code args} into a ViewOutstandingPaymentsCommand.
+     *
+     * @param args the arguments to parse
+     * @return the parsed ViewOutstandingPaymentsCommand
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public ViewOutstandingPaymentsCommand parse(String args) throws ParseException {
         requireNonNull(args);
         if (!args.trim().isEmpty()) {
