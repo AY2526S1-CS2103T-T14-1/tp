@@ -52,4 +52,15 @@ public class ViewOutstandingPaymentsCommand extends Command {
 
         return new CommandResult(outstandingPayments.toString());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // Stateless command: any two instances are considered equal
+        return other == this || (other != null && other.getClass() == this.getClass());
+    }
+
+    @Override
+    public int hashCode() {
+        return COMMAND_WORD.hashCode();
+    }
 }
