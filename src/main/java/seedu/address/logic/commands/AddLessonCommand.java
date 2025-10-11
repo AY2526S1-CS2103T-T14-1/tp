@@ -95,7 +95,7 @@ public class AddLessonCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Optional<Lesson> updatedLesson = addLessonDescriptor.getLesson();
+        Optional<Lesson> updatedLesson = Optional.of(addLessonDescriptor.getLesson());
         Optional<Finance> updatedFinance = personToEdit.getFinance();
         Optional<AttendanceStatus> updatedAttendance = Optional.empty();
 
@@ -131,7 +131,7 @@ public class AddLessonCommand extends Command {
      * Stores the details to add lesson.
      */
     public static class AddLessonDescriptor {
-        private Optional<Lesson> lesson;
+        private Lesson lesson;
 
         public AddLessonDescriptor() {}
 
@@ -143,11 +143,11 @@ public class AddLessonCommand extends Command {
             setLesson(toCopy.lesson);
         }
 
-        public void setLesson(Optional<Lesson> lesson) {
+        public void setLesson(Lesson lesson) {
             this.lesson = lesson;
         }
 
-        public Optional<Lesson> getLesson() {
+        public Lesson getLesson() {
             return lesson;
         }
 

@@ -14,6 +14,7 @@ import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.finance.FinanceStatus;
 import seedu.address.model.finance.FinanceType;
 import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
 import seedu.address.model.lesson.Time;
@@ -248,6 +249,21 @@ public class ParserUtil {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code Lesson Lesson} into a {@code Lesson}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Lesson parseLesson(String name, String date, String time, String location)
+            throws ParseException {
+        LessonName lessonName = parseLessonName(name);
+        Date lessonDate = parseDate(date);
+        Time lessonTime = parseTime(time);
+        Location lessonLocation = parseLocation(location);
+        return new Lesson(lessonName, lessonDate, lessonTime, lessonLocation);
     }
 
     /**
