@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,27 +29,24 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final JsonAdaptedFinance finance;
-    private final JsonAdaptedLesson lesson;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lesson") JsonAdaptedLesson lesson,
-            @JsonProperty("finance") JsonAdaptedFinance finance) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.finance = finance;
-        this.lesson = lesson;
     }
 
     /**
@@ -61,11 +57,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        finance = source.getFinance().map(JsonAdaptedFinance::new).orElse(null);
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        lesson = source.getLesson().map(JsonAdaptedLesson::new).orElse(null);
     }
 
     /**
@@ -111,26 +106,13 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        // Finance is optional, so it can be null
-        final Optional<seedu.address.model.finance.Finance> modelFinance;
-        if (finance == null) {
-            modelFinance = Optional.empty();
-        } else {
-            modelFinance = Optional.of(finance.toModelType());
-        }
-
-        // Lesson is optional, so it can be null
-        final Optional<Lesson> modelLesson;
-        if (lesson == null) {
-            modelLesson = Optional.empty();
-        } else {
-            modelLesson = Optional.of(lesson.toModelType());
-        }
-
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelTags, modelLesson, modelFinance, Optional.empty());
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
     }
 
 }

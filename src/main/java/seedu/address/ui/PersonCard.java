@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     private Label lesson;
     @FXML
     private Label finance;
+    @FXML
+    private Label remark;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,5 +66,6 @@ public class PersonCard extends UiPart<Region> {
         finance.setText(person.getFinance()
                 .map(f -> f.toString())
                 .orElse("No finance information"));
+        remark.setText(person.getRemark().value);
     }
 }
