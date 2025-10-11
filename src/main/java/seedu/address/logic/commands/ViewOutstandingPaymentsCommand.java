@@ -1,0 +1,66 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * Command to show outstanding payments 'outstanding'
+ */
+public class ViewOutstandingPaymentsCommand extends Command {
+    public static final String COMMAND_WORD = "outstanding";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all outstanding payments.\n"
+            + "Example: " + COMMAND_WORD;
+
+    /**
+     * Executes the command to view outstanding payments.
+     * @param model the model containing the data
+     * @return the result of the command execution
+     * @throws CommandException if an error occurs during execution
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> personList = model.getFilteredPersonList();
+        if (personList.isEmpty()) {
+            return new CommandResult("No outstanding payments found.");
+        }
+        // filter those who have outstanding payments
+        List<Person> overduePersonList = new ArrayList<>();
+        StringBuilder outstandingPayments = new StringBuilder();
+        int overdueCount = 0;
+        for (Person p : personList) {
+            if (p.getFinance().get().isOverdue()) {
+                overdueCount++;
+                overduePersonList.add(p);
+                outstandingPayments.append(overdueCount + ":").append("\n");
+                outstandingPayments.append(p.getName()).append("\n");
+                outstandingPayments.append(p.getEmail()).append("\n");
+                outstandingPayments.append(p.getPhone()).append("\n");
+                outstandingPayments.append(p.getFinance().get()).append("\n");
+            }
+        }
+        if (overduePersonList.isEmpty()) {
+            return new CommandResult("No outstanding payments found.");
+        }
+
+        return new CommandResult(outstandingPayments.toString());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // Stateless command: any two instances are considered equal
+        return other == this || (other != null && other.getClass() == this.getClass());
+    }
+
+    @Override
+    public int hashCode() {
+        return COMMAND_WORD.hashCode();
+    }
+}
