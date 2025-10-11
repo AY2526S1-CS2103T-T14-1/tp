@@ -252,10 +252,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Lesson Lesson} into a {@code Lesson}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses lesson details into a {@code Lesson}.
      *
-     * @throws ParseException if the given {@code location} is invalid.
+     * @throws ParseException if the given details is invalid.
      */
     public static Lesson parseLesson(String name, String date, String time, String location)
             throws ParseException {
