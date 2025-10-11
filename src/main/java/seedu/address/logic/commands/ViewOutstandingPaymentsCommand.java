@@ -36,10 +36,10 @@ public class ViewOutstandingPaymentsCommand extends Command {
         StringBuilder outstandingPayments = new StringBuilder();
         int overdueCount = 0;
         for (Person p : personList) {
-            if (p.getFinance().get().isOverdue()) {
+            if (p.getFinance().isPresent() && p.getFinance().get().isOverdue()) {
                 overdueCount++;
                 overduePersonList.add(p);
-                outstandingPayments.append(overdueCount + ":").append("\n");
+                outstandingPayments.append(overdueCount).append(":").append("\n");
                 outstandingPayments.append(p.getName()).append("\n");
                 outstandingPayments.append(p.getEmail()).append("\n");
                 outstandingPayments.append(p.getPhone()).append("\n");

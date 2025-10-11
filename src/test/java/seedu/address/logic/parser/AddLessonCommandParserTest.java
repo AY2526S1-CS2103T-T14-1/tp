@@ -82,6 +82,31 @@ public class AddLessonCommandParserTest {
     }
 
     @Test
+    public void parse_missingFields_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // missing lesson name
+        String userInput = targetIndex.getOneBased() + VALID_DATE_DESC + VALID_TIME_DESC + VALID_LOCATION_DESC;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // missing date
+        userInput = targetIndex.getOneBased() + VALID_LESSON_NAME_DESC_1 + VALID_TIME_DESC + VALID_LOCATION_DESC;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // missing time
+        userInput = targetIndex.getOneBased() + VALID_LESSON_NAME_DESC_1 + VALID_DATE_DESC + VALID_LOCATION_DESC;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // missing location
+        userInput = targetIndex.getOneBased() + VALID_LESSON_NAME_DESC_1 + VALID_DATE_DESC + VALID_TIME_DESC;
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // all fields missing
+        userInput = String.valueOf(targetIndex.getOneBased());
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + VALID_LESSON_DESC;

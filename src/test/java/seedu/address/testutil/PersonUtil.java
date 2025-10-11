@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -71,10 +70,10 @@ public class PersonUtil {
      */
     public static String getAddLessonDescriptorDetails(AddLessonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        Optional<Lesson> lesson = descriptor.getLesson();
-        lesson.ifPresent(l -> sb.append(PREFIX_NAME).append(l.lessonName).append(" ").append(PREFIX_DATE)
-                .append(l.date).append(" ").append(PREFIX_TIME).append(l.time).append(" ")
-                .append(PREFIX_LOCATION).append(l.location).append(" "));
+        Lesson lesson = descriptor.getLesson();
+        sb.append(PREFIX_NAME).append(lesson.lessonName).append(" ").append(PREFIX_DATE)
+                .append(lesson.date).append(" ").append(PREFIX_TIME).append(lesson.time).append(" ")
+                .append(PREFIX_LOCATION).append(lesson.location).append(" ");
         return sb.toString();
     }
 }

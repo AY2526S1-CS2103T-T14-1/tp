@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
-
 import seedu.address.logic.commands.AddLessonCommand.AddLessonDescriptor;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
@@ -30,15 +28,15 @@ public class AddLessonDescriptorBuilder {
      */
     public AddLessonDescriptorBuilder(Person person) {
         descriptor = new AddLessonDescriptor();
-        descriptor.setLesson(person.getLesson());
+        descriptor.setLesson(person.getLesson().orElse(null));
     }
 
     /**
      * Sets the {@code Lesson} of the {@code AddLessonDescriptor} that we are building.
      */
     public AddLessonDescriptorBuilder withLesson(String lessonName, String date, String time, String location) {
-        descriptor.setLesson(Optional.of(new Lesson(new LessonName(lessonName), new Date(date), new Time(time),
-                new Location(location))));
+        descriptor.setLesson(new Lesson(new LessonName(lessonName), new Date(date), new Time(time),
+                new Location(location)));
         return this;
     }
 
