@@ -20,7 +20,7 @@ public class FinanceTest {
         assertDoesNotThrow(() -> new Finance(validAmount, type, status));
 
         Finance finance = new Finance(validAmount, type, status);
-        assertEquals(validAmount, finance.getAmount());
+        assertEquals(validAmount, finance.getFinanceAmount());
     }
 
     @Test
@@ -110,7 +110,7 @@ public class FinanceTest {
 
         Finance finance = new Finance(amount, type, status);
 
-        assertEquals(amount, finance.getAmount());
+        assertEquals(amount, finance.getFinanceAmount());
         assertEquals(type, finance.getType());
         assertEquals(status, finance.getStatus());
     }

@@ -23,6 +23,9 @@ public class FinanceAmount {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
+    public FinanceAmount(double amount) {
+        this.amount = String.format("%.2f", amount);
+    }
 
     /**
      * Returns true if a given string is a valid amount.

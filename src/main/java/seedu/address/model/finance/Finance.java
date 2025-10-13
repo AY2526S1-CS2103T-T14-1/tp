@@ -25,7 +25,7 @@ public class Finance {
         this.status = status;
     }
 
-    public FinanceAmount getAmount() {
+    public FinanceAmount getFinanceAmount() {
         return amount;
     }
 

@@ -34,7 +34,7 @@ class JsonAdaptedFinance {
      * Converts a given {@code Finance} into this class for Jackson use.
      */
     public JsonAdaptedFinance(Finance source) {
-        amount = String.valueOf(source.getAmount().getAmount());
+        amount = String.valueOf(source.getFinanceAmount().getAmount());
         type = source.getType().name();
         status = source.getStatus().name();
     }
