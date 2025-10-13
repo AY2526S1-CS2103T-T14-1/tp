@@ -14,6 +14,12 @@ import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.person.Person;
 
+/**
+ * Constructs a {@code PayCommand} to record a payment for the person at the given index.
+ *
+ * @param index index of the person in the current filtered person list (1-based as entered by the user).
+ * @param payment amount to deduct from the person's outstanding finance.
+ */
 public class PayCommand extends Command {
 
     public static final String COMMAND_WORD = "pay";
@@ -32,6 +38,15 @@ public class PayCommand extends Command {
         this.payment = payment;
     }
 
+    /**
+     * Executes the pay command by deducting the payment from the target person's outstanding finance
+     * and updating the model with the new finance state.
+     *
+     * @param model the model holding the filtered person list and supporting updates.
+     * @return a {@link CommandResult} describing the successful payment recording.
+     * @throws CommandException if the provided index is out of bounds of the filtered person list.
+     * @throws NullPointerException if {@code model} is {@code null}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -50,6 +65,18 @@ public class PayCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, payment, personToAddPayment.getName()));
     }
 
+    /**
+     * Produces a new {@link Finance} reflecting the deduction of the given payment from the person's
+     * current outstanding amount. The finance type and status are preserved.
+     *
+     * Note: This method does not validate against negative results; callers should ensure the operation is valid.
+     *
+     * @param p the person whose finance is to be updated; must have a present finance.
+     * @param payment the payment amount to deduct.
+     * @return a new {@link Finance} instance with the updated outstanding amount.
+     * @throws NullPointerException if any argument is {@code null}.
+     * @throws java.util.NoSuchElementException if the person has no finance present.
+     */
     public Finance updateFinance(Person p, FinanceAmount payment) {
         Finance oldFinance = p.getFinance().get();
         return new Finance(new FinanceAmount(oldFinance.getFinanceAmount().getAmount() - payment.getAmount()),
