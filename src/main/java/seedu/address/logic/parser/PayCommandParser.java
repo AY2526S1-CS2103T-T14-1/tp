@@ -12,14 +12,11 @@ import seedu.address.model.finance.FinanceAmount;
 public class PayCommandParser implements Parser<PayCommand> {
 
     public PayCommand parse(String args) throws ParseException {
-        System.out.println("args: " + args);
         requireNonNull(args);
-        System.out.println("before trim");
         if (args.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PayCommand.MESSAGE_USAGE));
         }
-        System.out.println("after trim");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT);
         Index index;
         try {
