@@ -6,37 +6,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceStatus;
-import seedu.address.model.finance.FinanceType;
 
 /**
  * Jackson-friendly version of {@link Finance}.
  */
 class JsonAdaptedFinance {
 
-    private final String amount;
-    private final String type;
-    private final String status;
+    private final String owedAmount;
 
     /**
      * Constructs a {@code JsonAdaptedFinance} with the given finance details.
      */
     @JsonCreator
-    public JsonAdaptedFinance(@JsonProperty("amount") String amount,
-                              @JsonProperty("type") String type,
-                              @JsonProperty("status") String status) {
-        this.amount = amount;
-        this.type = type;
-        this.status = status;
+    public JsonAdaptedFinance(@JsonProperty("owedAmount") String owedAmount) {
+        this.owedAmount = owedAmount;
     }
 
     /**
      * Converts a given {@code Finance} into this class for Jackson use.
      */
     public JsonAdaptedFinance(Finance source) {
-        amount = String.valueOf(source.getFinanceAmount().getAmount());
-        type = source.getType().name();
-        status = source.getStatus().name();
+        owedAmount = String.valueOf(source.getOwedAmount().getAmount());
     }
 
     /**
@@ -45,34 +35,14 @@ class JsonAdaptedFinance {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Finance toModelType() throws IllegalValueException {
-        if (amount == null) {
-            throw new IllegalValueException("Finance amount cannot be null!");
+        if (owedAmount == null) {
+            throw new IllegalValueException("Finance owed amount cannot be null!");
         }
-        if (!FinanceAmount.isValidAmount(amount)) {
+        if (!FinanceAmount.isValidAmount(owedAmount)) {
             throw new IllegalValueException(FinanceAmount.MESSAGE_CONSTRAINTS);
         }
-        final FinanceAmount modelAmount = new FinanceAmount(amount);
+        final FinanceAmount modelOwedAmount = new FinanceAmount(owedAmount);
 
-        if (type == null) {
-            throw new IllegalValueException("Finance type cannot be null!");
-        }
-        final FinanceType modelType;
-        try {
-            modelType = FinanceType.valueOf(type);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalValueException("Finance type must be either PER_MONTH or PER_LESSON.");
-        }
-
-        if (status == null) {
-            throw new IllegalValueException("Finance status cannot be null!");
-        }
-        final FinanceStatus modelStatus;
-        try {
-            modelStatus = FinanceStatus.valueOf(status);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalValueException("Finance status must be either PAID, UNPAID, or OVERDUE.");
-        }
-
-        return new Finance(modelAmount, modelType, modelStatus);
+        return new Finance(modelOwedAmount);
     }
 }

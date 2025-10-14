@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCE_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCE_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -33,17 +31,13 @@ public class AddFinanceCommand extends Command {
 
     public static final String COMMAND_WORD = "addfinance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds finance information to the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an owed amount to the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing finance will be overwritten by the input values.\n"
+            + "The amount will be added to any existing owed amount.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_AMOUNT + "AMOUNT "
-            + PREFIX_FINANCE_TYPE + "TYPE "
-            + PREFIX_FINANCE_STATUS + "STATUS\n"
+            + PREFIX_AMOUNT + "AMOUNT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_AMOUNT + "100.00 "
-            + PREFIX_FINANCE_TYPE + "PER_MONTH "
-            + PREFIX_FINANCE_STATUS + "UNPAID";
+            + PREFIX_AMOUNT + "100.00";
 
     public static final String MESSAGE_ADD_FINANCE_SUCCESS = "Added Finance to %1$s: %2$s";
 
@@ -93,8 +87,17 @@ public class AddFinanceCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Lesson> updatedLesson = personToEdit.getLesson();
-        Optional<Finance> updatedFinance = Optional.of(addFinanceDescriptor.getFinance());
-        Optional<AttendanceStatus> updatedAttendance = Optional.empty();
+
+        // Add the new amount to existing owed amount, or create new Finance if none exists
+        Optional<Finance> updatedFinance;
+        if (personToEdit.getFinance().isPresent()) {
+            Finance existingFinance = personToEdit.getFinance().get();
+            updatedFinance = Optional.of(existingFinance.add(addFinanceDescriptor.getFinance().getOwedAmount()));
+        } else {
+            updatedFinance = Optional.of(addFinanceDescriptor.getFinance());
+        }
+
+        Optional<AttendanceStatus> updatedAttendance = personToEdit.getAttendance();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLesson,
                 updatedFinance, updatedAttendance);

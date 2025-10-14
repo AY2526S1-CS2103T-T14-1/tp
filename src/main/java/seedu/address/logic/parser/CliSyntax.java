@@ -12,8 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_AMOUNT = new Prefix("amt/");
-    public static final Prefix PREFIX_FINANCE_TYPE = new Prefix("ftype/");
-    public static final Prefix PREFIX_FINANCE_STATUS = new Prefix("fstatus/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");

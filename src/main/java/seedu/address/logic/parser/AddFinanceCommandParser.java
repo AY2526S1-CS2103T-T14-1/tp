@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCE_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCE_TYPE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -25,8 +23,7 @@ public class AddFinanceCommandParser implements Parser<AddFinanceCommand> {
      */
     public AddFinanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_FINANCE_TYPE,
-                PREFIX_FINANCE_STATUS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT);
 
         Index index;
         try {
@@ -36,21 +33,15 @@ public class AddFinanceCommandParser implements Parser<AddFinanceCommand> {
                     AddFinanceCommand.MESSAGE_USAGE), ive);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_FINANCE_TYPE, PREFIX_FINANCE_STATUS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
 
-        if (argMultimap.getValue(PREFIX_AMOUNT).isEmpty()
-                || argMultimap.getValue(PREFIX_FINANCE_TYPE).isEmpty()
-                || argMultimap.getValue(PREFIX_FINANCE_STATUS).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddFinanceCommand.MESSAGE_USAGE));
         }
 
         AddFinanceDescriptor addFinanceDescriptor = new AddFinanceDescriptor();
-        Finance finance = ParserUtil.parseFinance(
-                argMultimap.getValue(PREFIX_AMOUNT).get(),
-                argMultimap.getValue(PREFIX_FINANCE_TYPE).get(),
-                argMultimap.getValue(PREFIX_FINANCE_STATUS).get()
-        );
+        Finance finance = ParserUtil.parseFinance(argMultimap.getValue(PREFIX_AMOUNT).get());
         addFinanceDescriptor.setFinance(finance);
 
         return new AddFinanceCommand(index, addFinanceDescriptor);

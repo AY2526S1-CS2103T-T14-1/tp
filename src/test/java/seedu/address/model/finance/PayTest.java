@@ -2,7 +2,6 @@ package seedu.address.model.finance;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -30,12 +29,12 @@ public class PayTest {
     }
 
     @Test
-    public void execute_withOverdueFinance_marksPersonAsPaid() {
-        // even if the person has overdue finance, they can still be marked as paid
+    public void execute_withOwedAmount_reducesOwedAmount() {
+        // person with owed amount can make payment to reduce it
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
-        Person personWithOverdueFinance = new PersonBuilder().withName("Alice").withFinance(
-                new Finance(new FinanceAmount("100.00"), FinanceType.PER_MONTH, FinanceStatus.OVERDUE)).build();
-        model.addPerson(personWithOverdueFinance);
+        Person personWithOwedAmount = new PersonBuilder().withName("Alice").withFinance(
+                new Finance(new FinanceAmount("100.00"))).build();
+        model.addPerson(personWithOwedAmount);
         PayCommand payCommand = new PayCommand(Index.fromOneBased(1), new FinanceAmount("100.00"));
         String expectedMessage = String.format(PayCommand.MESSAGE_SUCCESS, "100.00", "Alice");
         CommandResult result = assertDoesNotThrow(() -> payCommand.execute(model));
