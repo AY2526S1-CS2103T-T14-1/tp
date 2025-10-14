@@ -82,4 +82,18 @@ public class PayCommand extends Command {
         return new Finance(new FinanceAmount(oldFinance.getFinanceAmount().getAmount() - payment.getAmount()),
                 oldFinance.getType(), oldFinance.getStatus());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof PayCommand)) {
+            return false;
+        }
+        PayCommand otherPayCommand = (PayCommand) other;
+        return index.equals(otherPayCommand.index)
+                && payment.equals(otherPayCommand.payment);
+    }
 }
