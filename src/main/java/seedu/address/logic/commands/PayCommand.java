@@ -15,10 +15,7 @@ import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.person.Person;
 
 /**
- * Constructs a {@code PayCommand} to record a payment for the person at the given index.
- *
- * @param index index of the person in the current filtered person list (1-based as entered by the user).
- * @param payment amount to deduct from the person's outstanding finance.
+ * Records a payment made by a student, reducing their outstanding finance amount.
  */
 public class PayCommand extends Command {
 
@@ -33,6 +30,12 @@ public class PayCommand extends Command {
     private final Index index;
     private final FinanceAmount payment;
 
+    /**
+     * Constructs a {@code PayCommand} to record a payment for the person at the given index.
+     *
+     * @param index index of the person in the current filtered person list (1-based as entered by the user).
+     * @param payment amount to deduct from the person's outstanding finance.
+    */
     public PayCommand(Index index, FinanceAmount payment) {
         this.index = index;
         this.payment = payment;
