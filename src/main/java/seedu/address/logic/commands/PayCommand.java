@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.FinanceStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,8 +83,12 @@ public class PayCommand extends Command {
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
         Finance oldFinance = p.getFinance().get();
-        return new Finance(new FinanceAmount(oldFinance.getFinanceAmount().getAmount() - payment.getAmount()),
-                oldFinance.getType(), oldFinance.getStatus());
+        FinanceAmount newAmount = new FinanceAmount(oldFinance.getFinanceAmount().getAmount() - payment.getAmount());
+        FinanceStatus newStatus = oldFinance.getStatus();
+        if (newAmount.getAmount() == 0) {
+            newStatus = FinanceStatus.PAID;
+        }
+        return new Finance(newAmount, oldFinance.getType(), newStatus);
     }
 
     @Override
