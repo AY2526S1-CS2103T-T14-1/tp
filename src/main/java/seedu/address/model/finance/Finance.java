@@ -13,10 +13,13 @@ public class Finance {
     private final FinanceStatus status;
 
 
+
     /**
      * Constructs a {@code Finance}.
      *
      * @param amount A valid amount.
+     * @param type Frequency type of the finance. E.g. Per Month, Per Lesson.
+     * @param status Payment status of the finance.
      */
     public Finance(FinanceAmount amount, FinanceType type, FinanceStatus status) {
         requireAllNonNull(amount, type, status);
