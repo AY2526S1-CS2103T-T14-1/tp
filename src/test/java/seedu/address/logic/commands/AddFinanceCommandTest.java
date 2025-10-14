@@ -155,4 +155,84 @@ public class AddFinanceCommandTest {
                 + ", addFinanceDescriptor=" + descriptor + "}";
         assertEquals(expected, addFinanceCommand.toString());
     }
+
+    @Test
+    public void execute_addFinanceToPersonWithoutExistingFinance_success() {
+        // Create a person without existing finance
+        Person personWithoutFinance = new PersonBuilder().withName("Test Person")
+                .withPhone("98765432").withEmail("test@example.com")
+                .withAddress("Test Address").withoutFinance().build();
+
+        Model testModel = new ModelManager(new AddressBook(), new UserPrefs());
+        testModel.addPerson(personWithoutFinance);
+
+        Finance financeToAdd = new Finance(new FinanceAmount("50.00"));
+        Person editedPerson = new PersonBuilder(personWithoutFinance).withFinance(financeToAdd).build();
+
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(financeToAdd);
+        AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
+                editedPerson.getName(), financeToAdd.toString());
+
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel.addPerson(personWithoutFinance);
+        expectedModel.setPerson(personWithoutFinance, editedPerson);
+
+        assertCommandSuccess(addFinanceCommand, testModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addFinanceToPersonWithExistingFinance_addsToExisting() {
+        // Create a person with existing finance of 100.00
+        Finance existingFinance = new Finance(new FinanceAmount("100.00"));
+        Person personWithFinance = new PersonBuilder().withName("Test Person")
+                .withPhone("98765432").withEmail("test@example.com")
+                .withAddress("Test Address").withFinance(existingFinance).build();
+
+        Model testModel = new ModelManager(new AddressBook(), new UserPrefs());
+        testModel.addPerson(personWithFinance);
+
+        // Add 50.00 more
+        Finance financeToAdd = new Finance(new FinanceAmount("50.00"));
+        Finance expectedFinance = existingFinance.add(financeToAdd.getOwedAmount()); // Should be 150.00
+        Person editedPerson = new PersonBuilder(personWithFinance).withFinance(expectedFinance).build();
+
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(financeToAdd);
+        AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
+                editedPerson.getName(), expectedFinance.toString());
+
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel.addPerson(personWithFinance);
+        expectedModel.setPerson(personWithFinance, editedPerson);
+
+        assertCommandSuccess(addFinanceCommand, testModel, expectedMessage, expectedModel);
+
+        // Verify the amount is correctly added
+        assertEquals(150.00, expectedFinance.getOwedAmount().getAmount(), 0.01);
+    }
+
+    @Test
+    public void addFinanceDescriptor_copy_success() {
+        Finance finance = new Finance(new FinanceAmount("100.00"));
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(finance);
+
+        AddFinanceDescriptor copy = new AddFinanceDescriptor(descriptor);
+        assertEquals(descriptor, copy);
+    }
+
+    @Test
+    public void addFinanceDescriptor_toString_success() {
+        Finance finance = new Finance(new FinanceAmount("100.00"));
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(finance);
+
+        String result = descriptor.toString();
+        assertTrue(result.contains("finance"));
+    }
 }
