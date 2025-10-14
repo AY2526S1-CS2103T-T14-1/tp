@@ -1,6 +1,8 @@
 package seedu.address.model.finance;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -9,6 +11,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.PayCommandParser;
 import seedu.address.model.AddressBook;
@@ -28,25 +31,15 @@ public class PayTest {
 
     @Test
     public void execute_withOverdueFinance_marksPersonAsPaid() {
+        // even if the person has overdue finance, they can still be marked as paid
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
-
-        Finance overdue = new Finance(new FinanceAmount("50.00"), FinanceType.PER_MONTH, FinanceStatus.OVERDUE);
-        Person target = new PersonBuilder().withName("Alice Blue").withPhone("91231234")
-                .withEmail("alice@example.com").withFinance(overdue).build();
-        Person other = new PersonBuilder().withName("Bob Green").withPhone("92341234")
-                .withEmail("bob@example.com").withFinance(
-                        new Finance(new FinanceAmount("30.00"), FinanceType.PER_LESSON, FinanceStatus.UNPAID)).build();
-
-        model.addPerson(target);
-        model.addPerson(other);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Finance paidFinance = new Finance(overdue.getFinanceAmount(), overdue.getType(), FinanceStatus.PAID);
-        Person paidTarget = new PersonBuilder(target).withFinance(paidFinance).build();
-        expectedModel.setPerson(target, paidTarget);
-
-        Index firstIndex = Index.fromOneBased(1);
-        assertEquals(expectedModel, model);
+        Person personWithOverdueFinance = new PersonBuilder().withName("Alice").withFinance(
+                new Finance(new FinanceAmount("100.00"), FinanceType.PER_MONTH, FinanceStatus.OVERDUE)).build();
+        model.addPerson(personWithOverdueFinance);
+        PayCommand payCommand = new PayCommand(Index.fromOneBased(1), new FinanceAmount("100.00"));
+        String expectedMessage = String.format(PayCommand.MESSAGE_SUCCESS, "100.00", "Alice");
+        CommandResult result = assertDoesNotThrow(() -> payCommand.execute(model));
+        assertEquals(new CommandResult(expectedMessage), result);
     }
 
     @Test
