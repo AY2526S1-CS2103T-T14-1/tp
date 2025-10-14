@@ -1,9 +1,10 @@
 package seedu.address.model.finance;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,4 +47,12 @@ public class PayTest {
 
         Index firstIndex = Index.fromOneBased(1);
         assertEquals(expectedModel, model);
-    }}
+    }
+
+    @Test
+    public void parse_indexWithExtraWhitespace_returnsPayCommand() {
+        PayCommandParser parser = new PayCommandParser();
+        String userInput = " 1 " + PREFIX_AMOUNT + "50.00";
+        assertParseSuccess(parser, userInput, new PayCommand(Index.fromOneBased(1), new FinanceAmount("50.00")));
+    }
+}
