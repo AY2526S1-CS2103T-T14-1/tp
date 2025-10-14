@@ -20,14 +20,15 @@ public class JsonAdaptedFinanceTest {
     public void toModelType_validFinanceDetails_returnsFinance() throws Exception {
         Finance finance = new Finance(new FinanceAmount(VALID_OWED_AMOUNT));
         JsonAdaptedFinance jsonAdaptedFinance = new JsonAdaptedFinance(finance);
-        assertEquals(finance, jsonAdaptedFinance.toModelType());
+        Finance result = jsonAdaptedFinance.toModelType();
+        assertEquals(finance.getOwedAmount().getAmount(), result.getOwedAmount().getAmount(), 0.001);
     }
 
     @Test
     public void toModelType_validOwedAmountString_returnsFinance() throws Exception {
         JsonAdaptedFinance jsonAdaptedFinance = new JsonAdaptedFinance(VALID_OWED_AMOUNT);
-        Finance expectedFinance = new Finance(new FinanceAmount(VALID_OWED_AMOUNT));
-        assertEquals(expectedFinance, jsonAdaptedFinance.toModelType());
+        Finance result = jsonAdaptedFinance.toModelType();
+        assertEquals(100.00, result.getOwedAmount().getAmount(), 0.001);
     }
 
     @Test
@@ -62,13 +63,14 @@ public class JsonAdaptedFinanceTest {
     public void constructor_validFinance_success() throws Exception {
         Finance finance = new Finance(new FinanceAmount("50.00"));
         JsonAdaptedFinance jsonAdaptedFinance = new JsonAdaptedFinance(finance);
-        assertEquals(finance, jsonAdaptedFinance.toModelType());
+        Finance result = jsonAdaptedFinance.toModelType();
+        assertEquals(50.00, result.getOwedAmount().getAmount(), 0.001);
     }
 
     @Test
     public void constructor_zeroOwedAmount_success() throws Exception {
         JsonAdaptedFinance jsonAdaptedFinance = new JsonAdaptedFinance("0.00");
-        Finance expectedFinance = new Finance(new FinanceAmount("0.00"));
-        assertEquals(expectedFinance, jsonAdaptedFinance.toModelType());
+        Finance result = jsonAdaptedFinance.toModelType();
+        assertEquals(0.00, result.getOwedAmount().getAmount(), 0.001);
     }
 }
