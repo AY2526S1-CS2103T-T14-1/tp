@@ -73,7 +73,7 @@ public class ScheduleCommand extends Command {
                     + " @ " + r.getLesson().getLocation()
                     + "\n";
         }
-        return new CommandResult(output);
+        return new CommandResult(output, false, false, true);
     }
 
     private static final class Row {

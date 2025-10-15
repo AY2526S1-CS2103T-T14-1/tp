@@ -8,6 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void constructors_defaultsAndShowSchedule() {
+        CommandResult a = new CommandResult("ok");
+        CommandResult b = new CommandResult("ok", false, false);
+        CommandResult c = new CommandResult("ok", false, false, true);
+
+        // defaults (no schedule) are equal
+        assertEquals(a, b);
+
+        // schedule flag differs
+        assertNotEquals(a, c);
+        assertNotEquals(b, c);
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
@@ -57,7 +72,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit()
+                + ", showSchedule=" + commandResult.isShowSchedule() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

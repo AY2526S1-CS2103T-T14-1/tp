@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ScheduleWindow scheduleWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        scheduleWindow = new ScheduleWindow(primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -176,6 +178,14 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            if (commandResult.isShowSchedule()) {
+                if (scheduleWindow.isShowing()) {
+                    scheduleWindow.focus();
+                } else {
+                    scheduleWindow.setContentArea(commandResult.getFeedbackToUser());
+                    scheduleWindow.show();
+                }
+            }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
