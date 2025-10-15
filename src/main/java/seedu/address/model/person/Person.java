@@ -93,8 +93,10 @@ public class Person {
     }
 
     public Person setLesson(String lessonName, String date, String time, String location) {
-        Lesson lesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
-        return new Person(name, phone, email, address, tags, Optional.of(lesson), Optional.empty(), Optional.empty());
+        Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),
+                new Time(time), new Location(location)));
+        Optional<Finance> updatedFinance = finance.or(() -> Optional.of(new Finance()));
+        return new Person(name, phone, email, address, tags, updatedLesson, updatedFinance, Optional.empty());
     }
 
     public Optional<AttendanceStatus> getAttendance() {
