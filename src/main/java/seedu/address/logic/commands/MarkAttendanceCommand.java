@@ -21,7 +21,8 @@ public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of the student identified by the index number used in the displayed person list.\n"
+            + ": Marks the attendance of the student "
+            + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STUDENT + "STATUS (must be 'present' or 'absent')\n"
             + "Example: " + COMMAND_WORD + " 1 "

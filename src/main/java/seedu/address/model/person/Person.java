@@ -94,7 +94,8 @@ public class Person {
      * The attendance for the new lesson will automatically be set to "Absent".
      */
     public Person setLesson(String lessonName, String date, String time, String location) {
-        Lesson newLesson = new Lesson(new LessonName(lessonName), new Date(date), new Time(time), new Location(location));
+        Lesson newLesson = new Lesson(new LessonName(lessonName),
+                new Date(date), new Time(time), new Location(location));
 
         return new Person(this.name, this.phone, this.email, this.address, this.tags,
                 Optional.of(newLesson), this.finance);
