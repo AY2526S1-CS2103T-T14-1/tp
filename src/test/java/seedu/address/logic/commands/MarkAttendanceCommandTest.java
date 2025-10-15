@@ -26,7 +26,8 @@ public class MarkAttendanceCommandTest {
         Person personWithLesson = new PersonBuilder(firstPerson).withLesson("Math", "Monday", "10:00", "Room1").build();
         model.setPerson(firstPerson, personWithLesson);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON, new Attendance("present"));
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(
+                INDEX_FIRST_PERSON, new Attendance("present"));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person expectedPerson = new PersonBuilder(personWithLesson).build().markAttendance("present");
@@ -39,7 +40,8 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_personWithoutLesson_throwsCommandException() {
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_SECOND_PERSON, new Attendance("present"));
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(
+                INDEX_SECOND_PERSON, new Attendance("present"));
         Person personWithoutLesson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_PERSON_HAS_NO_LESSON,
                 personWithoutLesson.getName());
