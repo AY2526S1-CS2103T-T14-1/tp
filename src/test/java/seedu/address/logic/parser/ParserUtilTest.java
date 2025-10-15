@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Attendance;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
@@ -296,5 +297,24 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         Location expectedLocation = new Location(VALID_LOCATION);
         assertEquals(expectedLocation, ParserUtil.parseLocation(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseAttendance_validValue_returnsAttendance() throws Exception {
+        Attendance expectedPresent = new Attendance("present");
+        assertEquals(expectedPresent, ParserUtil.parseAttendance("present"));
+        assertEquals(expectedPresent, ParserUtil.parseAttendance("Present")); // case-insensitive
+
+        Attendance expectedAbsent = new Attendance("absent");
+        assertEquals(expectedAbsent, ParserUtil.parseAttendance("absent"));
+        assertEquals(expectedAbsent, ParserUtil.parseAttendance("Absent")); // case-insensitive
+    }
+
+    @Test
+    public void parseAttendance_invalidValue_throwsParseException() {
+        // empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance(""));
+        // invalid status
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("late"));
     }
 }
