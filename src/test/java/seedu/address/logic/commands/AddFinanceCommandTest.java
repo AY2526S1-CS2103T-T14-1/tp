@@ -21,8 +21,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceStatus;
-import seedu.address.model.finance.FinanceType;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -36,19 +34,20 @@ public class AddFinanceCommandTest {
     @Test
     public void execute_addFinanceUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Finance finance = new Finance(
-                new FinanceAmount("100.00"),
-                FinanceType.PER_MONTH,
-                FinanceStatus.UNPAID
-        );
-        Person editedPerson = new PersonBuilder(firstPerson).withFinance(finance).build();
+        Finance financeToAdd = new Finance(new FinanceAmount("100.00"));
+
+        // Calculate expected finance: add to existing or create new
+        Finance expectedFinance = firstPerson.getFinance()
+                .map(existing -> existing.add(financeToAdd.getOwedAmount()))
+                .orElse(financeToAdd);
+        Person editedPerson = new PersonBuilder(firstPerson).withFinance(expectedFinance).build();
 
         AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
-        descriptor.setFinance(finance);
+        descriptor.setFinance(financeToAdd);
         AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
-                editedPerson.getName(), finance.toString());
+                editedPerson.getName(), expectedFinance.toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -61,19 +60,20 @@ public class AddFinanceCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Finance finance = new Finance(
-                new FinanceAmount("200.50"),
-                FinanceType.PER_LESSON,
-                FinanceStatus.PAID
-        );
-        Person editedPerson = new PersonBuilder(personInFilteredList).withFinance(finance).build();
+        Finance financeToAdd = new Finance(new FinanceAmount("200.50"));
+
+        // Calculate expected finance: add to existing or create new
+        Finance expectedFinance = personInFilteredList.getFinance()
+                .map(existing -> existing.add(financeToAdd.getOwedAmount()))
+                .orElse(financeToAdd);
+        Person editedPerson = new PersonBuilder(personInFilteredList).withFinance(expectedFinance).build();
 
         AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
-        descriptor.setFinance(finance);
+        descriptor.setFinance(financeToAdd);
         AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
-                editedPerson.getName(), finance.toString());
+                editedPerson.getName(), expectedFinance.toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -84,11 +84,7 @@ public class AddFinanceCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Finance finance = new Finance(
-                new FinanceAmount("100.00"),
-                FinanceType.PER_MONTH,
-                FinanceStatus.UNPAID
-        );
+        Finance finance = new Finance(new FinanceAmount("100.00"));
         AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
         descriptor.setFinance(finance);
         AddFinanceCommand addFinanceCommand = new AddFinanceCommand(outOfBoundIndex, descriptor);
@@ -107,11 +103,7 @@ public class AddFinanceCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        Finance finance = new Finance(
-                new FinanceAmount("100.00"),
-                FinanceType.PER_MONTH,
-                FinanceStatus.UNPAID
-        );
+        Finance finance = new Finance(new FinanceAmount("100.00"));
         AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
         descriptor.setFinance(finance);
         AddFinanceCommand addFinanceCommand = new AddFinanceCommand(outOfBoundIndex, descriptor);
@@ -121,16 +113,8 @@ public class AddFinanceCommandTest {
 
     @Test
     public void equals() {
-        Finance finance1 = new Finance(
-                new FinanceAmount("100.00"),
-                FinanceType.PER_MONTH,
-                FinanceStatus.UNPAID
-        );
-        Finance finance2 = new Finance(
-                new FinanceAmount("200.00"),
-                FinanceType.PER_LESSON,
-                FinanceStatus.PAID
-        );
+        Finance finance1 = new Finance(new FinanceAmount("100.00"));
+        Finance finance2 = new Finance(new FinanceAmount("200.00"));
 
         AddFinanceDescriptor descriptor1 = new AddFinanceDescriptor();
         descriptor1.setFinance(finance1);
@@ -163,16 +147,92 @@ public class AddFinanceCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        Finance finance = new Finance(
-                new FinanceAmount("100.00"),
-                FinanceType.PER_MONTH,
-                FinanceStatus.UNPAID
-        );
+        Finance finance = new Finance(new FinanceAmount("100.00"));
         AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
         descriptor.setFinance(finance);
         AddFinanceCommand addFinanceCommand = new AddFinanceCommand(index, descriptor);
         String expected = AddFinanceCommand.class.getCanonicalName() + "{index=" + index
                 + ", addFinanceDescriptor=" + descriptor + "}";
         assertEquals(expected, addFinanceCommand.toString());
+    }
+
+    @Test
+    public void execute_addFinanceToPersonWithoutExistingFinance_success() {
+        // Create a person without existing finance
+        Person personWithoutFinance = new PersonBuilder().withName("Test Person")
+                .withPhone("98765432").withEmail("test@example.com")
+                .withAddress("Test Address").withoutFinance().build();
+
+        Model testModel = new ModelManager(new AddressBook(), new UserPrefs());
+        testModel.addPerson(personWithoutFinance);
+
+        Finance financeToAdd = new Finance(new FinanceAmount("50.00"));
+        Person editedPerson = new PersonBuilder(personWithoutFinance).withFinance(financeToAdd).build();
+
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(financeToAdd);
+        AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
+                editedPerson.getName(), financeToAdd.toString());
+
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel.addPerson(personWithoutFinance);
+        expectedModel.setPerson(personWithoutFinance, editedPerson);
+
+        assertCommandSuccess(addFinanceCommand, testModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addFinanceToPersonWithExistingFinance_addsToExisting() {
+        // Create a person with existing finance of 100.00
+        Finance existingFinance = new Finance(new FinanceAmount("100.00"));
+        Person personWithFinance = new PersonBuilder().withName("Test Person")
+                .withPhone("98765432").withEmail("test@example.com")
+                .withAddress("Test Address").withFinance(existingFinance).build();
+
+        Model testModel = new ModelManager(new AddressBook(), new UserPrefs());
+        testModel.addPerson(personWithFinance);
+
+        // Add 50.00 more
+        Finance financeToAdd = new Finance(new FinanceAmount("50.00"));
+        Finance expectedFinance = existingFinance.add(financeToAdd.getOwedAmount()); // Should be 150.00
+        Person editedPerson = new PersonBuilder(personWithFinance).withFinance(expectedFinance).build();
+
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(financeToAdd);
+        AddFinanceCommand addFinanceCommand = new AddFinanceCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(AddFinanceCommand.MESSAGE_ADD_FINANCE_SUCCESS,
+                editedPerson.getName(), expectedFinance.toString());
+
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel.addPerson(personWithFinance);
+        expectedModel.setPerson(personWithFinance, editedPerson);
+
+        assertCommandSuccess(addFinanceCommand, testModel, expectedMessage, expectedModel);
+
+        // Verify the amount is correctly added
+        assertEquals(150.00, expectedFinance.getOwedAmount().getAmount(), 0.01);
+    }
+
+    @Test
+    public void addFinanceDescriptor_copy_success() {
+        Finance finance = new Finance(new FinanceAmount("100.00"));
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(finance);
+
+        AddFinanceDescriptor copy = new AddFinanceDescriptor(descriptor);
+        assertEquals(descriptor, copy);
+    }
+
+    @Test
+    public void addFinanceDescriptor_toString_success() {
+        Finance finance = new Finance(new FinanceAmount("100.00"));
+        AddFinanceDescriptor descriptor = new AddFinanceDescriptor();
+        descriptor.setFinance(finance);
+
+        String result = descriptor.toString();
+        assertTrue(result.contains("finance"));
     }
 }

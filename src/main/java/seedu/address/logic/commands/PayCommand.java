@@ -12,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -71,24 +70,17 @@ public class PayCommand extends Command {
 
     /**
      * Produces a new {@link Finance} reflecting the deduction of the given payment from the person's
-     * current outstanding amount. The finance type and status are preserved.
-     *
-     * Note: This method does not validate against negative results; callers should ensure the operation is valid.
+     * current outstanding amount.
      *
      * @param p the person whose finance is to be updated; must have a present finance.
      * @param payment the payment amount to deduct.
-     * @return a new {@link Finance} instance with the updated outstanding amount.
+     * @return a new {@link Finance} instance with the updated owed amount.
      * @throws NullPointerException if any argument is {@code null}.
      * @throws java.util.NoSuchElementException if the person has no finance present.
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
         Finance oldFinance = p.getFinance().get();
-        FinanceAmount newAmount = new FinanceAmount(oldFinance.getFinanceAmount().getAmount() - payment.getAmount());
-        FinanceStatus newStatus = oldFinance.getStatus();
-        if (newAmount.getAmount() == 0) {
-            newStatus = FinanceStatus.PAID;
-        }
-        return new Finance(newAmount, oldFinance.getType(), newStatus);
+        return oldFinance.pay(payment);
     }
 
     @Override

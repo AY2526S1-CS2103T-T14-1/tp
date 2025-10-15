@@ -6,8 +6,6 @@ import java.util.Set;
 
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceStatus;
-import seedu.address.model.finance.FinanceType;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
@@ -30,11 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Optional<Finance> DEFAULT_FINANCE = Optional.of(new Finance(
-            new FinanceAmount("0"),
-            FinanceType.PER_MONTH,
-            FinanceStatus.UNPAID
-    ));
+    public static final Optional<Finance> DEFAULT_FINANCE = Optional.of(new Finance(new FinanceAmount("0")));
     public static final Lesson DEFAULT_LESSON =
             new Lesson(new LessonName("Math"), new Date("Monday"), new Time("12:00"), new Location("Online"));
 

@@ -9,8 +9,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceStatus;
-import seedu.address.model.finance.FinanceType;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
@@ -34,49 +32,43 @@ public class SampleDataUtil {
                 getTagSet("friends"),
                 Optional.of(new Lesson(new LessonName("Math"), new Date("Monday"), new Time("08:00"),
                     new Location("RoomA"))),
-                Optional.of(new Finance(new FinanceAmount("500.00"), FinanceType.PER_MONTH,
-                    FinanceStatus.UNPAID)),
-                Optional.empty()), // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("500.00"))),
+                Optional.empty()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"),
                 Optional.of(new Lesson(new LessonName("Physics"), new Date("Tuesday"), new Time("10:00"),
                     new Location("RoomB"))),
-                Optional.of(new Finance(new FinanceAmount("300.00"), FinanceType.PER_MONTH,
-                    FinanceStatus.PAID)),
-                Optional.empty()), // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("0.00"))),
+                Optional.empty()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"),
                 Optional.of(new Lesson(new LessonName("Math"), new Date("Wednesday"), new Time("12:00"),
                     new Location("Online"))),
-                Optional.of(new Finance(new FinanceAmount("150.00"), FinanceType.PER_LESSON,
-                    FinanceStatus.UNPAID)),
-                Optional.empty()), // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("150.00"))),
+                Optional.empty()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"),
                 Optional.of(new Lesson(new LessonName("Chemistry"), new Date("Thursday"), new Time("14:00"),
                     new Location("RoomA"))),
-                Optional.of(new Finance(new FinanceAmount("450.00"), FinanceType.PER_MONTH,
-                    FinanceStatus.OVERDUE)),
-                Optional.empty()), // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("450.00"))),
+                Optional.empty()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"),
                 Optional.of(new Lesson(new LessonName("Math"), new Date("Friday"), new Time("16:00"),
                     new Location("RoomB"))),
-                Optional.of(new Finance(new FinanceAmount("200.00"), FinanceType.PER_LESSON,
-                    FinanceStatus.PAID)),
-                Optional.empty()), // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("0.00"))),
+                Optional.empty()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"),
                 Optional.of(new Lesson(new LessonName("Biology"), new Date("Monday"), new Time("18:00"),
                     new Location("Online"))),
-                Optional.of(new Finance(new FinanceAmount("600.00"), FinanceType.PER_MONTH,
-                    FinanceStatus.UNPAID)),
-                Optional.empty()) // <--- 여기 끝에 괄호 하나 제거
+                Optional.of(new Finance(new FinanceAmount("600.00"))),
+                Optional.empty())
         };
     }
 
