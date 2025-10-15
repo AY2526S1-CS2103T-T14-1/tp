@@ -27,7 +27,8 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
         if (!argMultimap.getValue(PREFIX_STUDENT).isPresent()) {

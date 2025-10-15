@@ -24,10 +24,12 @@ public class MarkAttendanceCommand extends Command {
             + ": Marks the attendance of the student identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STUDENT + "STATUS (must be 'present' or 'absent')\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_STUDENT + "present";
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_STUDENT + "present";
 
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance for Student %1$s: %2$s";
-    public static final String MESSAGE_PERSON_HAS_NO_LESSON = "Cannot mark attendance. Student %1$s has no lesson assigned.";
+    public static final String MESSAGE_PERSON_HAS_NO_LESSON = "Cannot mark attendance. "
+            + "Student %1$s has no lesson assigned.";
 
     private final Index index;
     private final Attendance attendance;
@@ -63,7 +65,8 @@ public class MarkAttendanceCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, editedPerson.getName(), this.attendance));
+        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS,
+                editedPerson.getName(), this.attendance));
     }
 
     @Override

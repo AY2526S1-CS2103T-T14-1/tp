@@ -108,7 +108,8 @@ public class Person {
      */
     public Person markAttendance(String attendanceValue) {
         if (lesson.isEmpty()) {
-            throw new IllegalStateException("This person has no lesson assigned to mark attendance for.");
+            throw new IllegalStateException(
+                    "This person has no lesson assigned to mark attendance for.");
         }
         Lesson updatedLesson = this.lesson.get().markAttendance(attendanceValue);
         return new Person(this.name, this.phone, this.email, this.address, this.tags,
