@@ -54,7 +54,7 @@ public class LessonTest {
     @Test
     public void toStringMethod() {
         String expected = String.format("[Lesson: %s | Date: %s | Time: %s | Location: %s | Status: %s]",
-                MATH.getLessonName(), MATH.getDate(), MATH.getTime(), MATH.getLocation(), MATH.getAttendance());
+                MATH.lessonName, MATH.date, MATH.time, MATH.location, MATH.attendance);
         assertEquals(expected, MATH.toString());
     }
 }
