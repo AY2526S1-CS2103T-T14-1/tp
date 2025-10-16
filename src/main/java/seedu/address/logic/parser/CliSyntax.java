@@ -16,6 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TIME = new Prefix("t/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_STUDENT = new Prefix("s/");
-    public static final Prefix PREFIX_ATTENDANCE = new Prefix("a/");
 
 }

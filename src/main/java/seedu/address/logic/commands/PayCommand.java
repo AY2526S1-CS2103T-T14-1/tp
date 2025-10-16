@@ -63,7 +63,7 @@ public class PayCommand extends Command {
         model.setPerson(personToAddPayment, new Person(
                 personToAddPayment.getName(), personToAddPayment.getPhone(), personToAddPayment.getEmail(),
                 personToAddPayment.getAddress(), personToAddPayment.getTags(), personToAddPayment.getLesson(),
-                Optional.ofNullable(updateFinance(personToAddPayment, payment)), personToAddPayment.getAttendance()
+                Optional.ofNullable(updateFinance(personToAddPayment, payment))
         ));
         return new CommandResult(String.format(MESSAGE_SUCCESS, payment, personToAddPayment.getName()));
     }

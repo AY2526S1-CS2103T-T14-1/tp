@@ -53,7 +53,6 @@ public class ScheduleCommandTest {
                         new Time(hhmm),
                         new Location(location)
                 )),
-                Optional.empty(),
                 Optional.empty()
         );
     }

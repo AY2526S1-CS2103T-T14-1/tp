@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -97,10 +96,8 @@ public class AddFinanceCommand extends Command {
             updatedFinance = Optional.of(addFinanceDescriptor.getFinance());
         }
 
-        Optional<AttendanceStatus> updatedAttendance = personToEdit.getAttendance();
-
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLesson,
-                updatedFinance, updatedAttendance);
+                updatedFinance);
     }
 
     @Override

@@ -15,6 +15,7 @@ public class Lesson {
     public final Date date;
     public final Time time;
     public final Location location;
+    public final Attendance attendance;
 
     /**
      * Constructs a {@code Lesson}.
@@ -25,10 +26,24 @@ public class Lesson {
      * @param location A valid location.
      */
     public Lesson(LessonName lessonName, Date date, Time time, Location location) {
+        requireAllNonNull(lessonName, date, time, location);
         this.lessonName = lessonName;
         this.date = date;
         this.time = time;
         this.location = location;
+        this.attendance = new Attendance("absent");
+    }
+
+    /**
+     * Constructs a {@code Lesson} with specified attendance.
+     */
+    public Lesson(LessonName lessonName, Date date, Time time, Location location, Attendance attendance) {
+        requireAllNonNull(lessonName, date, time, location, attendance);
+        this.lessonName = lessonName;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.attendance = attendance; // 외부에서 'present' 상태의 Attendance 객체를 받아올 수 있음
     }
 
     /**
@@ -42,6 +57,7 @@ public class Lesson {
         this.date = lesson.date;
         this.time = lesson.time;
         this.location = lesson.location;
+        this.attendance = lesson.attendance;
     }
 
     public LessonName getLessonName() {
@@ -60,6 +76,18 @@ public class Lesson {
         return location;
     }
 
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    /**
+     * Returns a new Lesson instance with updated attendance.
+     */
+    public Lesson markAttendance(String attendanceValue) {
+        Attendance updated = new Attendance(attendanceValue);
+        return new Lesson(lessonName, date, time, location, updated);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -75,21 +103,21 @@ public class Lesson {
         return lessonName.equals(otherLesson.lessonName)
                 && date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
-                && location.equals(otherLesson.location);
+                && location.equals(otherLesson.location)
+                && attendance.equals(otherLesson.attendance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lessonName, date, time, location);
+        return Objects.hash(lessonName, date, time, location, attendance);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return String.format("[Lesson Name: %s | Date: %s | Time: %s | Location: %s]",
-                lessonName.toString(), date.toString(), time.toString(), location.toString());
+        return String.format("[Lesson Name: %s | Date: %s | Time: %s | Location: %s | Attendance: %s]",
+                lessonName, date, time, location, attendance);
     }
 
 }
-
