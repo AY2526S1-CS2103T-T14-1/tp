@@ -94,11 +94,10 @@ public class Person {
      * The attendance for the new lesson will automatically be set to "Absent".
      */
     public Person setLesson(String lessonName, String date, String time, String location) {
-        Lesson newLesson = new Lesson(new LessonName(lessonName),
-                new Date(date), new Time(time), new Location(location));
-
-        return new Person(this.name, this.phone, this.email, this.address, this.tags,
-                Optional.of(newLesson), this.finance);
+        Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),
+                new Time(time), new Location(location)));
+        Optional<Finance> updatedFinance = finance.or(() -> Optional.of(new Finance()));
+        return new Person(name, phone, email, address, tags, updatedLesson, updatedFinance);
     }
 
     /**

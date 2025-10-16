@@ -95,7 +95,7 @@ public class AddLessonCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Lesson> updatedLesson = Optional.of(addLessonDescriptor.getLesson());
-        Optional<Finance> updatedFinance = personToEdit.getFinance();
+        Optional<Finance> updatedFinance = personToEdit.getFinance().or(() -> Optional.of(new Finance()));
 
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedLesson, updatedFinance);
