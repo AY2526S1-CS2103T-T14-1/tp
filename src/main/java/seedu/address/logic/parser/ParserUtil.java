@@ -11,13 +11,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.lesson.Attendance;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
 import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -230,17 +230,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String status} into an {@code AttendanceStatus}.
+     * Parses a {@code String status} into an {@code Attendance}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code status} is invalid.
      */
-    public static AttendanceStatus parseAttendanceStatus(String status) throws ParseException {
+    public static Attendance parseAttendance(String status) throws ParseException {
         requireNonNull(status);
-        try {
-            return AttendanceStatus.fromString(status);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(AttendanceStatus.MESSAGE_CONSTRAINTS);
+        String trimmedStatus = status.trim();
+        if (!Attendance.isValidAttendance(trimmedStatus)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
+        return new Attendance(trimmedStatus);
     }
 }

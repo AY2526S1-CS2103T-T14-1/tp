@@ -130,7 +130,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelTags, modelLesson, modelFinance, Optional.empty());
+                modelTags, modelLesson, modelFinance);
     }
 
 }

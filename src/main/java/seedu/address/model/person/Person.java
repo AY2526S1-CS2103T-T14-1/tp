@@ -33,14 +33,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<Lesson> lesson;
     private final Optional<Finance> finance;
-    private final Optional<AttendanceStatus> attendance;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Optional<Lesson> lesson, Optional<Finance> finance, Optional<AttendanceStatus> attendance) {
-        requireAllNonNull(name, phone, email, address, tags, lesson, finance, attendance);
+                  Optional<Lesson> lesson, Optional<Finance> finance) {
+        requireAllNonNull(name, phone, email, address, tags, lesson, finance);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,7 +47,6 @@ public class Person {
         this.tags.addAll(tags);
         this.lesson = lesson;
         this.finance = finance;
-        this.attendance = attendance;
     }
 
 
@@ -56,9 +54,8 @@ public class Person {
      * Convenience constructor for Person without lesson and finance information.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, Optional.empty(), Optional.empty(), Optional.empty());
+        this(name, phone, email, address, tags, Optional.empty(), Optional.empty());
     }
-
 
     public Name getName() {
         return name;
@@ -92,24 +89,31 @@ public class Person {
         return lesson;
     }
 
+    /**
+     * Returns a new Person object with a new Lesson assigned to them.
+     * The attendance for the new lesson will automatically be set to "Absent".
+     */
     public Person setLesson(String lessonName, String date, String time, String location) {
         Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),
                 new Time(time), new Location(location)));
         Optional<Finance> updatedFinance = finance.or(() -> Optional.of(new Finance()));
-        return new Person(name, phone, email, address, tags, updatedLesson, updatedFinance, Optional.empty());
-    }
-
-    public Optional<AttendanceStatus> getAttendance() {
-        return attendance;
+        return new Person(name, phone, email, address, tags, updatedLesson, updatedFinance);
     }
 
     /**
-     * Returns a new Person object with the updated attendance status.
-     * This respects the immutability of the Person class.
+     * Returns a new Person object with the attendance of their lesson updated.
+     * Throws an IllegalStateException if the person has no lesson assigned.
+     * @param attendanceValue The attendance status as a String ("present" or "absent").
+     * @return A new Person object with the updated lesson attendance.
      */
-    public Person withAttendance(AttendanceStatus status) {
+    public Person markAttendance(String attendanceValue) {
+        if (lesson.isEmpty()) {
+            throw new IllegalStateException(
+                    "This person has no lesson assigned to mark attendance for.");
+        }
+        Lesson updatedLesson = this.lesson.get().markAttendance(attendanceValue);
         return new Person(this.name, this.phone, this.email, this.address, this.tags,
-                this.lesson, this.finance, Optional.of(status));
+                Optional.of(updatedLesson), this.finance);
     }
 
     /**
@@ -151,7 +155,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, lesson, finance);
     }
 
     @Override
