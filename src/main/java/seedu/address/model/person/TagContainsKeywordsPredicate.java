@@ -14,7 +14,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person>{
     }
 
     /**
-     * Tests if any of the person's tags contain any of the keywords case-insensitive, partial match.
+     * Tests if any of the person's tags contain any of the keywords (case-insensitive, partial match).
      */
     @Override
     public boolean test(Person person) {
