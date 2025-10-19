@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
-public class TagContainsKeywordsPredicate implements Predicate<Person>{
+public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
