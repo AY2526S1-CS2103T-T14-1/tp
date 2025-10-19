@@ -3,9 +3,11 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Person}'s {@code Tag} matches any of the keywords given.
+ */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
@@ -15,14 +17,15 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      * Tests if any of the person's tags contain any of the keywords (case-insensitive, partial match).
+     * Returning true if at least one keyword matches at least one tag; otherwise, false.
      */
     @Override
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword ->
                         person.getTags().stream()
-                                .anyMatch(tag -> tag.toString().toLowerCase().contains(keyword.toLowerCase()))
-                );    }
+                                .anyMatch(tag -> tag.toString().toLowerCase().contains(keyword.toLowerCase())));
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -42,5 +45,5 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
-        }
+    }
 }
