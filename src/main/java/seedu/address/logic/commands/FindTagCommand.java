@@ -7,7 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
-public class FindTagCommand extends Command{
+public class FindTagCommand extends Command {
 
     public static final String COMMAND_WORD = "findtag";
 
