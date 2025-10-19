@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FindTagCommand extends Command{
@@ -38,7 +37,7 @@ public class FindTagCommand extends Command{
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindTagCommand)) {
             return false;
         }
 
