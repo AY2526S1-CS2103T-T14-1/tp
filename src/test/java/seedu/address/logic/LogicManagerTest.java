@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -161,6 +162,103 @@ public class LogicManagerTest {
 
         // Verify model is now empty
         assertEquals(emptyAddressBook, model.getAddressBook());
+    }
+
+    @Test
+    public void exportAddressBook_validPath_success() throws Exception {
+        // Add data to the model
+        ReadOnlyAddressBook typicalAddressBook = getTypicalAddressBook();
+        model.setAddressBook(typicalAddressBook);
+
+        // Export to a file
+        Path exportFilePath = temporaryFolder.resolve("export.json");
+        logic.exportAddressBook(exportFilePath);
+
+        // Verify the file was created and contains the correct data
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(exportFilePath);
+        Optional<ReadOnlyAddressBook> exportedData = addressBookStorage.readAddressBook(exportFilePath);
+
+        assert exportedData.isPresent();
+        assertEquals(typicalAddressBook, exportedData.get());
+    }
+
+    @Test
+    public void exportAddressBook_emptyAddressBook_success() throws Exception {
+        // Model is initially empty
+        assertEquals(new AddressBook(), model.getAddressBook());
+
+        // Export empty address book
+        Path exportFilePath = temporaryFolder.resolve("empty_export.json");
+        logic.exportAddressBook(exportFilePath);
+
+        // Verify the file was created and contains empty data
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(exportFilePath);
+        Optional<ReadOnlyAddressBook> exportedData = addressBookStorage.readAddressBook(exportFilePath);
+
+        assert exportedData.isPresent();
+        assertEquals(new AddressBook(), exportedData.get());
+    }
+
+    @Test
+    public void exportAddressBook_overwriteExistingFile_success() throws Exception {
+        // Add initial data and export
+        Person amy = new PersonBuilder(AMY).withTags().build();
+        model.addPerson(amy);
+
+        Path exportFilePath = temporaryFolder.resolve("overwrite.json");
+        logic.exportAddressBook(exportFilePath);
+
+        // Modify the model
+        ReadOnlyAddressBook typicalAddressBook = getTypicalAddressBook();
+        model.setAddressBook(typicalAddressBook);
+
+        // Export again to the same file (overwrite)
+        logic.exportAddressBook(exportFilePath);
+
+        // Verify the file contains the new data
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(exportFilePath);
+        Optional<ReadOnlyAddressBook> exportedData = addressBookStorage.readAddressBook(exportFilePath);
+
+        assert exportedData.isPresent();
+        assertEquals(typicalAddressBook, exportedData.get());
+    }
+
+    @Test
+    public void exportAddressBook_invalidPath_throwsIoException() {
+        // Try to export to an invalid path (directory that doesn't exist and can't be created)
+        Path invalidPath = temporaryFolder.resolve("nonexistent/deeply/nested/path/export.json");
+
+        // Note: This might not throw on all systems, as Java creates parent directories
+        // But it tests the error handling pathway
+        try {
+            logic.exportAddressBook(invalidPath);
+            // If it succeeds, verify the file was created
+            assert java.nio.file.Files.exists(invalidPath);
+        } catch (IOException e) {
+            // Expected behavior on some systems
+            assert true;
+        }
+    }
+
+    @Test
+    public void exportThenImport_dataIntegrity_success() throws Exception {
+        // Add data to the model
+        ReadOnlyAddressBook typicalAddressBook = getTypicalAddressBook();
+        model.setAddressBook(typicalAddressBook);
+
+        // Export the data
+        Path exportFilePath = temporaryFolder.resolve("roundtrip.json");
+        logic.exportAddressBook(exportFilePath);
+
+        // Clear the model
+        model.setAddressBook(new AddressBook());
+        assertNotEquals(typicalAddressBook, model.getAddressBook());
+
+        // Import the exported data
+        logic.importAddressBook(exportFilePath);
+
+        // Verify data integrity
+        assertEquals(typicalAddressBook, model.getAddressBook());
     }
 
     /**

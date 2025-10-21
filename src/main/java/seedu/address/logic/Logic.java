@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
@@ -55,4 +56,11 @@ public interface Logic {
      * @throws DataLoadingException If an error occurs during data loading.
      */
     void importAddressBook(Path filePath) throws DataLoadingException;
+
+    /**
+     * Exports address book data to the specified file path.
+     * @param filePath The path to export the JSON file to.
+     * @throws IOException If an error occurs during data export.
+     */
+    void exportAddressBook(Path filePath) throws IOException;
 }
