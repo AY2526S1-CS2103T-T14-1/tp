@@ -24,8 +24,7 @@ public class AddFeeCommandTest {
         AddFeeCommand command = new AddFeeCommand(
                 "Nonexistent", FinanceType.PER_LESSON, new FinanceAmount("50"));
 
-        assertThrows(
-                CommandException.class,
+        assertThrows(CommandException.class,
                 String.format(
                         "Error: No student found with the name \"%s\".",
                         "Nonexistent"
