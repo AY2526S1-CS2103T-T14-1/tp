@@ -48,10 +48,10 @@ public class MarkAttendanceCommandTest {
         model.setPerson(firstPerson, personWithLesson);
 
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(
-                INDEX_FIRST_PERSON, AttendanceStatus.PRESENT);
+                INDEX_FIRST_PERSON, AttendanceStatus.ABSENT);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person expectedPerson = new PersonBuilder(personWithLesson).build().markAttendance(AttendanceStatus.PRESENT);
+        Person expectedPerson = new PersonBuilder(personWithLesson).build().markAttendance(AttendanceStatus.ABSENT);
         expectedModel.setPerson(personWithLesson, expectedPerson);
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 expectedPerson.getName(), expectedPerson.getLesson().orElseThrow());

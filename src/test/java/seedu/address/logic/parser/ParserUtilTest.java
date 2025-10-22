@@ -47,7 +47,8 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "Monday";
     private static final String VALID_TIME = "12:00";
     private static final String VALID_LOCATION = "RoomA";
-    private static final String VALID_ATTENDANCE = "present";
+    private static final String VALID_ATTENDANCE_PRESENT = "present";
+    private static final String VALID_ATTENDANCE_ABSENT = "absent";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -317,13 +318,17 @@ public class ParserUtilTest {
     @Test
     public void parseAttendance_validValueWithoutWhitespace_returnsAttendance() throws Exception {
         AttendanceStatus expectedAttendance = AttendanceStatus.PRESENT;
-        assertEquals(expectedAttendance, ParserUtil.parseAttendance(VALID_ATTENDANCE));
+        assertEquals(expectedAttendance, ParserUtil.parseAttendance(VALID_ATTENDANCE_PRESENT));
     }
 
     @Test
     public void parseAttendance_validValueWithWhitespace_returnsTrimmedAttendance() throws Exception {
-        String attendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE + WHITESPACE;
-        AttendanceStatus expectedAttendance = AttendanceStatus.PRESENT;
-        assertEquals(expectedAttendance, ParserUtil.parseAttendance(attendanceWithWhitespace));
+        String presentAttendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE_PRESENT + WHITESPACE;
+        AttendanceStatus expectedPresentAttendance = AttendanceStatus.PRESENT;
+        assertEquals(expectedPresentAttendance, ParserUtil.parseAttendance(presentAttendanceWithWhitespace));
+
+        String absentAttendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE_ABSENT + WHITESPACE;
+        AttendanceStatus expectedAbsentAttendance = AttendanceStatus.ABSENT;
+        assertEquals(expectedAbsentAttendance, ParserUtil.parseAttendance(absentAttendanceWithWhitespace));
     }
 }

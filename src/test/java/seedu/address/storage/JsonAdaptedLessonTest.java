@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalLessons.MATH;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
@@ -92,6 +93,14 @@ public class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_LESSON_NAME, VALID_DATE, VALID_TIME, null,
                 VALID_ATTENDANCE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAttendance_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_LESSON_NAME, VALID_DATE, VALID_TIME, VALID_LOCATION,
+                null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, AttendanceStatus.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
