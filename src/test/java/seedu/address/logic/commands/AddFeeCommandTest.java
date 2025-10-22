@@ -28,8 +28,7 @@ public class AddFeeCommandTest {
                 String.format(
                         "Error: No student found with the name \"%s\".",
                         "Nonexistent"
-                ),
-                () -> command.execute(modelStub)
+                ), () -> command.execute(modelStub)
         );
     }
 
