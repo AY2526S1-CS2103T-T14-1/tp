@@ -22,30 +22,30 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
         // Required parameters
         String name = map.getValue(new Prefix("s/"))
                 .orElseThrow(() -> new ParseException(
-                        "Error: Missing required parameter. " +
-                                "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
+                        "Error: Missing required parameter. "
+                                + "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
                 .trim();
         String typeStr = map.getValue(new Prefix("t/"))
                 .orElseThrow(() -> new ParseException(
-                        "Error: Missing required parameter. " +
-                                "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
+                        "Error: Missing required parameter. "
+                                + "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
                 .trim().toLowerCase();
         String amountStr = map.getValue(new Prefix("a/"))
                 .orElseThrow(() -> new ParseException(
-                        "Error: Missing required parameter. " +
-                                "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
+                        "Error: Missing required parameter. "
+                                + "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT"))
                 .trim();
 
         // Validate name
         if (name.isEmpty()) {
             throw new ParseException(
-                    "Error: Student name cannot be empty. " +
-                            "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT");
+                    "Error: Student name cannot be empty. "
+                            + "Usage: addfee s/STUDENT_NAME t/[lesson|month] a/AMOUNT");
         }
         if (!NAME_PATTERN.matcher(name).matches()) {
             throw new ParseException(
-                    "Error: Invalid name format. " +
-                            "Only letters, spaces, hyphens (-), and apostrophes (') are allowed.");
+                    "Error: Invalid name format. "
+                            + "Only letters, spaces, hyphens (-), and apostrophes (') are allowed.");
         }
         if (name.length() > 100) {
             throw new ParseException(
@@ -63,19 +63,21 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
             break;
         default:
             throw new ParseException(
-                    "Error: Invalid tuition type. " +
-                            "Allowed values are 'lesson' or 'month'.");
+                    "Error: Invalid tuition type. "
+                            + "Allowed values are 'lesson' or 'month'.");
         }
 
         // Validate amount
         if (!FinanceAmount.isValidAmount(amountStr)) {
             throw new ParseException(
-                    "Error: Invalid amount format. Use a positive number with up to 2 decimal places.");
+                    "Error: Invalid amount format. "
+                            + "Use a positive number with up to 2 decimal places.");
         }
         double amt = Double.parseDouble(amountStr);
         if (amt <= 0.0 || amt > 100000.0) {
             throw new ParseException(
-                    "Error: Amount must be greater than 0 and less than or equal to 100,000.");
+                    "Error: Amount must be greater than 0 "
+                            + "and less than or equal to 100,000.");
         }
         FinanceAmount amount = new FinanceAmount(amountStr);
 
