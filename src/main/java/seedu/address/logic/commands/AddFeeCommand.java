@@ -35,6 +35,13 @@ public class AddFeeCommand extends Command {
     private final FinanceType type;
     private final FinanceAmount amount;
 
+    /**
+     * Creates an {@code AddFeeCommand} to set or update the tuition fee for a student.
+     *
+     * @param studentName Name of the student to assign the fee.
+     * @param type Type of fee (per lesson or per month).
+     * @param amount Amount of the tuition fee.
+     */
     public AddFeeCommand(String studentName, FinanceType type, FinanceAmount amount) {
         this.studentName = studentName;
         this.type = type;
