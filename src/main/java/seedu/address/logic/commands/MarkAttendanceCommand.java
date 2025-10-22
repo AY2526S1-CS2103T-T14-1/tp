@@ -6,7 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +35,8 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance for Student %1$s: %2$s";
     public static final String MESSAGE_PERSON_HAS_NO_LESSON = "Cannot mark attendance. "
             + "Student %1$s has no lesson assigned.";
+
+    private static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommand.class);
 
     private final Index index;
     private final AttendanceStatus attendanceStatus;
@@ -65,6 +70,9 @@ public class MarkAttendanceCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        logger.log(Level.INFO, String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, editedPerson.getName(),
+                editedPerson.getLesson().orElseThrow()));
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 editedPerson.getName(), editedPerson.getLesson().orElseThrow()));

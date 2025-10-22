@@ -33,7 +33,7 @@ public class MarkAttendanceCommandTest {
         Person expectedPerson = new PersonBuilder(personWithLesson).build().markAttendance(AttendanceStatus.PRESENT);
         expectedModel.setPerson(personWithLesson, expectedPerson);
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
-                expectedPerson.getName(), expectedPerson.getLesson());
+                expectedPerson.getName(), expectedPerson.getLesson().orElseThrow());
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
