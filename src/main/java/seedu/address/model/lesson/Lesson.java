@@ -31,7 +31,7 @@ public class Lesson {
         this.date = date;
         this.time = time;
         this.location = location;
-        this.attendance = new Attendance("absent");
+        this.attendance = new Attendance();
     }
 
     /**
@@ -83,8 +83,8 @@ public class Lesson {
     /**
      * Returns a new Lesson instance with updated attendance.
      */
-    public Lesson markAttendance(String attendanceValue) {
-        Attendance updated = new Attendance(attendanceValue);
+    public Lesson markAttendance(AttendanceStatus attendanceStatus) {
+        Attendance updated = this.attendance.mark(attendanceStatus);
         return new Lesson(lessonName, date, time, location, updated);
     }
 

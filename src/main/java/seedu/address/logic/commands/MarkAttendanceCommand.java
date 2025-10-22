@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -10,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,17 +34,16 @@ public class MarkAttendanceCommand extends Command {
             + "Student %1$s has no lesson assigned.";
 
     private final Index index;
-    private final Attendance attendance;
+    private final AttendanceStatus attendanceStatus;
 
     /**
      * @param index of the person in the filtered person list to mark attendance for
-     * @param attendance status to mark the student with
+     * @param attendanceStatus status to mark the student with
      */
-    public MarkAttendanceCommand(Index index, Attendance attendance) {
-        requireNonNull(index);
-        requireNonNull(attendance);
+    public MarkAttendanceCommand(Index index, AttendanceStatus attendanceStatus) {
+        requireAllNonNull(index, attendanceStatus);
         this.index = index;
-        this.attendance = attendance;
+        this.attendanceStatus = attendanceStatus;
     }
 
     @Override
@@ -61,13 +61,13 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(String.format(MESSAGE_PERSON_HAS_NO_LESSON, personToEdit.getName()));
         }
 
-        Person editedPerson = personToEdit.markAttendance(this.attendance.status);
+        Person editedPerson = personToEdit.markAttendance(this.attendanceStatus);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS,
-                editedPerson.getName(), this.attendance));
+                editedPerson.getName(), editedPerson.getLesson().orElseThrow()));
     }
 
     @Override
@@ -80,6 +80,6 @@ public class MarkAttendanceCommand extends Command {
         }
         MarkAttendanceCommand otherCommand = (MarkAttendanceCommand) other;
         return index.equals(otherCommand.index)
-                && attendance.equals(otherCommand.attendance);
+                && attendanceStatus.equals(otherCommand.attendanceStatus);
     }
 }

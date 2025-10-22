@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
@@ -21,6 +23,7 @@ class JsonAdaptedLesson {
     private final String date;
     private final String time;
     private final String location;
+    private final JsonAdaptedAttendance attendance;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -29,11 +32,13 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("lessonName") String lessonName,
                              @JsonProperty("date") String date,
                              @JsonProperty("time") String time,
-                             @JsonProperty("location") String location) {
+                             @JsonProperty("location") String location,
+                             @JsonProperty("attendance") JsonAdaptedAttendance attendance) {
         this.lessonName = lessonName;
         this.date = date;
         this.time = time;
         this.location = location;
+        this.attendance = attendance;
     }
 
     /**
@@ -44,6 +49,7 @@ class JsonAdaptedLesson {
         date = source.getDate().value;
         time = source.getTime().value;
         location = source.getLocation().value;
+        attendance = new JsonAdaptedAttendance(source.getAttendance());
     }
 
     /**
@@ -86,7 +92,13 @@ class JsonAdaptedLesson {
         }
         final Location modelLocation = new Location(location);
 
-        return new Lesson(modelLessonName, modelDate, modelTime, modelLocation);
+        if (attendance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AttendanceStatus.class.getSimpleName()));
+        }
+        final Attendance modelAttendance = attendance.toModelType();
+
+        return new Lesson(modelLessonName, modelDate, modelTime, modelLocation, modelAttendance);
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
@@ -301,11 +301,11 @@ public class ParserUtilTest {
 
     @Test
     public void parseAttendance_validValue_returnsAttendance() throws Exception {
-        Attendance expectedPresent = new Attendance("present");
+        AttendanceStatus expectedPresent = AttendanceStatus.PRESENT;
         assertEquals(expectedPresent, ParserUtil.parseAttendance("present"));
         assertEquals(expectedPresent, ParserUtil.parseAttendance("Present")); // case-insensitive
 
-        Attendance expectedAbsent = new Attendance("absent");
+        AttendanceStatus expectedAbsent = AttendanceStatus.ABSENT;
         assertEquals(expectedAbsent, ParserUtil.parseAttendance("absent"));
         assertEquals(expectedAbsent, ParserUtil.parseAttendance("Absent")); // case-insensitive
     }

@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.finance.Finance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
@@ -103,15 +104,15 @@ public class Person {
     /**
      * Returns a new Person object with the attendance of their lesson updated.
      * Throws an IllegalStateException if the person has no lesson assigned.
-     * @param attendanceValue The attendance status as a String ("present" or "absent").
+     * @param attendanceStatus The attendance status ("PRESENT" or "ABSENT").
      * @return A new Person object with the updated lesson attendance.
      */
-    public Person markAttendance(String attendanceValue) {
+    public Person markAttendance(AttendanceStatus attendanceStatus) {
         if (lesson.isEmpty()) {
             throw new IllegalStateException(
                     "This person has no lesson assigned to mark attendance for.");
         }
-        Lesson updatedLesson = this.lesson.get().markAttendance(attendanceValue);
+        Lesson updatedLesson = this.lesson.get().markAttendance(attendanceStatus);
         return new Person(this.name, this.phone, this.email, this.address, this.tags,
                 Optional.of(updatedLesson), this.finance);
     }

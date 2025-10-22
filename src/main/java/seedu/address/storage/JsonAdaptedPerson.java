@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.finance.Finance;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -114,7 +115,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // Finance is optional, so it can be null
-        final Optional<seedu.address.model.finance.Finance> modelFinance;
+        final Optional<Finance> modelFinance;
         if (finance == null) {
             modelFinance = Optional.empty();
         } else {
