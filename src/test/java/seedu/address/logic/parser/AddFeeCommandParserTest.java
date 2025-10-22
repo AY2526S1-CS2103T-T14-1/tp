@@ -17,16 +17,19 @@ public class AddFeeCommandParserTest {
     @Test
     public void parse_validArgs_returnsAddFeeCommand() throws Exception {
         AddFeeCommand command = parser.parse(" s/Alice t/lesson a/50");
-        assertEquals(new AddFeeCommand("Alice", FinanceType.PER_LESSON, new FinanceAmount("50")), command);
+        assertEquals(new AddFeeCommand(
+                "Alice", FinanceType.PER_LESSON, new FinanceAmount("50")), command);
     }
 
     @Test
     public void parse_missingArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" s/Alice t/lesson"));
+        assertThrows(ParseException.class, () -> parser.parse(
+                " s/Alice t/lesson"));
     }
 
     @Test
     public void parse_invalidType_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" s/Alice t/weekly a/50"));
+        assertThrows(ParseException.class, () -> parser.parse(
+                " s/Alice t/weekly a/50"));
     }
 }
