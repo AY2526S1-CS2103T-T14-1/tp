@@ -242,7 +242,7 @@ public class ParserUtil {
         if (!Attendance.isValidAttendanceStatus(trimmedStatus)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        return switch (status.toLowerCase()) {
+        return switch (trimmedStatus.toLowerCase()) {
         case "present" -> AttendanceStatus.PRESENT;
         case "absent" -> AttendanceStatus.ABSENT;
         default -> throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);

@@ -40,6 +40,9 @@ class JsonAdaptedAttendance {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Attendance toModelType() throws IllegalValueException {
+        if (totalLessons < 0 || totalAttendances < 0) {
+            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
+        }
         return new Attendance(totalLessons, totalAttendances);
     }
 
