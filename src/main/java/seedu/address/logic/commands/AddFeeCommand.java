@@ -41,6 +41,13 @@ public class AddFeeCommand extends Command {
         this.amount = amount;
     }
 
+    /**
+     * Executes the addfee command by finding the student and updating their finance record.
+     *
+     * @param model The model containing the address book data.
+     * @return CommandResult with a message indicating the result of execution.
+     * @throws CommandException if the student cannot be found or input is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
