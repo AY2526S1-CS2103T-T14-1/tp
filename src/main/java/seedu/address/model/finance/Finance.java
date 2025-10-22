@@ -2,6 +2,10 @@ package seedu.address.model.finance;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a Finance record in the address book.
  * Tracks the owed amount for a person.
@@ -9,7 +13,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Finance {
 
     private final FinanceAmount owedAmount;
-
+    private final List<PaymentEntry> history;
 
 
     /**
@@ -20,6 +24,7 @@ public class Finance {
     public Finance(FinanceAmount owedAmount) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
+        this.history = new ArrayList<>();
     }
 
     /**
@@ -27,10 +32,21 @@ public class Finance {
      */
     public Finance() {
         this.owedAmount = new FinanceAmount(0);
+        this.history = new ArrayList<>();
+    }
+
+    // Private canonical ctor to keep immutability on operations
+    private Finance(FinanceAmount owedAmount, List<PaymentEntry> history) {
+        this.owedAmount = owedAmount;
+        this.history = history;
     }
 
     public FinanceAmount getOwedAmount() {
         return owedAmount;
+    }
+
+    public List<PaymentEntry> getHistory() {
+        return history;
     }
 
     /**
@@ -54,7 +70,9 @@ public class Finance {
     public Finance pay(FinanceAmount amountToPay) {
         requireAllNonNull(amountToPay);
         double newAmount = Math.max(0, this.owedAmount.getAmount() - amountToPay.getAmount());
-        return new Finance(new FinanceAmount(newAmount));
+        List<PaymentEntry> newHistory = new ArrayList<>(history);
+        newHistory.add(new PaymentEntry(LocalDate.now(), amountToPay, ""));
+        return new Finance(new FinanceAmount(newAmount), newHistory);
     }
 
     @Override
