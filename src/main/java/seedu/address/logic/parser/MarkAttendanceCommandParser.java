@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 
 /**
  * Parses input arguments and creates a new MarkAttendanceCommand object
@@ -31,17 +31,14 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!argMultimap.getValue(PREFIX_STUDENT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
         String status = argMultimap.getValue(PREFIX_STUDENT).get();
-        if (!Attendance.isValidAttendance(status)) {
-            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
-        }
-        Attendance attendance = new Attendance(status);
+        AttendanceStatus attendanceStatus = ParserUtil.parseAttendance(status);
 
-        return new MarkAttendanceCommand(index, attendance);
+        return new MarkAttendanceCommand(index, attendanceStatus);
     }
 }

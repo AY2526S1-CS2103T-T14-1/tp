@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonName;
@@ -235,12 +236,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code status} is invalid.
      */
-    public static Attendance parseAttendance(String status) throws ParseException {
+    public static AttendanceStatus parseAttendance(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
-        if (!Attendance.isValidAttendance(trimmedStatus)) {
+        if (!Attendance.isValidAttendanceStatus(trimmedStatus)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        return new Attendance(trimmedStatus);
+        return switch (trimmedStatus.toLowerCase()) {
+        case "present" -> AttendanceStatus.PRESENT;
+        case "absent" -> AttendanceStatus.ABSENT;
+        default -> throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        };
     }
 }

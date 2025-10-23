@@ -14,7 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Location;
@@ -35,6 +35,7 @@ public class ParserUtilTest {
     private static final String INVALID_DATE = "Day";
     private static final String INVALID_TIME = "12pm";
     private static final String INVALID_LOCATION = "Room@";
+    private static final String INVALID_ATTENDANCE = "late";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -46,6 +47,8 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "Monday";
     private static final String VALID_TIME = "12:00";
     private static final String VALID_LOCATION = "RoomA";
+    private static final String VALID_ATTENDANCE_PRESENT = "present";
+    private static final String VALID_ATTENDANCE_ABSENT = "absent";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -241,13 +244,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
         Date expectedDate = new Date(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
-    public void parseDate_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(nameWithWhitespace));
@@ -264,13 +267,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTime_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseTime_validValueWithoutWhitespace_returnsTime() throws Exception {
         Time expectedTime = new Time(VALID_TIME);
         assertEquals(expectedTime, ParserUtil.parseTime(VALID_TIME));
     }
 
     @Test
-    public void parseTime_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
         Time expectedTime = new Time(VALID_TIME);
         assertEquals(expectedTime, ParserUtil.parseTime(nameWithWhitespace));
@@ -287,27 +290,21 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLocation_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseLocation_validValueWithoutWhitespace_returnsLocation() throws Exception {
         Location expectedLocation = new Location(VALID_LOCATION);
         assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
-    public void parseLocation_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         Location expectedLocation = new Location(VALID_LOCATION);
         assertEquals(expectedLocation, ParserUtil.parseLocation(nameWithWhitespace));
     }
 
     @Test
-    public void parseAttendance_validValue_returnsAttendance() throws Exception {
-        Attendance expectedPresent = new Attendance("present");
-        assertEquals(expectedPresent, ParserUtil.parseAttendance("present"));
-        assertEquals(expectedPresent, ParserUtil.parseAttendance("Present")); // case-insensitive
-
-        Attendance expectedAbsent = new Attendance("absent");
-        assertEquals(expectedAbsent, ParserUtil.parseAttendance("absent"));
-        assertEquals(expectedAbsent, ParserUtil.parseAttendance("Absent")); // case-insensitive
+    public void parseAttendance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAttendance(null));
     }
 
     @Test
@@ -315,6 +312,23 @@ public class ParserUtilTest {
         // empty string
         assertThrows(ParseException.class, () -> ParserUtil.parseAttendance(""));
         // invalid status
-        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("late"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance(INVALID_ATTENDANCE));
+    }
+
+    @Test
+    public void parseAttendance_validValueWithoutWhitespace_returnsAttendance() throws Exception {
+        AttendanceStatus expectedAttendance = AttendanceStatus.PRESENT;
+        assertEquals(expectedAttendance, ParserUtil.parseAttendance(VALID_ATTENDANCE_PRESENT));
+    }
+
+    @Test
+    public void parseAttendance_validValueWithWhitespace_returnsTrimmedAttendance() throws Exception {
+        String presentAttendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE_PRESENT + WHITESPACE;
+        AttendanceStatus expectedPresentAttendance = AttendanceStatus.PRESENT;
+        assertEquals(expectedPresentAttendance, ParserUtil.parseAttendance(presentAttendanceWithWhitespace));
+
+        String absentAttendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE_ABSENT + WHITESPACE;
+        AttendanceStatus expectedAbsentAttendance = AttendanceStatus.ABSENT;
+        assertEquals(expectedAbsentAttendance, ParserUtil.parseAttendance(absentAttendanceWithWhitespace));
     }
 }

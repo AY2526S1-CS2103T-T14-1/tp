@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.model.lesson.Attendance;
+import seedu.address.model.lesson.AttendanceStatus;
 
 public class MarkAttendanceCommandParserTest {
 
@@ -17,7 +18,7 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgs_returnsMarkAttendanceCommand() {
         assertParseSuccess(parser, "1 s/present",
-                new MarkAttendanceCommand(INDEX_FIRST_PERSON, new Attendance("present")));
+                new MarkAttendanceCommand(INDEX_FIRST_PERSON, AttendanceStatus.PRESENT));
     }
 
     @Test
