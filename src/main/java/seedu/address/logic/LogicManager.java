@@ -100,4 +100,11 @@ public class LogicManager implements Logic {
             throw new DataLoadingException(new Exception("File not found or is empty: " + filePath));
         }
     }
+
+    @Override
+    public void exportAddressBook(Path filePath) throws IOException {
+        logger.info("Exporting address book to: " + filePath);
+        storage.saveAddressBook(model.getAddressBook(), filePath);
+        logger.info("Successfully exported address book to: " + filePath);
+    }
 }
