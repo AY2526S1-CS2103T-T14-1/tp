@@ -17,7 +17,6 @@ public class Finance {
     private final List<PaymentEntry> history;
     private final TuitionPlan plan; // Optional (can be null)
 
-
     /**
      * Constructs a {@code Finance} with an initial owed amount.
      *
