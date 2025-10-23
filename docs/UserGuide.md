@@ -142,6 +142,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Viewling weekly schedule : `schedule`
+
+Shows all lessons in the current week (Mon–Sun), sorted by day and time.
+
+Format: `schedule`
+
+### Viewling payment history : `payments`
+
+Shows the payment history (newest first).
+
+Format: `payments`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

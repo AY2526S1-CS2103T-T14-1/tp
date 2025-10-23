@@ -22,6 +22,18 @@ public class Finance {
      *
      * @param owedAmount A valid owed amount.
      */
+    public Finance(FinanceAmount owedAmount, TuitionPlan plan) {
+        requireAllNonNull(owedAmount);
+        this.owedAmount = owedAmount;
+        this.history = new ArrayList<>();
+        this.plan = plan;
+    }
+
+    /**
+     * Constructs a {@code Finance} with an initial owed amount.
+     *
+     * @param owedAmount A valid owed amount.
+     */
     public Finance(FinanceAmount owedAmount, List<PaymentEntry> history, TuitionPlan plan) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
@@ -48,19 +60,12 @@ public class Finance {
         this.plan = null;
     }
 
-    // Private canonical ctor to keep immutability on operations
-    private Finance(FinanceAmount owedAmount, List<PaymentEntry> history) {
-        this.owedAmount = owedAmount;
-        this.history = history;
-        this.plan = null;
+    public FinanceAmount getOwedAmount() {
+        return owedAmount;
     }
 
     public List<PaymentEntry> getHistory() {
         return history;
-    }
-
-    public FinanceAmount getOwedAmount() {
-        return owedAmount;
     }
 
     public TuitionPlan getPlan() {
