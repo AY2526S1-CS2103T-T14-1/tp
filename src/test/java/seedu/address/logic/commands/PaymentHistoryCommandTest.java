@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -135,6 +136,16 @@ public class PaymentHistoryCommandTest {
         @Override
         public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
             return new seedu.address.model.UserPrefs();
+        }
+
+        @Override
+        public Optional<Person> findPersonByName(String name) {
+            for (Person p : list) { // 'list' is your ObservableList<Person>
+                if (p.getName().toString().equals(name)) {
+                    return Optional.of(p);
+                }
+            }
+            return Optional.empty();
         }
 
         // ---- Unused methods below: simple stubs to satisfy the interface ----

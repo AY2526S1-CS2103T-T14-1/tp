@@ -55,14 +55,14 @@ public class Finance {
         this.plan = null;
     }
 
+    public List<PaymentEntry> getHistory() {
+        return history;
+    }
+
     public FinanceAmount getOwedAmount() {
         return owedAmount;
     }
 
-    public List<PaymentEntry> getHistory() {
-        return history;
-    }
-      
     public TuitionPlan getPlan() {
         return plan;
     }
