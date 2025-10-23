@@ -2,6 +2,9 @@ package seedu.address.model.finance;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -11,17 +14,18 @@ import java.util.Objects;
 public class Finance {
 
     private final FinanceAmount owedAmount;
+    private final List<PaymentEntry> history;
     private final TuitionPlan plan; // Optional (can be null)
-
 
     /**
      * Constructs a {@code Finance} with an initial owed amount.
      *
      * @param owedAmount A valid owed amount.
      */
-    public Finance(FinanceAmount owedAmount, TuitionPlan plan) {
+    public Finance(FinanceAmount owedAmount, List<PaymentEntry> history, TuitionPlan plan) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
+        this.history = history;
         this.plan = plan;
     }
 
@@ -31,6 +35,7 @@ public class Finance {
     public Finance(FinanceAmount owedAmount) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
+        this.history = new ArrayList<>();
         this.plan = null;
     }
 
@@ -39,7 +44,19 @@ public class Finance {
      */
     public Finance() {
         this.owedAmount = new FinanceAmount(0);
+        this.history = new ArrayList<>();
         this.plan = null;
+    }
+
+    // Private canonical ctor to keep immutability on operations
+    private Finance(FinanceAmount owedAmount, List<PaymentEntry> history) {
+        this.owedAmount = owedAmount;
+        this.history = history;
+        this.plan = null;
+    }
+
+    public List<PaymentEntry> getHistory() {
+        return history;
     }
 
     public FinanceAmount getOwedAmount() {
@@ -58,7 +75,7 @@ public class Finance {
      * Returns a new Finance object with an updated tuition plan.
      */
     public Finance withPlan(TuitionPlan newPlan) {
-        return new Finance(this.owedAmount, newPlan);
+        return new Finance(this.owedAmount, this.history, newPlan);
     }
 
     /**
@@ -70,7 +87,7 @@ public class Finance {
     public Finance add(FinanceAmount amountToAdd) {
         requireAllNonNull(amountToAdd);
         double newAmount = this.owedAmount.getAmount() + amountToAdd.getAmount();
-        return new Finance(new FinanceAmount(newAmount), this.plan);
+        return new Finance(new FinanceAmount(newAmount), this.history, this.plan);
     }
 
     /**
@@ -82,7 +99,9 @@ public class Finance {
     public Finance pay(FinanceAmount amountToPay) {
         requireAllNonNull(amountToPay);
         double newAmount = Math.max(0, this.owedAmount.getAmount() - amountToPay.getAmount());
-        return new Finance(new FinanceAmount(newAmount), this.plan);
+        List<PaymentEntry> newHistory = new ArrayList<>(history);
+        newHistory.add(new PaymentEntry(LocalDate.now(), amountToPay, ""));
+        return new Finance(new FinanceAmount(newAmount), newHistory, this.plan);
     }
 
     @Override
