@@ -15,7 +15,6 @@ public class Finance {
     private final FinanceAmount owedAmount;
     private final List<PaymentEntry> history;
 
-
     /**
      * Constructs a {@code Finance} with an initial owed amount.
      *
