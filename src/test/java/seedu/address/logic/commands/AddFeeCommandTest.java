@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.finance.FinanceAmount;
 import seedu.address.model.finance.FinanceType;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests for {@code AddFeeCommand}.
@@ -112,5 +113,34 @@ public class AddFeeCommandTest {
         @Override
         public void updateFilteredPersonList(java.util.function.Predicate<Person> predicate) {
         }
+    }
+
+    @Test
+    public void execute_validStudent_success() throws Exception {
+        // Create a mock student with no finance plan
+        Person student = new PersonBuilder().withName("Alex Yeoh").build();
+
+        // Create a model stub that returns this student when searched by name
+        ModelStub modelStub = new ModelStub() {
+            @Override
+            public Optional<Person> findPersonByName(String name) {
+                return Optional.of(student);
+            }
+
+            @Override
+            public void setPerson(Person target, Person editedPerson) {
+                // success - no action needed for this test
+            }
+        };
+
+        AddFeeCommand command = new AddFeeCommand("Alex Yeoh",
+                FinanceType.PER_LESSON, new FinanceAmount("50"));
+
+        CommandResult result = command.execute(modelStub);
+
+        assertEquals(
+                String.format("Tuition fee set: %s pays %s per %s.",
+                        "Alex Yeoh", "50", "lesson"),
+                result.getFeedbackToUser());
     }
 }
