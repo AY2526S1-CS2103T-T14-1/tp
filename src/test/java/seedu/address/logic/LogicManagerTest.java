@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -9,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,11 +20,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -85,6 +89,78 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void importAddressBook_validFile_success() throws Exception {
+        // Create a file with typical address book data
+        Path importFilePath = temporaryFolder.resolve("import.json");
+        ReadOnlyAddressBook typicalAddressBook = getTypicalAddressBook();
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(importFilePath);
+        addressBookStorage.saveAddressBook(typicalAddressBook, importFilePath);
+
+        // Verify model is initially empty
+        assertEquals(new AddressBook(), model.getAddressBook());
+
+        // Import the file
+        logic.importAddressBook(importFilePath);
+
+        // Verify model now contains the imported data
+        assertEquals(typicalAddressBook, model.getAddressBook());
+    }
+
+    @Test
+    public void importAddressBook_nonExistentFile_throwsDataLoadingException() {
+        Path nonExistentFile = temporaryFolder.resolve("nonexistent.json");
+        assertThrows(DataLoadingException.class, () -> logic.importAddressBook(nonExistentFile));
+    }
+
+    @Test
+    public void importAddressBook_invalidJsonFile_throwsDataLoadingException() throws Exception {
+        // Create a file with invalid JSON content
+        Path invalidJsonFile = temporaryFolder.resolve("invalid.json");
+        java.nio.file.Files.writeString(invalidJsonFile, "{invalid json content}");
+
+        assertThrows(DataLoadingException.class, () -> logic.importAddressBook(invalidJsonFile));
+    }
+
+    @Test
+    public void importAddressBook_replacesExistingData() throws Exception {
+        // Add a person to the model
+        Person amy = new PersonBuilder(AMY).withTags().build();
+        model.addPerson(amy);
+        assertNotEquals(new AddressBook(), model.getAddressBook());
+
+        // Create a different address book file
+        Path importFilePath = temporaryFolder.resolve("import.json");
+        ReadOnlyAddressBook typicalAddressBook = getTypicalAddressBook();
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(importFilePath);
+        addressBookStorage.saveAddressBook(typicalAddressBook, importFilePath);
+
+        // Import should replace the existing data
+        logic.importAddressBook(importFilePath);
+
+        // Verify the model now contains only the imported data
+        assertEquals(typicalAddressBook, model.getAddressBook());
+    }
+
+    @Test
+    public void importAddressBook_emptyAddressBook_success() throws Exception {
+        // Add a person to the model first
+        Person amy = new PersonBuilder(AMY).withTags().build();
+        model.addPerson(amy);
+
+        // Create an empty address book file
+        Path emptyFilePath = temporaryFolder.resolve("empty.json");
+        AddressBook emptyAddressBook = new AddressBook();
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(emptyFilePath);
+        addressBookStorage.saveAddressBook(emptyAddressBook, emptyFilePath);
+
+        // Import the empty file
+        logic.importAddressBook(emptyFilePath);
+
+        // Verify model is now empty
+        assertEquals(emptyAddressBook, model.getAddressBook());
     }
 
     /**
