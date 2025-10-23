@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -146,6 +148,71 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens a file chooser to allow the user to select a JSON file to import.
+     */
+    @FXML
+    public void handleImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Import Address Book");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+
+        // Set initial directory to the data folder if it exists
+        File dataFolder = new File("data");
+        if (dataFolder.exists() && dataFolder.isDirectory()) {
+            fileChooser.setInitialDirectory(dataFolder);
+        }
+
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+
+        if (selectedFile != null) {
+            try {
+                logic.importAddressBook(selectedFile.toPath());
+                resultDisplay.setFeedbackToUser("Successfully imported data from: " + selectedFile.getAbsolutePath());
+                logger.info("Import successful from: " + selectedFile.getAbsolutePath());
+            } catch (Exception e) {
+                resultDisplay.setFeedbackToUser("Failed to import data: " + e.getMessage());
+                logger.warning("Import failed: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Opens a file chooser to allow the user to select a location to export the address book.
+     */
+    @FXML
+    public void handleExport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Address Book");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+
+        // Set initial directory to the data folder if it exists
+        File dataFolder = new File("data");
+        if (dataFolder.exists() && dataFolder.isDirectory()) {
+            fileChooser.setInitialDirectory(dataFolder);
+        }
+
+        // Set default file name with timestamp
+        String timestamp = java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        fileChooser.setInitialFileName("addressbook_" + timestamp + ".json");
+
+        File selectedFile = fileChooser.showSaveDialog(primaryStage);
+
+        if (selectedFile != null) {
+            try {
+                logic.exportAddressBook(selectedFile.toPath());
+                resultDisplay.setFeedbackToUser("Successfully exported data to: " + selectedFile.getAbsolutePath());
+                logger.info("Export successful to: " + selectedFile.getAbsolutePath());
+            } catch (Exception e) {
+                resultDisplay.setFeedbackToUser("Failed to export data: " + e.getMessage());
+                logger.warning("Export failed: " + e.getMessage());
+            }
         }
     }
 
