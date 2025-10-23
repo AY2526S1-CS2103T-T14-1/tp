@@ -17,19 +17,6 @@ public class Finance {
     private final List<PaymentEntry> history;
     private final TuitionPlan plan; // Optional (can be null)
 
-
-    /**
-     * Constructs a {@code Finance} with an initial owed amount.
-     *
-     * @param owedAmount A valid owed amount.
-     */
-    public Finance(FinanceAmount owedAmount, TuitionPlan plan) {
-        requireAllNonNull(owedAmount);
-        this.owedAmount = owedAmount;
-        this.history = new ArrayList<>();
-        this.plan = plan;
-    }
-
     /**
      * Constructs a {@code Finance} with an initial owed amount.
      *
@@ -66,6 +53,10 @@ public class Finance {
         this.owedAmount = owedAmount;
         this.history = history;
         this.plan = null;
+    }
+
+    public List<PaymentEntry> getHistory() {
+        return history;
     }
 
     public FinanceAmount getOwedAmount() {
