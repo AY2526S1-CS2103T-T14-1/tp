@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Finds a person by their name (case-insensitive).
+     *
+     * @param name The full name of the person to search for.
+     * @return An Optional containing the matching Person if found, otherwise an empty Optional.
+     */
+    Optional<Person> findPersonByName(String name);
 }

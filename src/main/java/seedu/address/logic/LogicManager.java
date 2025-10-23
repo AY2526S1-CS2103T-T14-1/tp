@@ -3,11 +3,13 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -84,5 +86,25 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void importAddressBook(Path filePath) throws DataLoadingException {
+        logger.info("Importing address book from: " + filePath);
+        Optional<ReadOnlyAddressBook> addressBookOptional = storage.readAddressBook(filePath);
+
+        if (addressBookOptional.isPresent()) {
+            model.setAddressBook(addressBookOptional.get());
+            logger.info("Successfully imported address book from: " + filePath);
+        } else {
+            throw new DataLoadingException(new Exception("File not found or is empty: " + filePath));
+        }
+    }
+
+    @Override
+    public void exportAddressBook(Path filePath) throws IOException {
+        logger.info("Exporting address book to: " + filePath);
+        storage.saveAddressBook(model.getAddressBook(), filePath);
+        logger.info("Successfully exported address book to: " + filePath);
     }
 }
