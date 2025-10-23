@@ -29,8 +29,8 @@ public class Finance {
         this.history = new ArrayList<>();
         this.plan = plan;
     }
-  
-        /**
+
+    /**
      * Constructs a {@code Finance} with an initial owed amount.
      *
      * @param owedAmount A valid owed amount.
@@ -75,7 +75,7 @@ public class Finance {
     public List<PaymentEntry> getHistory() {
         return history;
     }
-  
+
     public TuitionPlan getPlan() {
         return plan;
     }
