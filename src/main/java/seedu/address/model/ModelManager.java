@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -109,6 +110,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Optional<Person> findPersonByName(String name) {
+        String trimmed = name.trim();
+        return addressBook.getPersonList().stream()
+                .filter(p -> p.getName().fullName.equalsIgnoreCase(trimmed))
+                .findFirst();
     }
 
     //=========== Filtered Person List Accessors =============================================================

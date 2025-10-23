@@ -2,6 +2,8 @@ package seedu.address.model.finance;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 /**
  * Represents a Finance record in the address book.
  * Tracks the owed amount for a person.
@@ -9,7 +11,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Finance {
 
     private final FinanceAmount owedAmount;
-
+    private final TuitionPlan plan; // Optional (can be null)
 
 
     /**
@@ -17,9 +19,19 @@ public class Finance {
      *
      * @param owedAmount A valid owed amount.
      */
+    public Finance(FinanceAmount owedAmount, TuitionPlan plan) {
+        requireAllNonNull(owedAmount);
+        this.owedAmount = owedAmount;
+        this.plan = plan;
+    }
+
+    /**
+     * Constructs a {@code Finance} with only owed amount (no plan).
+     */
     public Finance(FinanceAmount owedAmount) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
+        this.plan = null;
     }
 
     /**
@@ -27,10 +39,26 @@ public class Finance {
      */
     public Finance() {
         this.owedAmount = new FinanceAmount(0);
+        this.plan = null;
     }
 
     public FinanceAmount getOwedAmount() {
         return owedAmount;
+    }
+
+    public TuitionPlan getPlan() {
+        return plan;
+    }
+
+    public boolean hasPlan() {
+        return plan != null;
+    }
+
+    /**
+     * Returns a new Finance object with an updated tuition plan.
+     */
+    public Finance withPlan(TuitionPlan newPlan) {
+        return new Finance(this.owedAmount, newPlan);
     }
 
     /**
@@ -42,7 +70,7 @@ public class Finance {
     public Finance add(FinanceAmount amountToAdd) {
         requireAllNonNull(amountToAdd);
         double newAmount = this.owedAmount.getAmount() + amountToAdd.getAmount();
-        return new Finance(new FinanceAmount(newAmount));
+        return new Finance(new FinanceAmount(newAmount), this.plan);
     }
 
     /**
@@ -54,7 +82,7 @@ public class Finance {
     public Finance pay(FinanceAmount amountToPay) {
         requireAllNonNull(amountToPay);
         double newAmount = Math.max(0, this.owedAmount.getAmount() - amountToPay.getAmount());
-        return new Finance(new FinanceAmount(newAmount));
+        return new Finance(new FinanceAmount(newAmount), this.plan);
     }
 
     @Override
@@ -63,24 +91,28 @@ public class Finance {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof Finance otherFinance)) {
+        if (!(other instanceof Finance)) {
             return false;
         }
 
-        return owedAmount.equals(otherFinance.owedAmount);
+        Finance otherFinance = (Finance) other;
+        return owedAmount.equals(otherFinance.owedAmount)
+                && ((plan == null && otherFinance.plan == null)
+                || (plan != null && plan.equals(otherFinance.plan)));
     }
 
     @Override
     public int hashCode() {
-        return owedAmount.hashCode();
+        return Objects.hash(owedAmount, plan);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return String.format("[Owed Amount: %.2f]", owedAmount.getAmount());
+        return plan == null
+                ? String.format("[Owed Amount: %.2f]", owedAmount.getAmount())
+                : String.format("[Owed Amount: %.2f, Plan: %s]", owedAmount.getAmount(), plan);
     }
 
 }
