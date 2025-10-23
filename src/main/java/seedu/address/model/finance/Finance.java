@@ -60,13 +60,6 @@ public class Finance {
         this.plan = null;
     }
 
-    // Private canonical ctor to keep immutability on operations
-    private Finance(FinanceAmount owedAmount, List<PaymentEntry> history) {
-        this.owedAmount = owedAmount;
-        this.history = history;
-        this.plan = null;
-    }
-
     public FinanceAmount getOwedAmount() {
         return owedAmount;
     }
