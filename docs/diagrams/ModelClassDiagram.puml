@@ -42,6 +42,8 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "0..1" Lesson
+Person *--> "0..1" Finance
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
