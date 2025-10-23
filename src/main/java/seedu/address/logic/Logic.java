@@ -1,9 +1,11 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -47,4 +49,18 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Imports address book data from the specified file path.
+     * @param filePath The path to the JSON file to import.
+     * @throws DataLoadingException If an error occurs during data loading.
+     */
+    void importAddressBook(Path filePath) throws DataLoadingException;
+
+    /**
+     * Exports address book data to the specified file path.
+     * @param filePath The path to export the JSON file to.
+     * @throws IOException If an error occurs during data export.
+     */
+    void exportAddressBook(Path filePath) throws IOException;
 }
