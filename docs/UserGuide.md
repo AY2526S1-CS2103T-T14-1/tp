@@ -158,6 +158,8 @@ Format: `payments`
 
 Shows outstanding payments of all clients
 
+Format: `outstanding`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
