@@ -148,11 +148,15 @@ Shows all lessons in the current week (Mon–Sun), sorted by day and time.
 
 Format: `schedule`
 
-### Viewling payment history : `payments`
+### Viewing payment history : `payments`
 
 Shows the payment history (newest first).
 
 Format: `payments`
+
+### View outstanding payments: `outstanding`
+
+Shows outstanding payments of all clients
 
 ### Clearing all entries : `clear`
 
