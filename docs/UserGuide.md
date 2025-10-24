@@ -128,6 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds people whose tags include any part of the keywords you enter
+
+Format: `findtag TAG_NAME`
+
+* You need not type the full tag name
+ 
+Examples:
+* `findtag IMPORTANT` will search for all people with tags that have `IMPORTANT`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -160,12 +171,23 @@ Shows outstanding payments of all clients
 
 Format: `outstanding`
 
+* Shows a list of people with amount owed right below the search bar
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+### Add payment made by client: `pay`
+
+Add the payment made by a particular client,  
+
+Format: `pay INDEX amt/AMOUNT`
+
+* `INDEX` is the number of the person listed on the main GUI window.
+* Specify the amount `AMOUNT`
+ 
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -214,5 +236,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
+**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
+**View outstanding payments** | `outstanding`
 **List** | `list`
 **Help** | `help`
