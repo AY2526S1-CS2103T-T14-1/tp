@@ -61,4 +61,16 @@ public class PayTest {
         CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
         assertEquals(Messages.MESSAGE_NO_OWED_AMOUNT, exception.getMessage());
     }
+
+    @Test
+    public void execute_TooHighIndex_throwsCommandException() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Person personWithOwedAmount = new PersonBuilder().withName("Alice").withFinance(
+                new Finance(new FinanceAmount("100.00"))).build();
+        model.addPerson(personWithOwedAmount);
+        PayCommand payCommand = new PayCommand(Index.fromOneBased(2), new FinanceAmount("100.00"));
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
+        assertEquals(expectedMessage, exception.getMessage());
+    }
 }
