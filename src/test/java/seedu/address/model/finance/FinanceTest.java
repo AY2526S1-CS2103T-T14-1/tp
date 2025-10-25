@@ -3,6 +3,7 @@ package seedu.address.model.finance;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,12 @@ public class FinanceTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Finance(null));
+    }
+
+    @Test
+    public void constructor_zeroFinanceAmount_returnsisZero() {
+        Finance finance = new Finance(new FinanceAmount("0.00"));
+        assertTrue(finance.getOwedAmount().isZero());
     }
 
     @Test
