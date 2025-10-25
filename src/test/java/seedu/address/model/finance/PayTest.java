@@ -63,7 +63,7 @@ public class PayTest {
     }
 
     @Test
-    public void execute_TooHighIndex_throwsCommandException() {
+    public void execute_tooHighIndex_throwsCommandException() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
         Person personWithOwedAmount = new PersonBuilder().withName("Alice").withFinance(
                 new Finance(new FinanceAmount("100.00"))).build();
