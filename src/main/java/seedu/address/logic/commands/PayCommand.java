@@ -60,7 +60,7 @@ public class PayCommand extends Command {
         }
         Person personToAddPayment = lastShownList.get(index.getZeroBased());
 
-        if (personToAddPayment.getFinance().get().getOwedAmount().isZero() ) {
+        if (personToAddPayment.getFinance().get().getOwedAmount().isZero()) {
             throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
         }
 
