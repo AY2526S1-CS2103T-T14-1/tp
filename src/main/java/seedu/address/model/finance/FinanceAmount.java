@@ -23,6 +23,14 @@ public class FinanceAmount {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
+
+    /**
+     * Returns true if FinanceAmount is zero.
+     */
+    public boolean isZero() {
+        return getAmount() == 0.0;
+    }
+
     public FinanceAmount(double amount) {
         this.amount = String.format("%.2f", amount);
     }
