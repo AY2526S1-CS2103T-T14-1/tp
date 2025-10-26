@@ -128,6 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds people whose tags include any part of the keywords you enter
+
+Format: `findtag TAG_NAME`
+
+* You need not type the full tag name
+ 
+Examples:
+* `findtag IMPORTANT` will search for all people with tags that have `IMPORTANT`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -148,11 +159,19 @@ Shows all lessons in the current week (Mon–Sun), sorted by day and time.
 
 Format: `schedule`
 
-### Viewling payment history : `payments`
+### Viewing payment history : `payments`
 
 Shows the payment history (newest first).
 
 Format: `payments`
+
+### View outstanding payments: `outstanding`
+
+Shows outstanding payments of all clients
+
+Format: `outstanding`
+
+* Shows a list of people with amount owed right below the search bar
 
 ### Clearing all entries : `clear`
 
@@ -160,6 +179,15 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Add payment made by client: `pay`
+
+Add the payment made by a particular client,  
+
+Format: `pay INDEX amt/AMOUNT`
+
+* `INDEX` is the number of the person listed on the main GUI window.
+* Specify the amount `AMOUNT`
+ 
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -203,10 +231,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**View Schedule** | `schedule`
+**View payment history** | `payments`
+**View outstanding payments** | `outstanding`
+**Clear** | `clear`
+**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
+**Exit** | `exit`
