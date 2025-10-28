@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -48,6 +51,9 @@ public class AddLessonCommand extends Command {
             + PREFIX_LOCATION + "RoomA";
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added Lesson to %1$s: %2$s";
+    public static final String MESSAGE_OVERWRITING = "Overwriting existing lesson for %1$s with %2$s";
+
+    private static final Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
 
     private final Index index;
     private final AddLessonDescriptor addLessonDescriptor;
@@ -76,10 +82,20 @@ public class AddLessonCommand extends Command {
         Person personToAddLesson = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToAddLesson, addLessonDescriptor);
 
+        String feedback = "";
+        if (personToAddLesson.getLesson().isPresent()) {
+            Lesson originalLesson = personToAddLesson.getLesson().orElseThrow();
+            logger.log(Level.WARNING, String.format(MESSAGE_OVERWRITING, editedPerson.getName(), originalLesson));
+            feedback = "Warning: " + String.format(MESSAGE_OVERWRITING, editedPerson.getName(), originalLesson) + "\n";
+        }
+
         model.setPerson(personToAddLesson, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, editedPerson.getName(),
-                editedPerson.getLesson().map(Lesson::toString).orElse("")));
+
+        feedback += String.format(MESSAGE_ADD_LESSON_SUCCESS, editedPerson.getName(), editedPerson.getLesson()
+                .map(Lesson::toString).orElse(""));
+
+        return new CommandResult(feedback);
     }
 
     /**
