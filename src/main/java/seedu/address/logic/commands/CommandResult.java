@@ -19,17 +19,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Whether UI should show the schedule*/
-    private final boolean showSchedule;
+    /** Whether UI should show the popup window*/
+    private final boolean showPopup;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSchedule) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPopup) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showSchedule = showSchedule;
+        this.showPopup = showPopup;
     }
 
     /**
@@ -40,7 +40,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showSchedule = false;
+        this.showPopup = false;
     }
 
     /**
@@ -63,8 +63,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isShowSchedule() {
-        return showSchedule;
+    public boolean isShowPopup() {
+        return showPopup;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showSchedule == otherCommandResult.showSchedule;
+                && showPopup == otherCommandResult.showPopup;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showSchedule);
+        return Objects.hash(feedbackToUser, showHelp, exit, showPopup);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("showSchedule", showSchedule)
+                .add("showPopup", showPopup)
                 .toString();
     }
 
