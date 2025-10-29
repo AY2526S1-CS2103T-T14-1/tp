@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,7 +38,7 @@ public class Finance {
     public Finance(FinanceAmount owedAmount, List<PaymentEntry> history, TuitionPlan plan) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
-        this.history = history;
+        this.history = new ArrayList<>(history == null ? List.of() : history);
         this.plan = plan;
     }
 
@@ -65,7 +66,7 @@ public class Finance {
     }
 
     public List<PaymentEntry> getHistory() {
-        return history;
+        return Collections.unmodifiableList(history);
     }
 
     public TuitionPlan getPlan() {
@@ -121,13 +122,14 @@ public class Finance {
 
         Finance otherFinance = (Finance) other;
         return owedAmount.equals(otherFinance.owedAmount)
+                && history.equals(otherFinance.history)
                 && ((plan == null && otherFinance.plan == null)
                 || (plan != null && plan.equals(otherFinance.plan)));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(owedAmount, plan);
+        return Objects.hash(owedAmount, history, plan);
     }
 
     /**

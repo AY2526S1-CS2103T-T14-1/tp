@@ -136,4 +136,14 @@ public class FinanceTest {
         assertEquals(amount, finance.getOwedAmount());
     }
 
+    @Test
+    public void pay_addsHistoryAndReducesOwed() {
+        Finance f = new Finance(new FinanceAmount("20.00"));
+        Finance f2 = f.pay(new FinanceAmount("7.50"));
+
+        assertEquals(12.50, f2.getOwedAmount().getAmount(), 1e-9);
+        assertEquals(1, f2.getHistory().size());
+        assertEquals(7.50, f2.getHistory().get(0).getAmount().getAmount(), 1e-9);
+    }
+
 }

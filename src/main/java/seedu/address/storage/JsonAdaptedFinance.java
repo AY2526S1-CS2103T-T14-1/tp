@@ -1,11 +1,15 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.PaymentEntry;
 
 /**
  * Jackson-friendly version of {@link Finance}.
@@ -13,13 +17,22 @@ import seedu.address.model.finance.FinanceAmount;
 class JsonAdaptedFinance {
 
     private final String owedAmount;
+    private final List<JsonAdaptedPaymentEntry> history = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedFinance} with the given finance details.
      */
-    @JsonCreator
-    public JsonAdaptedFinance(@JsonProperty("owedAmount") String owedAmount) {
+    public JsonAdaptedFinance(String owedAmount) {
         this.owedAmount = owedAmount;
+    }
+
+    @JsonCreator
+    public JsonAdaptedFinance(@JsonProperty("owedAmount") String owedAmount,
+                              @JsonProperty("history") List<JsonAdaptedPaymentEntry> history) {
+        this.owedAmount = owedAmount;
+        if (history != null) {
+            this.history.addAll(history);
+        }
     }
 
     /**
@@ -27,6 +40,9 @@ class JsonAdaptedFinance {
      */
     public JsonAdaptedFinance(Finance source) {
         owedAmount = String.valueOf(source.getOwedAmount().getAmount());
+        for (PaymentEntry entry : source.getHistory()) {
+            this.history.add(new JsonAdaptedPaymentEntry(entry));
+        }
     }
 
     /**
@@ -43,6 +59,11 @@ class JsonAdaptedFinance {
         }
         final FinanceAmount modelOwedAmount = new FinanceAmount(owedAmount);
 
-        return new Finance(modelOwedAmount);
+        final List<PaymentEntry> modelHistory = new ArrayList<>();
+        for (JsonAdaptedPaymentEntry jsonAdaptedPaymentEntry : history) {
+            modelHistory.add(jsonAdaptedPaymentEntry.toModelType());
+        }
+
+        return new Finance(modelOwedAmount, modelHistory, null);
     }
 }

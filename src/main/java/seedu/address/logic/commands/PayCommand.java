@@ -83,6 +83,9 @@ public class PayCommand extends Command {
         if (personFinance.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_PERSON_HAS_NO_FINANCE);
         }
+        if (personFinance.get().getOwedAmount().isZero()) {
+            throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
+        }
         if (personFinance.get().getOwedAmount().getAmount() - payment.getAmount() < 0) {
             throw new CommandException(Messages.MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT);
         }
@@ -99,7 +102,7 @@ public class PayCommand extends Command {
      * @throws java.util.NoSuchElementException if the person has no finance present.
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
-        Finance oldFinance = p.getFinance().get();
+        Finance oldFinance = p.getFinance().orElse(new Finance());
         return oldFinance.pay(payment);
     }
 
