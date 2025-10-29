@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
 import java.util.List;
@@ -77,15 +78,19 @@ public class PayCommand extends Command {
      * Produces a new {@link Finance} reflecting the deduction of the given payment from the person's
      * current outstanding amount.
      *
-     * @param p the person whose finance is to be updated; must have a present finance.
+     * @param p the person whose finance is to be updated; must have a present finance, else a new finance will be
+     *          created.
      * @param payment the payment amount to deduct.
      * @return a new {@link Finance} instance with the updated owed amount.
-     * @throws NullPointerException if any argument is {@code null}.
-     * @throws java.util.NoSuchElementException if the person has no finance present.
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
-        Finance oldFinance = p.getFinance().get();
-        return oldFinance.pay(payment);
+        requireAllNonNull(p, payment);
+        if (p.getFinance().isPresent()) {
+            Finance oldFinance = p.getFinance().get();
+            return oldFinance.pay(payment);
+        } else {
+            return new Finance();
+        }
     }
 
     @Override
