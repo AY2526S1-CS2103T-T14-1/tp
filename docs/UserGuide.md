@@ -103,7 +103,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the person’s tags by typing `tag/` without
     specifying any tags after it.
 
 Examples:
@@ -163,7 +163,7 @@ Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
 * Overwrites any existing lesson.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* `DAY` must be either `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` or `sunday`.
+* `DAY` must be either `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday`.
 * `DAY` is case-insensitive.
 * `TIME` must be in **hh:mm** format.
 
@@ -264,9 +264,9 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com addr/123, Clementi Rd, 1234665 tag/friend tag/colleague`
 **List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
