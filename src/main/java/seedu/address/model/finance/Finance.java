@@ -121,6 +121,7 @@ public class Finance {
 
         Finance otherFinance = (Finance) other;
         return owedAmount.equals(otherFinance.owedAmount)
+                && history.equals(otherFinance.history)
                 && ((plan == null && otherFinance.plan == null)
                 || (plan != null && plan.equals(otherFinance.plan)));
     }
