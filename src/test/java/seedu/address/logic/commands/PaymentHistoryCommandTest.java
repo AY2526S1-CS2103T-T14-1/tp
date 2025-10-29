@@ -196,5 +196,8 @@ public class PaymentHistoryCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
         }
+
+        @Override
+        public void commitAddressBook() {}
     }
 }
