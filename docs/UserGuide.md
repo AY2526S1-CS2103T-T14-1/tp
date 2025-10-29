@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+StudentConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StudentConnect can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -153,11 +153,52 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Viewling weekly schedule : `schedule`
+### Adding new lesson : `addlesson`
+
+Adds lesson to the specified person from the address book.
+
+Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
+
+* Adds lesson to the person at the specified `INDEX`.
+* Overwrites any existing lesson.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `DAY` must be either `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` or `sunday`.
+* `DAY` is case-insensitive.
+* `TIME` must be in **hh:mm** format.
+
+Examples:
+* `addlesson 1 n/Math d/Monday t/12:00 l/RoomA` adds a lesson with name `Math` on `Monday` `1200` at `RoomA` to the 1st person in the address book.
+
+### Marking attendance : `mark`
+
+Marks attendance for the specified person from the address book.
+
+Format: `mark INDEX s/STATUS`
+
+* Marks attendance for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `STATUS` must be either `present` or `absent`.
+* `STATUS` is case-insensitive.
+
+Examples:
+* `mark 1 s/present` marks the 1st person in the address book as `present`.
+
+### Viewing weekly schedule : `schedule`
 
 Shows all lessons in the current week (Mon–Sun), sorted by day and time.
 
 Format: `schedule`
+
+### Add payment made by client: `pay`
+
+Add the payment made by a particular client,
+
+Format: `pay INDEX amt/AMOUNT`
+
+* `INDEX` is the number of the person listed on the main GUI window.
+* Specify the amount `AMOUNT`
 
 ### Viewing payment history : `payments`
 
@@ -178,15 +219,6 @@ Format: `outstanding`
 Clears all entries from the address book.
 
 Format: `clear`
-
-### Add payment made by client: `pay`
-
-Add the payment made by a particular client,  
-
-Format: `pay INDEX amt/AMOUNT`
-
-* `INDEX` is the number of the person listed on the main GUI window.
-* Specify the amount `AMOUNT`
  
 ### Exiting the program : `exit`
 
@@ -238,9 +270,11 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**View Schedule** | `schedule`
+**Add lesson** | `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 l/RoomA`
+**Mark attendance** | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`
+**View schedule** | `schedule`
+**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
 **View payment history** | `payments`
 **View outstanding payments** | `outstanding`
 **Clear** | `clear`
-**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
 **Exit** | `exit`
