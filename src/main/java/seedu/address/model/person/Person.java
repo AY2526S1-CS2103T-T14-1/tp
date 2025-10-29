@@ -150,6 +150,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
+                && Objects.equals(lesson, otherPerson.lesson)
                 && Objects.equals(finance, otherPerson.finance);
     }
 
