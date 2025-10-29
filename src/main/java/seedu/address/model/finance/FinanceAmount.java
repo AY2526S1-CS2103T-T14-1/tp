@@ -29,8 +29,9 @@ public class FinanceAmount {
      * @param amount Amount in double format.
      */
     public FinanceAmount(double amount) {
-        this.amount = String.format("%.2f", amount);
-        checkArgument(isValidAmount(this.amount), MESSAGE_CONSTRAINTS);
+        String input = String.format("%.2f", amount);
+        checkArgument(isValidAmount(input), MESSAGE_CONSTRAINTS);
+        this.amount = input;
     }
 
     /**
