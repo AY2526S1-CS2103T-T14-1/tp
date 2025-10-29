@@ -59,7 +59,7 @@ public class PayTest {
         model.addPerson(personWithZeroOwedAmount);
         PayCommand payCommand = new PayCommand(Index.fromOneBased(1), new FinanceAmount("100.00"));
         CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
-        assertEquals(Messages.MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT, exception.getMessage());
+        assertEquals(Messages.MESSAGE_NO_OWED_AMOUNT, exception.getMessage());
     }
 
     @Test
