@@ -160,7 +160,7 @@ Adds lesson to the specified person from the address book.
 Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
 
 * Adds lesson to the person at the specified `INDEX`.
-* Overwrites any existing lesson.
+* Overwrites any existing lesson on applied student.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DAY` must be either `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday`.
