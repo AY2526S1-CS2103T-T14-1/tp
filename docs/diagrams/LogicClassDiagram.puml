@@ -12,12 +12,6 @@ Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 
-Class AddFeeCommand
-Class AddFeeCommandParser
-AddFeeCommand -up-|> Command
-ParserClasses ..> AddFeeCommandParser : <<create>>
-AddFeeCommandParser ..> AddFeeCommand : <<creates>>
-
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
 }
