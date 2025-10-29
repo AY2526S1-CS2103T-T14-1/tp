@@ -20,6 +20,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT = "The payment exceeds the owed amount.";
     public static final String MESSAGE_PERSON_HAS_NO_FINANCE = "The person has no finance.";
+    public static final String MESSAGE_NO_OWED_AMOUNT = "This person has no owed amount.";
 
 
     /**
