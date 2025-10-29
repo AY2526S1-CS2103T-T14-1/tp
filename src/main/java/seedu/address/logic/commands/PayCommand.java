@@ -61,9 +61,7 @@ public class PayCommand extends Command {
         }
         Person personToAddPayment = lastShownList.get(index.getZeroBased());
 
-        if (personToAddPayment.getFinance().get().getOwedAmount().isZero()) {
-            throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
-        }
+        checkValidPayment(personToAddPayment.getFinance(), payment);
 
         //update Finance object for this person based on the payment
         model.setPerson(personToAddPayment, new Person(
@@ -72,6 +70,26 @@ public class PayCommand extends Command {
                 Optional.ofNullable(updateFinance(personToAddPayment, payment))
         ));
         return new CommandResult(String.format(MESSAGE_SUCCESS, payment, personToAddPayment.getName()));
+    }
+
+    /**
+     * Checks if the payment is valid against the person's current owed amount.
+     *
+     * @param personFinance the person's current finance details.
+     * @param payment the payment amount to validate.
+     * @throws CommandException if the payment exceeds the owed amount.
+     */
+    public void checkValidPayment(Optional<Finance> personFinance, FinanceAmount payment) throws CommandException {
+        // Payment exceeds owed amount
+        if (personFinance.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_PERSON_HAS_NO_FINANCE);
+        }
+        if (personFinance.get().getOwedAmount().isZero()) {
+            throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
+        }
+        if (personFinance.get().getOwedAmount().getAmount() - payment.getAmount() < 0) {
+            throw new CommandException(Messages.MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT);
+        }
     }
 
     /**
@@ -85,12 +103,8 @@ public class PayCommand extends Command {
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
         requireAllNonNull(p, payment);
-        if (p.getFinance().isPresent()) {
-            Finance oldFinance = p.getFinance().get();
-            return oldFinance.pay(payment);
-        } else {
-            return new Finance();
-        }
+        Finance oldFinance = p.getFinance().orElse(new Finance());
+        return oldFinance.pay(payment);
     }
 
     @Override

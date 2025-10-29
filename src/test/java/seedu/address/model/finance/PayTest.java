@@ -73,4 +73,14 @@ public class PayTest {
         CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
         assertEquals(expectedMessage, exception.getMessage());
     }
+
+    @Test
+    public void execute_personHasNoFinance_throwsCommandException() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Person personWithoutFinance = new PersonBuilder().withName("Bob").build();
+        model.addPerson(personWithoutFinance);
+        PayCommand payCommand = new PayCommand(Index.fromOneBased(1), new FinanceAmount("50.00"));
+        CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
+        assertEquals(Messages.MESSAGE_PERSON_HAS_NO_FINANCE, exception.getMessage());
+    }
 }

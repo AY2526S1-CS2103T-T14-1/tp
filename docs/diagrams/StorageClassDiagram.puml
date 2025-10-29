@@ -20,6 +20,9 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedLesson
+Class JsonAdaptedAttendance
+Class JsonAdaptedFinance
 }
 
 }
@@ -39,5 +42,7 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
-
+JsonAdaptedPerson --> "0..1" JsonAdaptedLesson
+JsonAdaptedPerson --> "0..1" JsonAdaptedFinance
+JsonAdaptedLesson --> JsonAdaptedAttendance
 @enduml
