@@ -16,7 +16,7 @@ public class FinanceAmount {
 
     /**
      * Constructs a {@code FinanceAmount}.
-     * @param amount
+     * @param amount Amount in string format.
      */
     public FinanceAmount(String amount) {
         requireNonNull(amount);
@@ -24,9 +24,13 @@ public class FinanceAmount {
         this.amount = amount;
     }
 
-
+    /**
+     * Constructs a {@code FinanceAmount}.
+     * @param amount Amount in double format.
+     */
     public FinanceAmount(double amount) {
         this.amount = String.format("%.2f", amount);
+        checkArgument(isValidAmount(this.amount), MESSAGE_CONSTRAINTS);
     }
 
     /**
