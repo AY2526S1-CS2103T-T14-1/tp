@@ -9,6 +9,7 @@ Class AddCommand
 Class EditCommand
 Class DeleteCommand
 Class FindCommand
+Class FindTagCommand
 Class AddFinanceCommand
 Class PayCommand
 Class AddLessonCommand
@@ -23,6 +24,7 @@ Class AddCommandParser
 Class EditCommandParser
 Class DeleteCommandParser
 Class FindCommandParser
+Class FindTagCommandParser
 Class AddFinanceCommandParser
 Class PayCommandParser
 Class AddLessonCommandParser
@@ -43,6 +45,7 @@ AddressBookParser .down.> AddCommandParser: <<create>>
 AddressBookParser .down.> EditCommandParser: <<create>>
 AddressBookParser .down.> DeleteCommandParser: <<create>>
 AddressBookParser .down.> FindCommandParser: <<create>>
+AddressBookParser .down.> FindTagCommandParser: <<create>>
 AddressBookParser .down.> AddFinanceCommandParser: <<create>>
 AddressBookParser .down.> PayCommandParser: <<create>>
 AddressBookParser .down.> AddLessonCommandParser: <<create>>
@@ -54,6 +57,7 @@ AddCommandParser ..> AddCommand : <<create>>
 EditCommandParser ..> EditCommand : <<create>>
 DeleteCommandParser ..> DeleteCommand : <<create>>
 FindCommandParser ..> FindCommand : <<create>>
+FindTagCommandParser ..> FindTagCommand : <<create>>
 AddFinanceCommandParser ..> AddFinanceCommand : <<create>>
 PayCommandParser ..> PayCommand : <<create>>
 AddLessonCommandParser ..> AddLessonCommand : <<create>>
@@ -67,6 +71,7 @@ AddCommandParser .up.|> Parser
 EditCommandParser .up.|> Parser
 DeleteCommandParser .up.|> Parser
 FindCommandParser .up.|> Parser
+FindTagCommandParser .up.|> Parser
 AddFinanceCommandParser .up.|> Parser
 PayCommandParser .up.|> Parser
 AddLessonCommandParser .up.|> Parser
@@ -88,6 +93,9 @@ DeleteCommandParser ..> ParserUtil
 
 FindCommandParser ..> ArgumentMultimap
 FindCommandParser ..> ArgumentTokenizer
+
+FindTagCommandParser ..> ArgumentMultimap
+FindTagCommandParser ..> ArgumentTokenizer
 
 AddFinanceCommandParser ..> ArgumentMultimap
 AddFinanceCommandParser ..> ArgumentTokenizer
@@ -113,13 +121,13 @@ MarkAttendanceCommandParser ..> ParserUtil
 
 ArgumentTokenizer .left.> ArgumentMultimap
 CliSyntax ..> Prefix
-ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 
 AddCommand -up-|> Command
 EditCommand -up-|> Command
 DeleteCommand -up-|> Command
 FindCommand -up-|> Command
+FindTagCommand -up-|> Command
 AddFinanceCommand -up-|> Command
 PayCommand -up-|> Command
 AddLessonCommand -up-|> Command
