@@ -237,13 +237,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -275,20 +268,22 @@ Enable tutors and teachers to manage student contacts, notes, and tuition record
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                       | So that I can…​ |
-|----------|---------|----------------------------------------------------|--------------|
-| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system |
-| `* * *`  | tutor   | delete a student permanently                       | reduce clutter |
-| `* * *`  | tutor   | add a lesson with date, time, and location         | track when and where I teach |
-| `* *`    | tutor   | mark attendance for a lesson                       | know if the student showed up |
-| `* *`    | tutor   | add tuition fees per lesson or per month           | track income |
-| `* * *`  | tutor   | record fee payments                                | know who has paid |
-| `* * *`  | tutor   | see outstanding payments                           | follow up with students/parents |
-| `* *`    | tutor   | see a daily/weekly schedule                        | plan my teaching |
-| `* * *`  | tutor   | search by student name                             | quickly find their record |
-| `* *`    | tutor   | view a student’s details                           | reach them easily |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​                                                         | So that I can…​                     |
+|----------|---------|----------------------------------------------------------------------|-------------------------------------|
+| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system           |
+| `* * *`  | tutor   | delete a student permanently                                         | reduce clutter                      |
+| `* * *`  | tutor   | add a lesson with date, time, and location                           | track when and where I teach        |
+| `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
+| `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
+| `* * *`  | tutor   | record fee payments                                                  | know who has paid                   |
+| `* * *`  | tutor   | see outstanding payments                                             | follow up with students/parents     |
+| `* *`    | tutor   | see a daily/weekly schedule                                          | plan my teaching                    |
+| `* * *`  | tutor   | search by student name                                               | quickly find their record           |
+| `* *`    | tutor   | view a student’s details                                             | reach them easily                   |
+| `*`      | tutor   | import student data from a spreadsheet                               | save time entering existing records |
+| `*`      | tutor   | create groups of students                                            | manage group lessons                |
+| `*`      | tutor   | assign different hourly rates to different students                  | reflect actual arrangements         |
+| `*`      | tutor   | export a fee report for a particular time period eg. a month         | manage my finances better.          |
 
 ### Use cases
 
@@ -487,8 +482,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -498,8 +491,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
 6. The data should be stored locally and should be in a human editable text file.
 7. Package everything into a single JAR file.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -536,8 +527,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -553,12 +542,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
