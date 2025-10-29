@@ -1,146 +1,55 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.Optional;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddFeeCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceType;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests for {@code AddFeeCommand}.
+ * Parses input arguments and creates a new {@code AddFeeCommand} object.
+ * Format: {@code addfee INDEX amt/AMOUNT}
  */
-public class AddFeeCommandTest {
+public class AddFeeCommandParser implements Parser<AddFeeCommand> {
 
-    @Test
-    public void execute_studentNotFound_throwsCommandException() {
-        ModelStub modelStub = new ModelStub();
-        AddFeeCommand command = new AddFeeCommand(
-                "Nonexistent", FinanceType.PER_LESSON, new FinanceAmount("50"));
+    private static final Prefix PREFIX_AMOUNT = new Prefix("amt/");
 
-        assertThrows(CommandException.class,
-                String.format(
-                        "Error: No student found with the name \"%s\".",
-                        "Nonexistent"
-                ), () -> command.execute(modelStub)
-        );
-    }
+    @Override
+    public AddFeeCommand parse(String args) throws ParseException {
+        ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT);
+        map.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
 
-    @Test
-    public void equals_sameValues_returnsTrue() {
-        AddFeeCommand first = new AddFeeCommand(
-                "Alice", FinanceType.PER_LESSON, new FinanceAmount("50"));
-        AddFeeCommand copy = new AddFeeCommand(
-                "Alice", FinanceType.PER_LESSON, new FinanceAmount("50"));
-        assertEquals(first, copy);
-    }
-
-    /**
-     * Minimal ModelStub for testing AddFeeCommand.
-     */
-    private static class ModelStub implements Model {
-        @Override
-        public Optional<Person> findPersonByName(String name) {
-            return Optional.empty();
+        // ======= Parse index (first argument) =======
+        String preamble = map.getPreamble().trim();
+        if (preamble.isEmpty()) {
+            throw new ParseException("Error: Missing student index. Usage: addfee INDEX amt/AMOUNT");
         }
 
-        // All other methods throw AssertionError — not needed for this test
-        @Override
-        public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            throw new ParseException("Error: Invalid index format. Index must be a positive integer.");
         }
 
-        @Override
-        public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
-            return null;
+        // ======= Parse amount =======
+        String amountStr = map.getValue(PREFIX_AMOUNT)
+                .orElseThrow(() -> new ParseException(
+                        "Error: Missing required parameter. Usage: addfee INDEX amt/AMOUNT"))
+                .trim();
+
+        if (!FinanceAmount.isValidAmount(amountStr)) {
+            throw new ParseException(
+                    "Error: Invalid amount format. Use a positive number with up to 2 decimal places.");
         }
 
-        @Override
-        public seedu.address.commons.core.GuiSettings getGuiSettings() {
-            return null;
+        double amt = Double.parseDouble(amountStr);
+        if (amt <= 0.0 || amt > 100000.0) {
+            throw new ParseException(
+                    "Error: Amount must be greater than 0 and less than or equal to 100,000.");
         }
 
-        @Override
-        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
-        }
-
-        @Override
-        public java.nio.file.Path getAddressBookFilePath() {
-            return null;
-        }
-
-        @Override
-        public void setAddressBookFilePath(java.nio.file.Path path) {
-        }
-
-        @Override
-        public void setAddressBook(seedu.address.model.ReadOnlyAddressBook ab) {
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyAddressBook getAddressBook() {
-            return null;
-        }
-
-        @Override
-        public boolean hasPerson(Person p) {
-            return false;
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-        }
-
-        @Override
-        public void addPerson(Person person) {
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-        }
-
-        @Override
-        public javafx.collections.ObservableList<Person> getFilteredPersonList() {
-            return null;
-        }
-
-        @Override
-        public void updateFilteredPersonList(java.util.function.Predicate<Person> predicate) {
-        }
-    }
-
-    @Test
-    public void execute_validStudent_success() throws Exception {
-        // Create a mock student with no finance plan
-        Person student = new PersonBuilder().withName("Alex Yeoh").build();
-
-        // Create a model stub that returns this student when searched by name
-        ModelStub modelStub = new ModelStub() {
-            @Override
-            public Optional<Person> findPersonByName(String name) {
-                return Optional.of(student);
-            }
-
-            @Override
-            public void setPerson(Person target, Person editedPerson) {
-                // success - no action needed for this test
-            }
-        };
-
-        AddFeeCommand command = new AddFeeCommand("Alex Yeoh",
-                FinanceType.PER_LESSON, new FinanceAmount("50"));
-
-        CommandResult result = command.execute(modelStub);
-
-        assertEquals(
-                String.format("Tuition fee set: %s pays %s per %s.",
-                        "Alex Yeoh", "50", "lesson"),
-                result.getFeedbackToUser());
+        // ======= Create FinanceAmount and Command =======
+        FinanceAmount amount = new FinanceAmount(amountStr);
+        return new AddFeeCommand(index, amount);
     }
 }

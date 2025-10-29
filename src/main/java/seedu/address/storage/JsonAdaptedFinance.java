@@ -57,6 +57,7 @@ class JsonAdaptedFinance {
         if (!FinanceAmount.isValidAmount(owedAmount)) {
             throw new IllegalValueException(FinanceAmount.MESSAGE_CONSTRAINTS);
         }
+
         final FinanceAmount modelOwedAmount = new FinanceAmount(owedAmount);
 
         final List<PaymentEntry> modelHistory = new ArrayList<>();
@@ -64,6 +65,6 @@ class JsonAdaptedFinance {
             modelHistory.add(jsonAdaptedPaymentEntry.toModelType());
         }
 
-        return new Finance(modelOwedAmount, modelHistory, null);
+        return new Finance(modelOwedAmount, modelHistory);
     }
 }

@@ -87,6 +87,11 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Commits the current state of the address book for undo/redo tracking.
+     */
+    void commitAddressBook();
+
+    /**
      * Finds a person by their name (case-insensitive).
      *
      * @param name The full name of the person to search for.
