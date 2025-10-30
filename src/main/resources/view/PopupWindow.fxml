@@ -11,7 +11,8 @@
 
 <BorderPane prefHeight="450.0" prefWidth="650.0"
             xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1">
+            xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@PopupWindow.css">
 
     <!-- Top header -->
     <top>
