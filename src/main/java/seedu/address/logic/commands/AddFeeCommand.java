@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
@@ -21,8 +23,10 @@ public class AddFeeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the outstanding amount owed by a student.\n"
-            + "Parameters: INDEX amt/AMOUNT\n"
-            + "Example: addfee 1 amt/150";
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_AMOUNT + "AMOUNT\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_AMOUNT + "150";
 
     private static final String MESSAGE_SUCCESS =
             "Outstanding amount for %s updated to %s.";
@@ -58,7 +62,7 @@ public class AddFeeCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person student = lastShownList.get(index.getZeroBased());
