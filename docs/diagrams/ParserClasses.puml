@@ -5,32 +5,12 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 Class "{abstract}\nCommand" as Command
-Class AddCommand
-Class EditCommand
-Class DeleteCommand
-Class FindCommand
-Class FindTagCommand
-Class AddFinanceCommand
-Class PayCommand
-Class AddLessonCommand
-Class ScheduleCommand
-Class MarkAttendanceCommand
-Class ViewOutstandingPaymentsCommand
+Class XYZCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
-Class AddCommandParser
-Class EditCommandParser
-Class DeleteCommandParser
-Class FindCommandParser
-Class FindTagCommandParser
-Class AddFinanceCommandParser
-Class PayCommandParser
-Class AddLessonCommandParser
-Class ScheduleCommandParser
-Class MarkAttendanceCommandParser
-Class ViewOutstandingPaymentsCommandParser
+Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
@@ -41,97 +21,22 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> AddCommandParser: <<create>>
-AddressBookParser .down.> EditCommandParser: <<create>>
-AddressBookParser .down.> DeleteCommandParser: <<create>>
-AddressBookParser .down.> FindCommandParser: <<create>>
-AddressBookParser .down.> FindTagCommandParser: <<create>>
-AddressBookParser .down.> AddFinanceCommandParser: <<create>>
-AddressBookParser .down.> PayCommandParser: <<create>>
-AddressBookParser .down.> AddLessonCommandParser: <<create>>
-AddressBookParser .down.> ScheduleCommandParser: <<create>>
-AddressBookParser .down.> MarkAttendanceCommandParser: <<create>>
-AddressBookParser .down.> ViewOutstandingPaymentsCommandParser: <<create>>
+AddressBookParser .down.> XYZCommandParser: <<create>>
 
-AddCommandParser ..> AddCommand : <<create>>
-EditCommandParser ..> EditCommand : <<create>>
-DeleteCommandParser ..> DeleteCommand : <<create>>
-FindCommandParser ..> FindCommand : <<create>>
-FindTagCommandParser ..> FindTagCommand : <<create>>
-AddFinanceCommandParser ..> AddFinanceCommand : <<create>>
-PayCommandParser ..> PayCommand : <<create>>
-AddLessonCommandParser ..> AddLessonCommand : <<create>>
-ScheduleCommandParser ..> ScheduleCommand : <<create>>
-MarkAttendanceCommandParser ..> MarkAttendanceCommand : <<create>>
-ViewOutstandingPaymentsCommandParser ..> ViewOutstandingPaymentsCommand : <<create>>
+XYZCommandParser ..> XYZCommand : <<create>>
 
 AddressBookParser ..> Command : <<use>>
 
-AddCommandParser .up.|> Parser
-EditCommandParser .up.|> Parser
-DeleteCommandParser .up.|> Parser
-FindCommandParser .up.|> Parser
-FindTagCommandParser .up.|> Parser
-AddFinanceCommandParser .up.|> Parser
-PayCommandParser .up.|> Parser
-AddLessonCommandParser .up.|> Parser
-ScheduleCommandParser .up.|> Parser
-MarkAttendanceCommandParser .up.|> Parser
-ViewOutstandingPaymentsCommandParser .up.|> Parser
+XYZCommandParser .up.|> Parser
 
-AddCommandParser ..> ArgumentMultimap
-AddCommandParser ..> ArgumentTokenizer
-AddCommandParser ..> CliSyntax
-AddCommandParser ..> ParserUtil
-
-EditCommandParser ..> ArgumentMultimap
-EditCommandParser ..> ArgumentTokenizer
-EditCommandParser ..> CliSyntax
-EditCommandParser ..> ParserUtil
-
-DeleteCommandParser ..> ParserUtil
-
-FindCommandParser ..> ArgumentMultimap
-FindCommandParser ..> ArgumentTokenizer
-
-FindTagCommandParser ..> ArgumentMultimap
-FindTagCommandParser ..> ArgumentTokenizer
-
-AddFinanceCommandParser ..> ArgumentMultimap
-AddFinanceCommandParser ..> ArgumentTokenizer
-AddFinanceCommandParser ..> CliSyntax
-AddFinanceCommandParser ..> ParserUtil
-
-PayCommandParser ..> ArgumentMultimap
-PayCommandParser ..> ArgumentTokenizer
-PayCommandParser ..> CliSyntax
-PayCommandParser ..> ParserUtil
-
-AddLessonCommandParser ..> ArgumentMultimap
-AddLessonCommandParser ..> ArgumentTokenizer
-AddLessonCommandParser ..> CliSyntax
-AddLessonCommandParser ..> ParserUtil
-
-ScheduleCommandParser ..> ParserUtil
-
-MarkAttendanceCommandParser ..> ArgumentMultimap
-MarkAttendanceCommandParser ..> ArgumentTokenizer
-MarkAttendanceCommandParser ..> CliSyntax
-MarkAttendanceCommandParser ..> ParserUtil
+XYZCommandParser ..> ArgumentMultimap
+XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> CliSyntax
+XYZCommandParser ..> ParserUtil
 
 ArgumentTokenizer .left.> ArgumentMultimap
 CliSyntax ..> Prefix
 ArgumentTokenizer .down.> Prefix
 
-AddCommand -up-|> Command
-EditCommand -up-|> Command
-DeleteCommand -up-|> Command
-FindCommand -up-|> Command
-FindTagCommand -up-|> Command
-AddFinanceCommand -up-|> Command
-PayCommand -up-|> Command
-AddLessonCommand -up-|> Command
-ScheduleCommand -up-|> Command
-MarkAttendanceCommand -up-|> Command
-ViewOutstandingPaymentsCommand -up-|> Command
+XYZCommand -up-|> Command
 @enduml
