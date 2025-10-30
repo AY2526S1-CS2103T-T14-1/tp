@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.Objects;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +36,8 @@ public class PopupWindow extends UiPart<AnchorPane> {
         dialogStage.setTitle("CommandOutputWindow");
         dialogStage.initOwner(owner);
         dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(
+                getClass().getResourceAsStream("/images/info_icon.png"))));
         dialogStage.setScene(new Scene(getRoot()));
         dialogStage.setResizable(true);
     }
