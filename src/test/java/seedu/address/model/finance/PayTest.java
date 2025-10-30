@@ -83,4 +83,15 @@ public class PayTest {
         CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
         assertEquals(Messages.MESSAGE_PERSON_HAS_NO_FINANCE, exception.getMessage());
     }
+
+    @Test
+    public void execcute_zeroPayment_throwsCommandException() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Person personWithOwedAmount = new PersonBuilder().withName("Alice").withFinance(
+                new Finance(new FinanceAmount("100.00"))).build();
+        model.addPerson(personWithOwedAmount);
+        PayCommand payCommand = new PayCommand(Index.fromOneBased(1), new FinanceAmount("0"));
+        CommandException exception = assertThrows(CommandException.class, () -> payCommand.execute(model));
+        assertEquals(Messages.MESSAGE_PAYMENT_ZERO, exception.getMessage());
+    }
 }

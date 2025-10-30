@@ -87,6 +87,9 @@ public class PayCommand extends Command {
         if (personFinance.get().getOwedAmount().isZero()) {
             throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
         }
+        if (payment.isZero()) {
+            throw new CommandException(Messages.MESSAGE_PAYMENT_ZERO);
+        }
         if (personFinance.get().getOwedAmount().getAmount() - payment.getAmount() < 0) {
             throw new CommandException(Messages.MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT);
         }
