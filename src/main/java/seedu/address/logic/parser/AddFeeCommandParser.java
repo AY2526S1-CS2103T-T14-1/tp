@@ -19,7 +19,7 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT);
         map.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
 
-        // ✅ Step 1: Parse index (first argument)
+        // Parse index (first argument)
         String preamble = map.getPreamble().trim();
         if (preamble.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeeCommand.MESSAGE_USAGE));
@@ -32,7 +32,7 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeeCommand.MESSAGE_USAGE), pe);
         }
 
-        // ✅ Step 2: Parse amount
+        // Parse amount
         String amountStr = map.getValue(PREFIX_AMOUNT)
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddFeeCommand.MESSAGE_USAGE)));

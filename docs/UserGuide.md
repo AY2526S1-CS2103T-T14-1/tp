@@ -194,6 +194,19 @@ Shows all lessons in the current week (Mon–Sun), sorted by day and time.
 
 Format: `schedule`
 
+### Updating outstanding fees : `addfee`
+
+Updates (or adds) the outstanding amount owed by a student.
+
+Format: `addfee INDEX amt/AMOUNT`
+
+* `INDEX` is the number of the person listed on the main GUI window.
+* The amount must be a positive number.
+
+Examples:
+* `addfee 1 amt/150` — Adds \$150 to the first student’s outstanding amount.
+* `addfee 3 amt/89.50` — Adds \$89.50 to the third student’s outstanding amount.
+
 ### Add payment made by client: `pay`
 
 Add the payment made by a particular client,
@@ -272,6 +285,7 @@ Action | Format, Examples
 **Add lesson** | `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 l/RoomA`
 **Mark attendance** | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`
 **View schedule** | `schedule`
+**Add fee** | `addfee INDEX amt/AMOUNT`<br>e.g., `addfee 1 amt/150`
 **Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
 **View payment history** | `payments`
 **View outstanding payments** | `outstanding`
