@@ -1,146 +1,138 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceType;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
- * Contains integration tests for {@code AddFeeCommand}.
+ * Unit tests for {@code AddFeeCommand}.
  */
 public class AddFeeCommandTest {
 
     @Test
-    public void execute_studentNotFound_throwsCommandException() {
-        ModelStub modelStub = new ModelStub();
-        AddFeeCommand command = new AddFeeCommand(
-                "Nonexistent", FinanceType.PER_LESSON, new FinanceAmount("50"));
+    public void execute_validIndex_updatesOutstandingAmount() throws CommandException {
+        Person student = buildPerson("Alex Yeoh");
+        List<Person> list = new ArrayList<>();
+        list.add(student);
 
-        assertThrows(CommandException.class,
-                String.format(
-                        "Error: No student found with the name \"%s\".",
-                        "Nonexistent"
-                ), () -> command.execute(modelStub)
-        );
+        ModelStubWithPersons model = new ModelStubWithPersons(list);
+        AddFeeCommand command = new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("50"));
+
+        CommandResult result = command.execute(model);
+        assertTrue(result.getFeedbackToUser().contains("updated to 50"));
+    }
+
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        ModelStubWithPersons model = new ModelStubWithPersons(new ArrayList<>());
+        AddFeeCommand command = new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("50"));
+
+        assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void equals_sameValues_returnsTrue() {
-        AddFeeCommand first = new AddFeeCommand(
-                "Alice", FinanceType.PER_LESSON, new FinanceAmount("50"));
-        AddFeeCommand copy = new AddFeeCommand(
-                "Alice", FinanceType.PER_LESSON, new FinanceAmount("50"));
-        assertEquals(first, copy);
+        AddFeeCommand cmd1 = new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("100"));
+        AddFeeCommand cmd2 = new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("100"));
+        assertTrue(cmd1.equals(cmd2));
+    }
+
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        AddFeeCommand cmd1 = new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("100"));
+        AddFeeCommand cmd2 = new AddFeeCommand(Index.fromOneBased(2), new FinanceAmount("50"));
+        assertEquals(false, cmd1.equals(cmd2));
+    }
+
+    // ---------- Helpers ----------
+
+    private static Person buildPerson(String name) {
+        return new Person(
+                new Name(name),
+                new Phone("98765432"),
+                new Email("alex@example.com"),
+                new Address("123, Clementi Rd"),
+                new java.util.HashSet<Tag>(),
+                Optional.empty(),
+                Optional.of(new Finance(new FinanceAmount("0.0")))
+        );
     }
 
     /**
-     * Minimal ModelStub for testing AddFeeCommand.
+     * Minimal stub model for testing AddFeeCommand.
      */
-    private static class ModelStub implements Model {
-        @Override
-        public Optional<Person> findPersonByName(String name) {
-            return Optional.empty();
-        }
+    private static class ModelStubWithPersons implements Model {
+        private final ObservableList<Person> persons;
 
-        // All other methods throw AssertionError — not needed for this test
-        @Override
-        public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {
+        ModelStubWithPersons(List<Person> list) {
+            this.persons = FXCollections.observableArrayList(list);
         }
 
         @Override
-        public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
-            return null;
-        }
-
-        @Override
-        public seedu.address.commons.core.GuiSettings getGuiSettings() {
-            return null;
-        }
-
-        @Override
-        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
-        }
-
-        @Override
-        public java.nio.file.Path getAddressBookFilePath() {
-            return null;
-        }
-
-        @Override
-        public void setAddressBookFilePath(java.nio.file.Path path) {
-        }
-
-        @Override
-        public void setAddressBook(seedu.address.model.ReadOnlyAddressBook ab) {
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyAddressBook getAddressBook() {
-            return null;
-        }
-
-        @Override
-        public boolean hasPerson(Person p) {
-            return false;
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-        }
-
-        @Override
-        public void addPerson(Person person) {
+        public ObservableList<Person> getFilteredPersonList() {
+            return persons;
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            int idx = persons.indexOf(target);
+            if (idx >= 0) {
+                persons.set(idx, editedPerson);
+            }
         }
 
         @Override
-        public javafx.collections.ObservableList<Person> getFilteredPersonList() {
-            return null;
+        public void commitAddressBook() {
+            // no-op for testing
         }
 
+        // --- Unused methods for interface completeness ---
         @Override
-        public void updateFilteredPersonList(java.util.function.Predicate<Person> predicate) {
-        }
-    }
-
-    @Test
-    public void execute_validStudent_success() throws Exception {
-        // Create a mock student with no finance plan
-        Person student = new PersonBuilder().withName("Alex Yeoh").build();
-
-        // Create a model stub that returns this student when searched by name
-        ModelStub modelStub = new ModelStub() {
-            @Override
-            public Optional<Person> findPersonByName(String name) {
-                return Optional.of(student);
-            }
-
-            @Override
-            public void setPerson(Person target, Person editedPerson) {
-                // success - no action needed for this test
-            }
-        };
-
-        AddFeeCommand command = new AddFeeCommand("Alex Yeoh",
-                FinanceType.PER_LESSON, new FinanceAmount("50"));
-
-        CommandResult result = command.execute(modelStub);
-
-        assertEquals(
-                String.format("Tuition fee set: %s pays %s per %s.",
-                        "Alex Yeoh", "50", "lesson"),
-                result.getFeedbackToUser());
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {}
+        @Override
+        public ReadOnlyAddressBook getAddressBook() { return null; }
+        @Override
+        public void addPerson(Person person) {}
+        @Override
+        public void deletePerson(Person target) {}
+        @Override
+        public boolean hasPerson(Person person) { return false; }
+        @Override
+        public void updateFilteredPersonList(java.util.function.Predicate<Person> predicate) {}
+        @Override
+        public java.nio.file.Path getAddressBookFilePath() { return null; }
+        @Override
+        public void setAddressBookFilePath(java.nio.file.Path path) {}
+        @Override
+        public seedu.address.commons.core.GuiSettings getGuiSettings() { return null; }
+        @Override
+        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {}
+        @Override
+        public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() { return null; }
+        @Override
+        public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {}
+        @Override
+        public Optional<Person> findPersonByName(String name) { return Optional.empty(); }
     }
 }

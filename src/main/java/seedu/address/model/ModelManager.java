@@ -113,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void commitAddressBook() {
+        addressBook.commit();
+    }
+
+    @Override
     public Optional<Person> findPersonByName(String name) {
         String trimmed = name.trim();
         return addressBook.getPersonList().stream()

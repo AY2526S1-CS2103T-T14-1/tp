@@ -123,7 +123,7 @@ public class FinanceTest {
         FinanceAmount amount = new FinanceAmount("10.00");
 
         Finance finance = new Finance(amount);
-        String expected = "[Owed Amount: 10.00]";
+        String expected = "[Owed Amount: 10.00, Payments: 0]";
         assertEquals(expected, finance.toString());
     }
 
