@@ -482,6 +482,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**UC11: View Payment History**
+
+**MSS**
+
+1. Actor chooses to view all recorded payments.
+2. System gets payment entries from all students.
+3. System sorts the payments by date, newest first.
+4. System displays the payment group by dates and shows a total paid amount.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. No Payment record exist.
+
+    * 2a1. System displays “No payments recorded.”
+  
+      Use case ends.
+
+* 2b. Some entries are linked to students that were deleted or corrupted.
+
+    * 2b1. System skips invalid entries and logs a warning.
+    * 2b2. System displays remaining valid entries.
+  
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
