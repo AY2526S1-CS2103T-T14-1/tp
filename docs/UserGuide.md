@@ -5,6 +5,8 @@ title: User Guide
 
 StudentConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StudentConnect can get your contact management tasks done faster than traditional GUI apps.
 
+This application is meant for private tutors to manage their students' information, lessons, attendance and payments.
+
 * Table of Contents
 {:toc}
 
