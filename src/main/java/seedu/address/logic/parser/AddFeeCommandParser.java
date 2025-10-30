@@ -17,7 +17,7 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT);
         map.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
 
-        // ✅ Step 1: Parse index (first argument)
+        // Parse index (first argument)
         String preamble = map.getPreamble().trim();
         if (preamble.isEmpty()) {
             throw new ParseException("Error: Missing student index. Usage: addfee INDEX amt/AMOUNT");
@@ -30,7 +30,7 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
             throw new ParseException("Error: Invalid index format. Index must be a positive integer.");
         }
 
-        // ✅ Step 2: Parse amount
+        // Parse amount
         String amountStr = map.getValue(PREFIX_AMOUNT)
                 .orElseThrow(() -> new ParseException(
                         "Error: Missing required parameter. Usage: addfee INDEX amt/AMOUNT"))
