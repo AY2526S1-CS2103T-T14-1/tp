@@ -62,7 +62,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return value;
+        return value.substring(0, 1).toUpperCase() + value.substring(1);
     }
 
     @Override

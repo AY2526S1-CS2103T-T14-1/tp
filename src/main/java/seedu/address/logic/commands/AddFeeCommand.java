@@ -2,76 +2,71 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
-import seedu.address.model.finance.FinanceType;
-import seedu.address.model.finance.TuitionPlan;
 import seedu.address.model.person.Person;
 
 /**
- * Adds or updates a tuition fee plan for a student.
+ * Updates the outstanding amount owed by a student identified by index in the address book.
  */
 public class AddFeeCommand extends Command {
 
     public static final String COMMAND_WORD = "addfee";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds or updates a tuition fee plan for a student.\n"
-            + "Parameters: s/STUDENT_NAME t/[lesson|month] a/AMOUNT\n"
-            + "Example: addfee s/John Doe t/lesson a/50";
+            + ": Updates the outstanding amount owed by a student.\n"
+            + "Parameters: INDEX amt/AMOUNT\n"
+            + "Example: addfee 1 amt/150";
 
     private static final String MESSAGE_SUCCESS =
-            "Tuition fee set: %s pays %s per %s.";
-    private static final String MESSAGE_OVERWRITE_WARNING =
-            "Warning: Fee plan already exists for this student. Overwriting the existing plan.";
-    private static final String MESSAGE_NOT_FOUND =
-            "Error: No student found with the name \"%s\".";
+            "Outstanding amount for %s updated to %s.";
+    private static final String MESSAGE_INVALID_INDEX =
+            "Error: Invalid student index.";
 
-    private final String studentName;
-    private final FinanceType type;
+    private final Index index;
     private final FinanceAmount amount;
 
     /**
-     * Creates an {@code AddFeeCommand} to set or update the tuition fee for a student.
+     * Creates an {@code AddFeeCommand} to update the outstanding amount for a student.
      *
-     * @param studentName Name of the student to assign the fee.
-     * @param type Type of fee (per lesson or per month).
-     * @param amount Amount of the tuition fee.
+     * @param index Index of the student in the displayed list.
+     * @param amount The new outstanding amount.
      */
-    public AddFeeCommand(String studentName, FinanceType type, FinanceAmount amount) {
-        this.studentName = studentName;
-        this.type = type;
+    public AddFeeCommand(Index index, FinanceAmount amount) {
+        requireNonNull(index);
+        requireNonNull(amount);
+        this.index = index;
         this.amount = amount;
     }
 
     /**
-     * Executes the addfee command by finding the student and updating their finance record.
+     * Executes the {@code AddFeeCommand} by finding the student and updating their outstanding amount.
      *
-     * @param model The model containing the address book data.
-     * @return CommandResult with a message indicating the result of execution.
-     * @throws CommandException if the student cannot be found or input is invalid.
+     * @param model The model containing the student data.
+     * @return A {@code CommandResult} indicating the outcome of the command.
+     * @throws CommandException If the specified index is invalid.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Optional<Person> optionalPerson = model.findPersonByName(studentName);
-        if (optionalPerson.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_NOT_FOUND, studentName));
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        Person student = optionalPerson.get();
-        boolean hasExistingPlan = student.getFinance().isPresent()
-                && student.getFinance().get().hasPlan();
+        Person student = lastShownList.get(index.getZeroBased());
 
-        TuitionPlan plan = new TuitionPlan(type, amount);
+        // Create or update Finance object
         Finance updatedFinance = student.getFinance()
                 .orElse(new Finance())
-                .withPlan(plan);
+                .add(amount);
 
         Person updatedPerson = new Person(
                 student.getName(),
@@ -84,18 +79,15 @@ public class AddFeeCommand extends Command {
         );
 
         model.setPerson(student, updatedPerson);
+        model.commitAddressBook();
 
-        String message = String.format(MESSAGE_SUCCESS,
-                studentName, amount.toString(),
-                type == FinanceType.PER_LESSON ? "lesson" : "month");
-
-        if (hasExistingPlan) {
-            message = MESSAGE_OVERWRITE_WARNING + "\n" + message;
-        }
-
-        return new CommandResult(message);
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                student.getName(), amount.toString()));
     }
 
+    /**
+     * Returns true if both {@code AddFeeCommand} objects have the same index and amount.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -105,8 +97,7 @@ public class AddFeeCommand extends Command {
             return false;
         }
         AddFeeCommand o = (AddFeeCommand) other;
-        return studentName.equalsIgnoreCase(o.studentName)
-                && type.equals(o.type)
+        return index.equals(o.index)
                 && amount.equals(o.amount);
     }
 }

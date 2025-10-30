@@ -16,15 +16,29 @@ public class FinanceAmount {
 
     /**
      * Constructs a {@code FinanceAmount}.
-     * @param amount
+     * @param amount Amount in string format.
      */
     public FinanceAmount(String amount) {
         requireNonNull(amount);
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
+
+    /**
+     * Constructs a {@code FinanceAmount}.
+     * @param amount Amount in double format.
+     */
     public FinanceAmount(double amount) {
-        this.amount = String.format("%.2f", amount);
+        String input = String.format("%.2f", amount);
+        checkArgument(isValidAmount(input), MESSAGE_CONSTRAINTS);
+        this.amount = input;
+    }
+
+    /**
+     * Returns true if FinanceAmount is zero.
+     */
+    public boolean isZero() {
+        return getAmount() == 0.0;
     }
 
     /**

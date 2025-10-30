@@ -1,41 +1,63 @@
 package seedu.address.ui;
 
+import java.util.Objects;
+
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Very small window that shows the schedule text produced by the {@code schedule} command.
+ * Very small window that shows the text produced by the {@code schedule} and {@code payments} commands.
  * <p>
  * This window is modal (owned by the primary stage) and simply displays a read-only TextArea.
  */
-public class ScheduleWindow extends UiPart<AnchorPane> {
-    private static final String FXML = "ScheduleWindow.fxml";
+public class PopupWindow extends UiPart<AnchorPane> {
+    private static final String FXML = "PopupWindow.fxml";
 
     private final Stage dialogStage;
 
-    @javafx.fxml.FXML
+    @FXML
     private TextArea contentArea;
 
     /**
-     * Creates a new modal schedule window owned by the given {@code owner} stage.
+     * Creates a new modal window owned by the given {@code owner} stage.
      *
      * @param owner The primary stage to own this dialog.
      */
-    public ScheduleWindow(Stage owner) {
+    public PopupWindow(Stage owner) {
         super(FXML);
         dialogStage = new Stage();
-        dialogStage.setTitle("Weekly Schedule");
+        dialogStage.setTitle("CommandOutputWindow");
         dialogStage.initOwner(owner);
         dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(
+                getClass().getResourceAsStream("/images/info_icon.png"))));
         dialogStage.setScene(new Scene(getRoot()));
         dialogStage.setResizable(true);
     }
 
+    @FXML
+    private void handleClose() {
+        dialogStage.close();
+    }
+
+    @FXML
+    private void handleCopyContent() {
+        String text = contentArea.getText();
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(text);
+        clipboard.setContent(content);
+    }
+
     /**
-     * Sets the schedule text content to display.
+     * Sets the text content to display.
      *
      * @param content The text to show in the window.
      */
@@ -66,4 +88,5 @@ public class ScheduleWindow extends UiPart<AnchorPane> {
     public boolean isShowing() {
         return dialogStage.isShowing();
     }
+
 }

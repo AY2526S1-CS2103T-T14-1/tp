@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'studentconnect.jar'
 }
 
 defaultTasks 'clean', 'test'

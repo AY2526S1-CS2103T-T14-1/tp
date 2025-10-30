@@ -41,7 +41,7 @@ public class PaymentHistoryCommandTest {
 
         // Any non-null feedback is acceptable; most important is no popup
         assertTrue(text != null && text.trim().length() > 0);
-        assertFalse(res.isShowSchedule());
+        assertFalse(res.isShowPopup());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class PaymentHistoryCommandTest {
         assertTrue(out.contains("100") || out.contains("100.00"));
 
         // non-empty result should open the popup
-        assertTrue(res.isShowSchedule());
+        assertTrue(res.isShowPopup());
     }
 
     // -------- helpers --------
@@ -196,5 +196,8 @@ public class PaymentHistoryCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
         }
+
+        @Override
+        public void commitAddressBook() {}
     }
 }

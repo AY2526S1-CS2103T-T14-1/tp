@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+StudentConnect is a **desktop app for managing student information for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StudentConnect can get your tuition management tasks done faster and in one place compared to using multiple traditional generic GUI apps.
+
+The application is designed for private tutors with basic computer experience, to manage their students' information, lessons, attendance and payments. No prior technical expertise is required — the setup guide will walk you through installing Java and starting StudentConnect step by step.
+
 
 * Table of Contents
 {:toc}
@@ -15,11 +18,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your StudentConnect Application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar studentconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -28,7 +31,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` : Adds a contact named `John Doe` to the student list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -75,17 +78,17 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the student list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01`
+* `add n/Betsy Crowe tag/friend p/1234567 e/betsycrowe@example.com addr/Newgate Prison tag/criminal `
 
 ### Listing all persons : `list`
 
@@ -97,13 +100,13 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the person’s tags by typing `tag/` without
     specifying any tags after it.
 
 Examples:
@@ -128,6 +131,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds people whose tags include any part of the keywords you enter
+
+Format: `findtag TAG_NAME`
+
+* You need not type the full tag name
+ 
+Examples:
+* `findtag IMPORTANT` will search for all people with tags that have `IMPORTANT`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -142,24 +156,73 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Viewling weekly schedule : `schedule`
+### Adding new lesson : `addlesson`
+
+Adds lesson to the specified person from the address book.
+
+Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
+
+* Adds lesson to the person at the specified `INDEX`.
+* Overwrites any existing lesson on applied student.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `DAY` must be either `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday`.
+* `DAY` is case-insensitive.
+* `TIME` must be in **hh:mm** format.
+
+Examples:
+* `addlesson 1 n/Math d/Monday t/12:00 l/RoomA` adds a lesson with name `Math` on `Monday` `1200` at `RoomA` to the 1st person in the address book.
+
+### Marking attendance : `mark`
+
+Marks attendance for the specified person from the address book.
+
+Format: `mark INDEX s/STATUS`
+
+* Marks attendance for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `STATUS` must be either `present` or `absent`.
+* `STATUS` is case-insensitive.
+
+Examples:
+* `mark 1 s/present` marks the 1st person in the address book as `present`.
+
+### Viewing weekly schedule : `schedule`
 
 Shows all lessons in the current week (Mon–Sun), sorted by day and time.
 
 Format: `schedule`
 
-### Viewling payment history : `payments`
+### Add payment made by client: `pay`
+
+Add the payment made by a particular client,
+
+Format: `pay INDEX amt/AMOUNT`
+
+* `INDEX` is the number of the person listed on the main GUI window.
+* Specify the amount `AMOUNT`
+
+### Viewing payment history : `payments`
 
 Shows the payment history (newest first).
 
 Format: `payments`
+
+### View outstanding payments: `outstanding`
+
+Shows outstanding payments of all clients
+
+Format: `outstanding`
+
+* Shows a list of people with amount owed right below the search bar
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
-
+ 
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -172,16 +235,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/studentconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,10 +262,18 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com addr/123, Clementi Rd, 1234665 tag/friend tag/colleague`
+**List** | `list`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add lesson** | `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 l/RoomA`
+**Mark attendance** | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`
+**View schedule** | `schedule`
+**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
+**View payment history** | `payments`
+**View outstanding payments** | `outstanding`
+**Clear** | `clear`
+**Exit** | `exit`

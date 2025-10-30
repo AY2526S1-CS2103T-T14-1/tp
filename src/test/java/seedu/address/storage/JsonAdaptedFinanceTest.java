@@ -3,11 +3,16 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.finance.Finance;
 import seedu.address.model.finance.FinanceAmount;
+import seedu.address.model.finance.PaymentEntry;
 
 public class JsonAdaptedFinanceTest {
     private static final String INVALID_OWED_AMOUNT = "abc";
@@ -72,5 +77,28 @@ public class JsonAdaptedFinanceTest {
         JsonAdaptedFinance jsonAdaptedFinance = new JsonAdaptedFinance("0.00");
         Finance result = jsonAdaptedFinance.toModelType();
         assertEquals(0.00, result.getOwedAmount().getAmount(), 0.001);
+    }
+
+    @Test
+    public void toModelType_withHistory_roundTrips() throws Exception {
+        String d1 = "2025-10-01";
+        String d2 = "2025-10-15";
+        List<JsonAdaptedPaymentEntry> history = Arrays.asList(
+                new JsonAdaptedPaymentEntry(d1, "25.50", "first payment"),
+                new JsonAdaptedPaymentEntry(d2, "10.00", "")
+        );
+
+        JsonAdaptedFinance adapted = new JsonAdaptedFinance("100.00", history);
+        Finance model = adapted.toModelType();
+
+        assertEquals(100.00, model.getOwedAmount().getAmount(), 0.001);
+
+        List<PaymentEntry> restored = model.getHistory();
+        assertEquals(2, restored.size());
+        assertEquals(LocalDate.parse(d1), restored.get(0).getDate());
+        assertEquals(25.50, restored.get(0).getAmount().getAmount(), 0.001);
+        assertEquals("first payment", restored.get(0).getNote());
+        assertEquals(LocalDate.parse(d2), restored.get(1).getDate());
+        assertEquals(10.00, restored.get(1).getAmount().getAmount(), 0.001);
     }
 }

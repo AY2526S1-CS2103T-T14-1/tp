@@ -4,51 +4,40 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Represents a Finance record in the address book.
- * Tracks the owed amount for a person.
+ * Tracks the amount owed and payment history for a student.
  */
 public class Finance {
 
     private final FinanceAmount owedAmount;
     private final List<PaymentEntry> history;
-    private final TuitionPlan plan; // Optional (can be null)
 
     /**
-     * Constructs a {@code Finance} with an initial owed amount.
+     * Constructs a {@code Finance} with the specified owed amount.
      *
-     * @param owedAmount A valid owed amount.
-     */
-    public Finance(FinanceAmount owedAmount, TuitionPlan plan) {
-        requireAllNonNull(owedAmount);
-        this.owedAmount = owedAmount;
-        this.history = new ArrayList<>();
-        this.plan = plan;
-    }
-
-    /**
-     * Constructs a {@code Finance} with an initial owed amount.
-     *
-     * @param owedAmount A valid owed amount.
-     */
-    public Finance(FinanceAmount owedAmount, List<PaymentEntry> history, TuitionPlan plan) {
-        requireAllNonNull(owedAmount);
-        this.owedAmount = owedAmount;
-        this.history = history;
-        this.plan = plan;
-    }
-
-    /**
-     * Constructs a {@code Finance} with only owed amount (no plan).
+     * @param owedAmount The current outstanding amount.
      */
     public Finance(FinanceAmount owedAmount) {
         requireAllNonNull(owedAmount);
         this.owedAmount = owedAmount;
         this.history = new ArrayList<>();
-        this.plan = null;
+    }
+
+    /**
+     * Constructs a {@code Finance} with an owed amount and payment history.
+     *
+     * @param owedAmount The current outstanding amount.
+     * @param history The list of past payments.
+     */
+    public Finance(FinanceAmount owedAmount, List<PaymentEntry> history) {
+        requireAllNonNull(owedAmount);
+        this.owedAmount = owedAmount;
+        this.history = new ArrayList<>(history == null ? List.of() : history);
     }
 
     /**
@@ -57,58 +46,69 @@ public class Finance {
     public Finance() {
         this.owedAmount = new FinanceAmount(0);
         this.history = new ArrayList<>();
-        this.plan = null;
     }
 
+    /**
+     * Returns the current owed amount.
+     *
+     * @return The {@code FinanceAmount} representing the outstanding balance.
+     */
     public FinanceAmount getOwedAmount() {
         return owedAmount;
     }
 
-    public List<PaymentEntry> getHistory() {
-        return history;
-    }
-
-    public TuitionPlan getPlan() {
-        return plan;
-    }
-
-    public boolean hasPlan() {
-        return plan != null;
-    }
-
     /**
-     * Returns a new Finance object with an updated tuition plan.
+     * Returns an unmodifiable view of the payment history.
+     *
+     * @return A list of {@code PaymentEntry} objects.
      */
-    public Finance withPlan(TuitionPlan newPlan) {
-        return new Finance(this.owedAmount, this.history, newPlan);
+    public List<PaymentEntry> getHistory() {
+        return Collections.unmodifiableList(history);
     }
 
     /**
-     * Returns a new Finance object with the specified amount added to the owed amount.
+     * Returns a new {@code Finance} object with the owed amount replaced by the specified amount.
+     *
+     * @param newAmount The new outstanding amount to set.
+     * @return A new {@code Finance} with the updated owed amount.
+     */
+    public Finance withOutstandingAmount(FinanceAmount newAmount) {
+        requireAllNonNull(newAmount);
+        return new Finance(newAmount, this.history);
+    }
+
+    /**
+     * Returns a new {@code Finance} object with the specified amount added to the owed amount.
      *
      * @param amountToAdd The amount to add to the owed amount.
-     * @return A new Finance object with the updated owed amount.
+     * @return A new {@code Finance} object with the updated owed amount.
      */
     public Finance add(FinanceAmount amountToAdd) {
         requireAllNonNull(amountToAdd);
         double newAmount = this.owedAmount.getAmount() + amountToAdd.getAmount();
-        return new Finance(new FinanceAmount(newAmount), this.history, this.plan);
+        return new Finance(new FinanceAmount(newAmount), this.history);
     }
 
     /**
-     * Returns a new Finance object with the specified amount deducted from the owed amount.
+     * Returns a new {@code Finance} object with the specified amount deducted from the owed amount.
      *
-     * @param amountToPay The amount to pay/reduce from the owed amount.
-     * @return A new Finance object with the updated owed amount.
+     * @param amountToPay The amount to reduce from the owed amount.
+     * @return A new {@code Finance} object with the updated owed amount.
      */
     public Finance pay(FinanceAmount amountToPay) {
         requireAllNonNull(amountToPay);
         double newAmount = Math.max(0, this.owedAmount.getAmount() - amountToPay.getAmount());
         List<PaymentEntry> newHistory = new ArrayList<>(history);
         newHistory.add(new PaymentEntry(LocalDate.now(), amountToPay, ""));
-        return new Finance(new FinanceAmount(newAmount), newHistory, this.plan);
+        return new Finance(new FinanceAmount(newAmount), newHistory);
     }
 
+    /**
+     * Returns true if this {@code Finance} is equal to another object.
+     *
+     * @param other The object to compare with.
+     * @return True if both objects represent the same finance record.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -121,22 +121,27 @@ public class Finance {
 
         Finance otherFinance = (Finance) other;
         return owedAmount.equals(otherFinance.owedAmount)
-                && ((plan == null && otherFinance.plan == null)
-                || (plan != null && plan.equals(otherFinance.plan)));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(owedAmount, plan);
+                && history.equals(otherFinance.history);
     }
 
     /**
-     * Format state as text for viewing.
+     * Returns the hash code for this {@code Finance}.
+     *
+     * @return Hash code of the Finance object.
      */
-    public String toString() {
-        return plan == null
-                ? String.format("[Owed Amount: %.2f]", owedAmount.getAmount())
-                : String.format("[Owed Amount: %.2f, Plan: %s]", owedAmount.getAmount(), plan);
+    @Override
+    public int hashCode() {
+        return Objects.hash(owedAmount, history);
     }
 
+    /**
+     * Returns a string representation of this {@code Finance}.
+     *
+     * @return A formatted string showing the owed amount and history count.
+     */
+    @Override
+    public String toString() {
+        return String.format("[Owed Amount: %.2f, Payments: %d]",
+                owedAmount.getAmount(), history.size());
+    }
 }

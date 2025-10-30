@@ -3,6 +3,7 @@ package seedu.address.model.finance;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,12 @@ public class FinanceTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Finance(null));
+    }
+
+    @Test
+    public void constructor_zeroFinanceAmount_returnsisZero() {
+        Finance finance = new Finance(new FinanceAmount("0.00"));
+        assertTrue(finance.getOwedAmount().isZero());
     }
 
     @Test
@@ -116,7 +123,7 @@ public class FinanceTest {
         FinanceAmount amount = new FinanceAmount("10.00");
 
         Finance finance = new Finance(amount);
-        String expected = "[Owed Amount: 10.00]";
+        String expected = "[Owed Amount: 10.00, Payments: 0]";
         assertEquals(expected, finance.toString());
     }
 
@@ -127,6 +134,16 @@ public class FinanceTest {
         Finance finance = new Finance(amount);
 
         assertEquals(amount, finance.getOwedAmount());
+    }
+
+    @Test
+    public void pay_addsHistoryAndReducesOwed() {
+        Finance f = new Finance(new FinanceAmount("20.00"));
+        Finance f2 = f.pay(new FinanceAmount("7.50"));
+
+        assertEquals(12.50, f2.getOwedAmount().getAmount(), 1e-9);
+        assertEquals(1, f2.getHistory().size());
+        assertEquals(7.50, f2.getHistory().get(0).getAmount().getAmount(), 1e-9);
     }
 
 }

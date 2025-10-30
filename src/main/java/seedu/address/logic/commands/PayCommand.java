@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
 import java.util.List;
@@ -59,6 +60,9 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToAddPayment = lastShownList.get(index.getZeroBased());
+
+        checkValidPayment(personToAddPayment.getFinance(), payment);
+
         //update Finance object for this person based on the payment
         model.setPerson(personToAddPayment, new Person(
                 personToAddPayment.getName(), personToAddPayment.getPhone(), personToAddPayment.getEmail(),
@@ -69,17 +73,40 @@ public class PayCommand extends Command {
     }
 
     /**
+     * Checks if the payment is valid against the person's current owed amount.
+     *
+     * @param personFinance the person's current finance details.
+     * @param payment the payment amount to validate.
+     * @throws CommandException if the payment exceeds the owed amount.
+     */
+    public void checkValidPayment(Optional<Finance> personFinance, FinanceAmount payment) throws CommandException {
+        // Payment exceeds owed amount
+        if (personFinance.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_PERSON_HAS_NO_FINANCE);
+        }
+        if (personFinance.get().getOwedAmount().isZero()) {
+            throw new CommandException(Messages.MESSAGE_NO_OWED_AMOUNT);
+        }
+        if (payment.isZero()) {
+            throw new CommandException(Messages.MESSAGE_PAYMENT_ZERO);
+        }
+        if (personFinance.get().getOwedAmount().getAmount() - payment.getAmount() < 0) {
+            throw new CommandException(Messages.MESSAGE_PAYMENT_EXCEEDS_OWED_AMOUNT);
+        }
+    }
+
+    /**
      * Produces a new {@link Finance} reflecting the deduction of the given payment from the person's
      * current outstanding amount.
      *
-     * @param p the person whose finance is to be updated; must have a present finance.
+     * @param p the person whose finance is to be updated; must have a present finance, else a new finance will be
+     *          created.
      * @param payment the payment amount to deduct.
      * @return a new {@link Finance} instance with the updated owed amount.
-     * @throws NullPointerException if any argument is {@code null}.
-     * @throws java.util.NoSuchElementException if the person has no finance present.
      */
     public Finance updateFinance(Person p, FinanceAmount payment) {
-        Finance oldFinance = p.getFinance().get();
+        requireAllNonNull(p, payment);
+        Finance oldFinance = p.getFinance().orElse(new Finance());
         return oldFinance.pay(payment);
     }
 
