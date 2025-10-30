@@ -1,0 +1,11 @@
+.button {
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+}
+
+.button:hover {
+    -fx-background-color: derive(-fx-background, 20%);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
