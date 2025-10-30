@@ -200,7 +200,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set default file name with timestamp
         String timestamp = java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-        fileChooser.setInitialFileName("addressbook_" + timestamp + ".json");
+        fileChooser.setInitialFileName("StudentConnect_" + timestamp + ".json");
 
         File selectedFile = fileChooser.showSaveDialog(primaryStage);
 
