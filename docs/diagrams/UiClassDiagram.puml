@@ -10,7 +10,7 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
-Class ScheduleWindow
+Class PopupWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
@@ -35,7 +35,7 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-down-> "1" ScheduleWindow
+MainWindow *-down-> "1" PopupWindow
 MainWindow --> "1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
@@ -48,7 +48,7 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
-ScheduleWindow --|> UiPart
+PopupWindow --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
