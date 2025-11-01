@@ -3,6 +3,7 @@ package seedu.address.model.finance;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -99,7 +100,7 @@ public class Finance {
         requireAllNonNull(amountToPay);
         double newAmount = Math.max(0, this.owedAmount.getAmount() - amountToPay.getAmount());
         List<PaymentEntry> newHistory = new ArrayList<>(history);
-        newHistory.add(new PaymentEntry(LocalDate.now(), amountToPay, ""));
+        newHistory.add(new PaymentEntry(LocalDate.now(), LocalTime.now(), amountToPay, ""));
         return new Finance(new FinanceAmount(newAmount), newHistory);
     }
 
