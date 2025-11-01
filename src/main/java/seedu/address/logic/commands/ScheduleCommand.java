@@ -33,7 +33,7 @@ public class ScheduleCommand extends Command {
         LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate sunday = monday.plusDays(6);
 
-        List<Person> personList = model.getFilteredPersonList();
+        List<Person> personList = model.getAddressBook().getPersonList();
         List<Row> rows = new ArrayList<>();
 
         for (Person p : personList) {
