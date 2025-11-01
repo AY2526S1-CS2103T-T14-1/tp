@@ -105,7 +105,7 @@ public class PaymentHistoryCommand extends Command {
         }
 
         public LocalTime getTime() {
-            return  time;
+            return time;
         }
 
         public String getStudent() {
