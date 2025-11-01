@@ -83,9 +83,9 @@ Adds a person to the student list.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​`
 
 **Field Constraints:**
-* `NAME`: Alphanumeric characters and spaces only. Maximum 75 characters.
+* `NAME`: Alphanumeric characters and spaces only. Maximum 50 characters.
 * `PHONE_NUMBER`: Numbers only, at least 3 digits. Maximum 20 digits.
-* `EMAIL`: Valid email format. Maximum 75 characters.
+* `EMAIL`: Valid email format. Maximum 50 characters.
 * `ADDRESS`: Can be any value (should not be blank).
 * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
 

@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final int MAX_LENGTH = 75;
+    public static final int MAX_LENGTH = 50;
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank. "
             + "Maximum length is " + MAX_LENGTH + " characters.";
