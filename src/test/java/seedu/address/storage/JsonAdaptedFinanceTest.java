@@ -82,10 +82,12 @@ public class JsonAdaptedFinanceTest {
     @Test
     public void toModelType_withHistory_roundTrips() throws Exception {
         String d1 = "2025-10-01";
+        String t1 = "10:30:00";
         String d2 = "2025-10-15";
+        String t2 = "14:45:00";
         List<JsonAdaptedPaymentEntry> history = Arrays.asList(
-                new JsonAdaptedPaymentEntry(d1, "25.50", "first payment"),
-                new JsonAdaptedPaymentEntry(d2, "10.00", "")
+                new JsonAdaptedPaymentEntry(d1, t1, "25.50", "first payment"),
+                new JsonAdaptedPaymentEntry(d2, t2, "10.00", "")
         );
 
         JsonAdaptedFinance adapted = new JsonAdaptedFinance("100.00", history);
