@@ -207,9 +207,9 @@ Examples:
 * `addfee 1 amt/150` — Adds \$150 to the first student’s outstanding amount.
 * `addfee 3 amt/89.50` — Adds \$89.50 to the third student’s outstanding amount.
 
-### Add payment made by client: `pay`
+### Add payment made by student: `pay`
 
-Add the payment made by a particular client,
+Add the payment made by a particular student,
 
 Format: `pay INDEX amt/AMOUNT`
 
@@ -224,7 +224,7 @@ Format: `payments`
 
 ### View outstanding payments: `outstanding`
 
-Shows outstanding payments of all clients
+Shows outstanding payments of all students
 
 Format: `outstanding`
 

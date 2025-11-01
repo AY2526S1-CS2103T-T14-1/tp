@@ -398,14 +398,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Actor selects a student with fees.
-2. System shows outstanding fees.
+1. System shows students with outstanding fees.
+2. Actor selects a student with outstanding fees.
 3. Actor enters payment details (amount, date, method).
 4. System records payment and updates balance.
 
     Use case ends.
 
 **Extensions**
+
+* 2a. Payment is made for student who does not owe any fees.
+
+    * 2a1. System displays error, showing that selected student does not owe.
 
 * 3a. Payment details invalid.
 
