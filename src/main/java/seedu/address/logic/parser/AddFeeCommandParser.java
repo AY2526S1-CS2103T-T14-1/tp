@@ -38,12 +38,7 @@ public class AddFeeCommandParser implements Parser<AddFeeCommand> {
                         AddFeeCommand.MESSAGE_USAGE)));
 
         if (!FinanceAmount.isValidAmount(amountStr)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeeCommand.MESSAGE_USAGE));
-        }
-
-        double amt = Double.parseDouble(amountStr);
-        if (amt <= 0.0 || amt > 100000.0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFeeCommand.MESSAGE_USAGE));
+            throw new ParseException(FinanceAmount.MESSAGE_CONSTRAINTS);
         }
 
         FinanceAmount amount = new FinanceAmount(amountStr);

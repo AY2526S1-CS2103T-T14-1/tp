@@ -68,9 +68,14 @@ public class AddFeeCommand extends Command {
         Person student = lastShownList.get(index.getZeroBased());
 
         // Create or update Finance object
-        Finance updatedFinance = student.getFinance()
-                .orElse(new Finance())
-                .add(amount);
+        Finance updatedFinance;
+        try {
+            updatedFinance = student.getFinance()
+                    .orElse(new Finance())
+                    .add(amount);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(seedu.address.model.finance.FinanceAmount.MESSAGE_EXCEEDS_LIMIT);
+        }
 
         Person updatedPerson = new Person(
                 student.getName(),
