@@ -11,7 +11,6 @@ import java.util.Objects;
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be either 'present' or 'absent'.";
-    public static final String MESSAGE_INVALID_ATTENDANCE = "Total attendances cannot exceed total lessons.";
     public static final String VALIDATION_REGEX = "(?i)^(present|absent)$";
     public static final String PRINT_FORMAT = "%d/%d";
 
@@ -30,15 +29,8 @@ public class Attendance {
      * Constructs a new {@code Attendance} with specified details.
      * @param totalLessons Total lessons.
      * @param totalAttendances Total attendances.
-     * @throws IllegalArgumentException if totalAttendances > totalLessons or if either value is negative.
      */
     public Attendance(int totalLessons, int totalAttendances) {
-        if (totalLessons < 0 || totalAttendances < 0) {
-            throw new IllegalArgumentException("Total lessons and total attendances must be non-negative.");
-        }
-        if (totalAttendances > totalLessons) {
-            throw new IllegalArgumentException(MESSAGE_INVALID_ATTENDANCE);
-        }
         this.totalLessons = totalLessons;
         this.totalAttendances = totalAttendances;
     }

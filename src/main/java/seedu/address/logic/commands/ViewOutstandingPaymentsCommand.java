@@ -27,7 +27,7 @@ public class ViewOutstandingPaymentsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> personList = model.getAddressBook().getPersonList();
+        List<Person> personList = model.getFilteredPersonList();
         if (personList.isEmpty()) {
             return new CommandResult("No outstanding payments found.");
         }

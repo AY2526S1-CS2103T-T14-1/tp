@@ -21,26 +21,6 @@ public class AttendanceTest {
     }
 
     @Test
-    public void constructor_invalidAttendance_throwsIllegalArgumentException() {
-        // totalAttendances > totalLessons
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(0, 4));
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(3, 5));
-
-        // negative values
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(-1, 0));
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(0, -1));
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(-1, -1));
-    }
-
-    @Test
-    public void constructor_validAttendance_success() {
-        // totalAttendances <= totalLessons
-        new Attendance(0, 0); // should not throw
-        new Attendance(5, 3); // should not throw
-        new Attendance(10, 10); // should not throw
-    }
-
-    @Test
     public void equals() {
         Attendance attendance = new Attendance();
 

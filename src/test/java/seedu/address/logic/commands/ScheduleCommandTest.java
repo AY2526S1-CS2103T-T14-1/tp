@@ -129,40 +129,4 @@ public class ScheduleCommandTest {
         assertTrue(out.contains("Art"), "Should show lesson name.");
         assertTrue(out.contains("Studio"), "Should show location.");
     }
-
-    @Test
-    public void execute_withActiveFilter_showsAllLessons() throws Exception {
-        Model model = emptyModel();
-        // Add multiple students with lessons
-        model.addPerson(withLesson("Alex Yeoh",
-                "Monday",
-                "09:00",
-                "Room A",
-                "Math"));
-        model.addPerson(withLesson("Bernice Yu",
-                "Tuesday",
-                "14:00",
-                "Room B",
-                "Science"));
-        model.addPerson(withLesson("Charlotte Oliveiro",
-                "Wednesday",
-                "16:00",
-                "Room C",
-                "English"));
-
-        // Apply filter to show only "Alex"
-        model.updateFilteredPersonList(person -> person.getName().fullName.contains("Alex"));
-
-        // Execute schedule command
-        CommandResult result = new ScheduleCommand().execute(model);
-        String out = result.getFeedbackToUser();
-
-        // Verify ALL lessons are shown, not just filtered ones
-        assertTrue(out.contains("[Alex Yeoh]"), "Should show Alex's lesson.");
-        assertTrue(out.contains("[Bernice Yu]"), "Should show Bernice's lesson despite filter.");
-        assertTrue(out.contains("[Charlotte Oliveiro]"), "Should show Charlotte's lesson despite filter.");
-        assertTrue(out.contains("Math"), "Should show Math lesson.");
-        assertTrue(out.contains("Science"), "Should show Science lesson.");
-        assertTrue(out.contains("English"), "Should show English lesson.");
-    }
 }

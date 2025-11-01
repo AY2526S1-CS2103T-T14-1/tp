@@ -155,12 +155,7 @@ public class PaymentHistoryCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new ReadOnlyAddressBook() {
-                @Override
-                public ObservableList<Person> getPersonList() {
-                    return list;
-                }
-            };
+            return null;
         }
 
         @Override

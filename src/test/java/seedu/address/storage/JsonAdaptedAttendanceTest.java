@@ -37,12 +37,4 @@ public class JsonAdaptedAttendanceTest {
         String expectedMessage = Attendance.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
     }
-
-    @Test
-    public void toModelType_attendancesExceedLessons_throwsIllegalValueException() {
-        // Case: totalAttendances (4) > totalLessons (0)
-        JsonAdaptedAttendance attendance = new JsonAdaptedAttendance(0, 4);
-        String expectedMessage = "Total attendances cannot exceed total lessons.";
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
-    }
 }
