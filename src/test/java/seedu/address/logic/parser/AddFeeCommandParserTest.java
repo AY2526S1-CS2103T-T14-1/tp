@@ -46,4 +46,24 @@ public class AddFeeCommandParserTest {
         // Negative amount
         assertThrows(ParseException.class, () -> parser.parse("1 amt/-10"));
     }
+
+    @Test
+    public void parse_largeValidAmount_returnsAddFeeCommand() throws Exception {
+        // Test with $900,000 - should be valid (within 1,000,000 limit)
+        AddFeeCommand command = parser.parse("1 amt/900000");
+        assertEquals(new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("900000")), command);
+    }
+
+    @Test
+    public void parse_maximumValidAmount_returnsAddFeeCommand() throws Exception {
+        // Test with exactly $1,000,000 - should be valid
+        AddFeeCommand command = parser.parse("1 amt/1000000");
+        assertEquals(new AddFeeCommand(Index.fromOneBased(1), new FinanceAmount("1000000")), command);
+    }
+
+    @Test
+    public void parse_amountExceedsLimit_throwsParseException() {
+        // Amount exceeds $1,000,000 limit
+        assertThrows(ParseException.class, () -> parser.parse("1 amt/1000000.01"));
+    }
 }
