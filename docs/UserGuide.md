@@ -135,9 +135,12 @@ Examples:
 
 Finds people whose tags include any part of the keywords you enter
 
-Format: `findtag TAG_NAME`
+Format: `findtag TAG_NAME [MORE_TAGNAMES]`
 
-* You need not type the full tag name
+> [!TIP]
+> * You need not type the full tag name
+> * You can use 1-n number of tag names
+> * Search is case-insensitive
  
 Examples:
 * `findtag IMPORTANT` will search for all people with tags that have `IMPORTANT`
