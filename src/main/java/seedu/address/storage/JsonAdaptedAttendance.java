@@ -49,6 +49,9 @@ class JsonAdaptedAttendance {
         if (totalLessons < 0 || totalAttendances < 0) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
+        if (totalAttendances > totalLessons) {
+            throw new IllegalValueException(Attendance.MESSAGE_INVALID_ATTENDANCE);
+        }
         return new Attendance(totalLessons, totalAttendances);
     }
 
