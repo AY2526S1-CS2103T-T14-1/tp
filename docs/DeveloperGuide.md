@@ -10,9 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 AI was used throughout the development of this project:
-- GitHub Copilot was used for auto-completing code snippets.
-- Claude Sonnet 4.5 was used to generate the unit tests.
-- Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
+* GitHub Copilot was used for auto-completing code snippets.
+* Claude Sonnet 4.5 was used to generate the unit tests.
+* Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
 * This is a brownfield project based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project developed by SE-EDU.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -72,13 +72,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -89,7 +89,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -119,7 +119,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,13 +135,13 @@ The `Model` component,
 
 Each `Person` object contains validated fields with the following constraints to prevent UI overflow and ensure data integrity:
 
-| Field | Validation Rules | Max Length |
-|-------|-----------------|------------|
-| `Name` | Alphanumeric characters and spaces only. Cannot be blank. | 50 characters |
-| `Phone` | Numeric digits only. Minimum 3 digits. | 20 digits |
-| `Email` | Valid email format (local-part@domain). | 50 characters |
-| `Address` | Any non-blank value. | No limit |
-| `Tag` | Alphanumeric characters only. | 15 characters per tag |
+| Field     | Validation Rules                                                                       | Max Length            |
+|-----------|----------------------------------------------------------------------------------------|-----------------------|
+| `Name`    | Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Cannot be blank.      | 50 characters         |
+| `Phone`   | Numeric digits only. Minimum 3 digits.                                                 | 20 digits             |
+| `Email`   | Valid email format (local-part@domain).                                                | 50 characters         |
+| `Address` | alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only. Cannot be blank. | No limit              |
+| `Tag`     | Alphanumeric characters only.                                                          | 15 characters per tag |
 
 These constraints are enforced at the model level in their respective classes (`Name`, `Phone`, `Email`, `Tag`) through the `isValid*()` methods.
 
@@ -154,7 +154,7 @@ These constraints are enforced at the model level in their respective classes (`
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -169,7 +169,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Supporting Documentation**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
