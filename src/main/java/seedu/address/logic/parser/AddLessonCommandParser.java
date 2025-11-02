@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.logic.commands.AddLessonCommand.AddLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.logic.commands.AddLessonCommand.AddLessonDescriptor;
 
 /**
  * Parses input arguments and creates a new AddLessonCommand object

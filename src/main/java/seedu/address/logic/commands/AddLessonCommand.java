@@ -188,7 +188,6 @@ public class AddLessonCommand extends Command {
         }
 
         public void setLesson(Lesson lesson) {
-            requireNonNull(lesson);
             this.lesson = lesson;
         }
 
