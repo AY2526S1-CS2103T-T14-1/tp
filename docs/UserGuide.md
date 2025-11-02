@@ -82,6 +82,13 @@ Adds a person to the student list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​`
 
+**Field Constraints:**
+* `NAME`: Alphanumeric characters and spaces only. Maximum 50 characters.
+* `PHONE_NUMBER`: Numbers only, at least 3 digits. Maximum 20 digits.
+* `EMAIL`: Valid email format. Maximum 50 characters.
+* `ADDRESS`: Can be any value (should not be blank).
+* `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -204,11 +211,13 @@ Updates (or adds) the outstanding amount owed by a student.
 Format: `addfee INDEX amt/AMOUNT`
 
 * `INDEX` is the number of the person listed on the main GUI window.
-* The amount must be a positive number.
+* The amount must be a positive number up to 2 decimal places.
+* The amount must be between $0.00 and $1,000,000.00 (inclusive).
+* The total outstanding amount after adding cannot exceed $1,000,000.00.
 
 Examples:
-* `addfee 1 amt/150` — Adds \$150 to the first student’s outstanding amount.
-* `addfee 3 amt/89.50` — Adds \$89.50 to the third student’s outstanding amount.
+* `addfee 1 amt/150` — Adds \$150 to the first student's outstanding amount.
+* `addfee 3 amt/89.50` — Adds \$89.50 to the third student's outstanding amount.
 
 ### Add payment made by student: `pay`
 
@@ -217,7 +226,8 @@ Add the payment made by a particular student,
 Format: `pay INDEX amt/AMOUNT`
 
 * `INDEX` is the number of the person listed on the main GUI window.
-* Specify the amount `AMOUNT`
+* The `AMOUNT` must be a positive number up to 2 decimal places.
+* The `AMOUNT` must be between $0.00 and current owed amount (inclusive).
 
 ### Viewing payment history : `payments`
 

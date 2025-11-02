@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class FinanceAmount {
     public static final String MESSAGE_CONSTRAINTS =
-            "Amount must be a positive number up to 2 decimal places, between 0 and 1,000,000.00.";
+            "Amount must be a positive number up to 2 decimal places, between $0.00 and $1,000,000.00 (inclusive).";
+    public static final String MESSAGE_EXCEEDS_LIMIT =
+            "The resulting amount would exceed the maximum allowed amount of $1,000,000.00.";
     private static final String VALIDATION_REGEX = "^\\s*(\\d{1,7})(\\.\\d{1,2})?\\s*$";
 
     private final String amount;
