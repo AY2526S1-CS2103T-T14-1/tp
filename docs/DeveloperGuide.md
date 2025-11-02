@@ -9,6 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+AI was used throughout the development of this project:
+- GitHub Copilot was used for auto-completing code snippets.
+- Claude Sonnet 4.5 was used to generate the unit tests.
+- Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
 * This is a brownfield project based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project developed by SE-EDU.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -124,8 +128,22 @@ The `Model` component,
 
 * stores the application data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+#### Field Validation Constraints
+
+Each `Person` object contains validated fields with the following constraints to prevent UI overflow and ensure data integrity:
+
+| Field | Validation Rules | Max Length |
+|-------|-----------------|------------|
+| `Name` | Alphanumeric characters and spaces only. Cannot be blank. | 50 characters |
+| `Phone` | Numeric digits only. Minimum 3 digits. | 20 digits |
+| `Email` | Valid email format (local-part@domain). | 50 characters |
+| `Address` | Any non-blank value. | No limit |
+| `Tag` | Alphanumeric characters only. | 15 characters per tag |
+
+These constraints are enforced at the model level in their respective classes (`Name`, `Phone`, `Email`, `Tag`) through the `isValid*()` methods.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -185,12 +203,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system           |
 | `* * *`  | tutor   | delete a student permanently                                         | reduce clutter                      |
 | `* * *`  | tutor   | add a lesson with date, time, and location                           | track when and where I teach        |
-| `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
-| `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
 | `* * *`  | tutor   | record fee payments                                                  | know who has paid                   |
 | `* * *`  | tutor   | see outstanding payments                                             | follow up with students/parents     |
-| `* *`    | tutor   | see a daily/weekly schedule                                          | plan my teaching                    |
 | `* * *`  | tutor   | search by student name                                               | quickly find their record           |
+| `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
+| `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
+| `* *`    | tutor   | see a daily/weekly schedule                                          | plan my teaching                    |
 | `* *`    | tutor   | view a student’s details                                             | reach them easily                   |
 | `*`      | tutor   | import student data from a spreadsheet                               | save time entering existing records |
 | `*`      | tutor   | create groups of students                                            | manage group lessons                |
@@ -310,14 +328,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Actor selects a student with fees.
-2. System shows outstanding fees.
+1. System shows students with outstanding fees.
+2. Actor selects a student with outstanding fees.
 3. Actor enters payment details (amount, date, method).
 4. System records payment and updates balance.
 
     Use case ends.
 
 **Extensions**
+
+* 2a. Payment is made for student who does not owe any fees.
+
+    * 2a1. System displays error, showing that selected student does not owe.
 
 * 3a. Payment details invalid.
 

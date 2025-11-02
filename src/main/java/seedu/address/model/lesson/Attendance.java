@@ -6,11 +6,12 @@ import java.util.Objects;
 
 /**
  * Represents a student's attendance status for a lesson.
- * Guarantees: immutable; value is either "present" or "absent"
+ * Guarantees: immutable;
  */
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be either 'present' or 'absent'.";
+    public static final String MESSAGE_NON_NEGATIVE_ARGS = "Total lessons and total attendances must be non-negative.";
     public static final String MESSAGE_INVALID_ATTENDANCE = "Total attendances cannot exceed total lessons.";
     public static final String VALIDATION_REGEX = "(?i)^(present|absent)$";
     public static final String PRINT_FORMAT = "%d/%d";
@@ -34,7 +35,7 @@ public class Attendance {
      */
     public Attendance(int totalLessons, int totalAttendances) {
         if (totalLessons < 0 || totalAttendances < 0) {
-            throw new IllegalArgumentException("Total lessons and total attendances must be non-negative.");
+            throw new IllegalArgumentException(MESSAGE_NON_NEGATIVE_ARGS);
         }
         if (totalAttendances > totalLessons) {
             throw new IllegalArgumentException(MESSAGE_INVALID_ATTENDANCE);

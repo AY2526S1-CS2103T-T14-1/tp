@@ -92,7 +92,6 @@ public class Person {
 
     /**
      * Returns a new Person object with a new Lesson assigned to them.
-     * The attendance for the new lesson will automatically be set to "Absent".
      */
     public Person setLesson(String lessonName, String date, String time, String location) {
         Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),
@@ -107,7 +106,7 @@ public class Person {
      * @param attendanceStatus The attendance status ("PRESENT" or "ABSENT").
      * @return A new Person object with the updated lesson attendance.
      */
-    public Person markAttendance(AttendanceStatus attendanceStatus) {
+    public Person markAttendance(AttendanceStatus attendanceStatus) throws IllegalStateException {
         if (lesson.isEmpty()) {
             throw new IllegalStateException(
                     "This person has no lesson assigned to mark attendance for.");
@@ -118,7 +117,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name and email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -127,7 +126,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
     }
 
     /**

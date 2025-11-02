@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,7 @@ import seedu.address.model.finance.PaymentEntry;
  */
 public class JsonAdaptedPaymentEntry {
     private final String date;
+    private final String time;
     private final String amount;
     private final String note;
 
@@ -22,14 +24,17 @@ public class JsonAdaptedPaymentEntry {
      * Constructs a {@code JsonAdaptedPaymentEntry} from individual JSON properties.
      *
      * @param date   payment date in ISO-8601 (yyyy-MM-dd)
+     * @param time   payment time in ISO-8601 (HH:mm:ss); may be null
      * @param amount payment amount as string with up to 2 dp
      * @param note   optional note; may be null
      */
     @JsonCreator
     public JsonAdaptedPaymentEntry(@JsonProperty("date") String date,
+                                    @JsonProperty("time") String time,
                                     @JsonProperty("amount") String amount,
                                     @JsonProperty("note") String note) {
         this.date = date;
+        this.time = time;
         this.amount = amount;
         this.note = note == null ? "" : note;
     }
@@ -43,6 +48,7 @@ public class JsonAdaptedPaymentEntry {
         this.date = src.getDate().toString();
         this.amount = src.getAmount().toString();
         this.note = src.getNote();
+        this.time = src.getTime().toString();
     }
 
     /**
@@ -56,10 +62,12 @@ public class JsonAdaptedPaymentEntry {
             throw new IllegalValueException("PaymentEntry date cannot be null.");
         }
         final LocalDate modelDate;
+        final LocalTime modelTime;
         try {
             modelDate = LocalDate.parse(date);
+            modelTime = time == null || time.isBlank() ? LocalTime.now() : LocalTime.parse(time);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Invalid payment date: " + date);
+            throw new IllegalValueException("Invalid payment date or time: " + date + " " + time);
         }
 
         if (amount == null || !FinanceAmount.isValidAmount(amount)) {
@@ -69,6 +77,6 @@ public class JsonAdaptedPaymentEntry {
 
         final String modelNote = note == null ? "" : note;
 
-        return new PaymentEntry(modelDate, modelAmount, modelNote);
+        return new PaymentEntry(modelDate, modelTime, modelAmount, modelNote);
     }
 }

@@ -66,6 +66,9 @@ public class AddLessonCommand extends Command {
         requireNonNull(index);
         requireNonNull(addLessonDescriptor);
 
+        assert index.getOneBased() > 0 : "Index must be positive";
+        assert addLessonDescriptor.getLesson() != null : "Lesson in descriptor should not be null";
+
         this.index = index;
         this.addLessonDescriptor = new AddLessonDescriptor(addLessonDescriptor);
     }
@@ -73,13 +76,18 @@ public class AddLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.log(Level.INFO, "Executing AddLessonCommand for index: {0}", index);
+
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null : "Filtered person list should not be null";
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToAddLesson = lastShownList.get(index.getZeroBased());
+        assert personToAddLesson != null : "Person to edit must not be null";
+
         Person editedPerson = createEditedPerson(personToAddLesson, addLessonDescriptor);
 
         String feedback = "";
@@ -104,6 +112,9 @@ public class AddLessonCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, AddLessonDescriptor addLessonDescriptor) {
         assert personToEdit != null;
+        assert addLessonDescriptor != null;
+        assert addLessonDescriptor.getLesson() != null : "Lesson in descriptor must not be null";
+
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
@@ -150,10 +161,12 @@ public class AddLessonCommand extends Command {
         public AddLessonDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copies an {@code AddLessonDescriptor} and return an {@code AddLessonDescriptor}.
+         *
+         * @param toCopy {@code AddLessonDescriptor} to be copied.
          */
         public AddLessonDescriptor(AddLessonDescriptor toCopy) {
+            requireNonNull(toCopy);
             setLesson(toCopy.lesson);
         }
 

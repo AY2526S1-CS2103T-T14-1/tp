@@ -3,306 +3,540 @@ layout: page
 title: User Guide
 ---
 
-StudentConnect is a **desktop app for managing student information for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StudentConnect can get your tuition management tasks done faster and in one place compared to using multiple traditional generic GUI apps.
+**Welcome to _StudentConnect_!**
 
-The application is designed for private tutors with basic computer experience, to manage their students' information, lessons, attendance and payments. No prior technical expertise is required — the setup guide will walk you through installing Java and starting StudentConnect step by step.
+**StudentConnect** is an easy-to-use app that **helps private tutors keep track of their students, lessons, attendance
+and payments**. It’s designed to help you work faster and stay organized. You simply type short
+commands, and your information appears neatly on the screen.
 
+**_Don’t worry if you’re not good with computers!_** StudentConnect includes clear, step-by-step instructions to guide
+you from installing the program to getting started. You’ll be up and running in just a few minutes.
+
+For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
+Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
+examples so you can easily follow along.
+
+For **experienced users**, check out the [_**Command Summary**_](#command-summary) to quickly look up any command
+format.
+
+For **troubleshooting or common questions**, check out the [_**FAQ**_](#faq) and [_**Known Issues**_](#known-issues)
+sections at the end.
+
+You can jump to any section using the **Table of Contents** below.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+## Installation
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-1/tp/releases).
+1. **Check your computer’s setup**<br>
+   Make sure you have Java 17 or a newer version installed.<br>
+   **Non-Mac users:** Download and install Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).<br>
+   **Mac users:** Follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
+<br>
+2. **Download StudentConnect**<br>Get the latest version of the app by downloading the `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-1/tp/releases).<br>
+<br>
+3. **Choose where to save it**<br>Move the downloaded file to a folder where you want to keep your StudentConnect files.
+   _(This will be your “home folder” for the app.)_<br>
+<br>
+4. **Open the app**<br>
+   * Open the Command Prompt (Windows) or Terminal (Mac).
+   * Go to the folder where you saved the file by typing:
+        ```bash
+        cd path_to_your_folder
+        ```
+   * Then run this command:
+        ```bash
+        java -jar studentconnect.jar
+        ```
+   * The app will open in a few seconds and show some sample data so you can try it out.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your StudentConnect Application.
+> 💡 **Tip:**<br>
+> Start by typing `help` and pressing Enter to see this guide anytime you need help!
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar studentconnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+## Command Format
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+Before using the commands in StudentConnect, it helps to understand how they are written.
+Here are a few simple rules to guide you:
 
-   * `list` : Lists all contacts.
+### Basic Command Usage
 
-   * `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` : Adds a contact named `John Doe` to the student list.
+* Type in **lowercase letters**
+* Press **Enter** after typing
+* Some commands need extra info (like a name or number)
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+### Understanding Command Format
 
-   * `clear` : Deletes all contacts.
+* **Words in UPPER_CASE** are the parameters to be replaced.<br>
+e.g. in `add n/NAME`, replace `NAME` with `John Doe`.<br>
+<br>
+* **Items in square brackets** are optional.<br>
+e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<br>
+<br>
+* **Items with `…`** after them can be used multiple times (including zero times).<br>
+e.g. `[t/TAG]…` can be used as `t/friend`, `t/friend t/family` or not used at all.<br>
+<br>
+* **Parameters can be in any order.**<br>
+e.g. `n/NAME p/PHONE_NUMBER` is the same as `p/PHONE_NUMBER n/NAME`.<br>
+<br>
+* **Extra parameters are ignored** for simple commands like `help`, `list`, `exit` and `clear`.<br>
+e.g. `help 123` will be interpreted as `help`.<br>
 
-   * `exit` : Exits the app.
+> 💡 **Tip:**<br>
+> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+> as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-1. Refer to the [Features](#features) below for details of each command.
+## User Interface Overview
+
+The interface is designed to be intuitive and efficient for managing your students, lessons, attendance and payments.
+
+### Main Interface
+
+![Ui](images/UiOverview.png)
+
+| #  | Description         |
+|----|---------------------|
+| 1  | Command Box         |
+| 2  | Command Result      |
+| 3  | Student Name        |
+| 4  | Student Tags        |
+| 5  | Student Details     |
+| 6  | Data Directory      |
+| 7  | Help (User Guide)   |
+| 8  | Import Student List |
+| 9  | Export Student List |
+| 10 | Exit StudentConnect |
+
+> 💡 **Tip:**<br>
+> Scroll through long lists using the scroll bars.
+
+### Key Features
+
+* **Real-Time Updates**: Contact and event lists refresh instantly after any changes.
+* **Sample Data Included**: The app comes preloaded with sample contacts and events to help you get started quickly.
+* **Responsive Design**: The interface adapts seamlessly to different screen sizes and remains smooth even with hundreds
+of contacts and events.
+* **Clear Visual Feedback**: Every action provides immediate success or error messages for better user guidance.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
-<div markdown="block" class="alert alert-info">
+## Managing Students
 
-**:information_source: Notes about the command format:**<br>
+### Adding student : `add`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+**Adds a student** to StudentConnect.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+**Format:**
+```
+add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…
+```
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+> 💡 **Tip:**
+> * `NAME`: Alphanumeric characters  with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
+> * `PHONE_NUMBER`: Numbers only, at least 3 digits. Maximum 20 digits.
+> * `EMAIL`: Valid email format. Maximum 50 characters.
+> * `ADDRESS`: Can be any alphanumeric value with `/`, `#`, `-`, `.` and `,`.
+> * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+Example:
+```
+add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01
+```
+<figure>
+  <img src="images/Add.png" alt="Add" style="margin-right:5%;">
+  <figcaption><em>Adds a student with name <code>John Doe</code>, phone <code>98765432</code>, email
+    <code>johnd@example.com</code> and address <code>John street, block 123, #01-01</code></em></figcaption>
+</figure>
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+### Editing student : `edit`
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+**Edits an existing student** in StudentConnect.
 
-### Viewing help : `help`
+Format:
+```
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…
+```
 
-Shows a message explaining how to access the help page.
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing tags, the existing tags of the student will be overwritten.
+> * To remove all the student’s tags, type `tag/` without specifying any tags after it.
 
-![help message](images/helpMessage.png)
+Example:
+```
+edit 1 p/91234567 e/johndoe@example.com
+```
+<figure>
+  <img src="images/Edit.png" alt="Edit" style="margin-right:5%;">
+  <figcaption><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
+    <code>johndoe@example.com</code> respectively</em></figcaption>
+</figure>
 
-Format: `help`
+### Finding students by name : `find`
 
+**Finds existing students by name** in StudentConnect.
 
-### Adding a person: `add`
+Format:
+```
+find KEYWORD [MORE_KEYWORDS]...
+```
 
-Adds a person to the student list.
+> 💡 **Tip:**
+> * The search is case-insensitive.
+> * The order of the keywords does not matter.
+> * Only the name is searched.
+> * Only full words will be matched.
+> * Students matching at least one keyword will be returned (i.e. `OR` search).
 
-Before running the command:
-<img src="images/beforeaddperson.png" alt="before running add command" style="width: 400px; max-width: 100%;">
-After running the command:
-<img src="images/addperson.png" alt="after running add command" style="width: 400px; max-width: 100%;">
+Example:
+```
+find alex david
+```
+<figure>
+  <img src="images/findAlexDavidResult.png" alt="Find" style="margin-right:5%;">
+  <figcaption><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></figcaption>
+</figure>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​`
+### Finding students by tag : `findtag`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+**Finds existing students by tag** in StudentConnect.
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01`
-* `add n/Betsy Crowe tag/friend p/1234567 e/betsycrowe@example.com addr/Boulder Heights tag/Math`
+Format:
+```
+findtag TAG_NAME [MORE_TAGNAMES]...
+```
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the application.
-
-Before running the command:
-<img src="images/listcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
-After running the command:
-<img src="images/afterlistcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the application.
-
-Before running the command:
-<img src="images/editcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
-After running the command:
-<img src="images/aftereditcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `tag/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Locating persons by tag: `findtag`
-
-Finds people whose tags include any part of the keywords you enter
-
-Format: `findtag TAG_NAME`
-
-* You need not type the full tag name
+> 💡 **Tip:**
+> * The search is case-insensitive.
+> * The order of the keywords does not matter.
+> * Only the tag is searched.
+> * Partial words will be matched.
+> * Students matching at least one keyword will be returned (i.e. `OR` search).
  
-Examples:
-* `findtag IMPORTANT` will search for all people with tags that have `IMPORTANT`
+Example:
+```
+findtag friends
+```
+<figure>
+  <img src="images/Findtag.png" alt="Findtag" style="margin-right:5%;">
+  <figcaption><em>Finds students whose tags partially match <code>friends</code></em></figcaption>
+</figure>
 
-### Deleting a person : `delete`
+### Deleting student : `delete`
 
-Deletes the specified person from the application.
+**Deletes an existing student** in StudentConnect.
 
-Format: `delete INDEX`
+Format:
+```
+delete INDEX
+```
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+Example:
+```
+delete 1
+```
+<figure>
+  <img src="images/Delete1.png" alt="Delete1" width="45%" style="margin-right:5%;">
+  <img src="images/Delete2.png" alt="Delete2" width="45%">
+  <figcaption><em>Deletes the 1st person in the displayed student list</em></figcaption>
+</figure>
 
-### Adding new lesson : `addlesson`
+### Listing all students : `list`
 
-Adds lesson to the specified person from the application.
+**List all students** in StudentConnect.
 
-Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
+Format:
+```
+list
+```
 
-* Adds lesson to the person at the specified `INDEX`.
-* Overwrites any existing lesson on applied student.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* `DAY` must be either `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday`.
-* `DAY` is case-insensitive.
-* `TIME` must be in **hh:mm** format.
+Example:
+```
+list
+```
+<figure>
+  <img src="images/List.png" alt="List" style="margin-right:5%;">
+  <figcaption><em>Lists all students</em></figcaption>
+</figure>
 
-Examples:
-* `addlesson 1 n/Math d/Monday t/12:00 l/RoomA` adds a lesson with name `Math` on `Monday` `1200` at `RoomA` to the 1st person in the application.
+### Clearing all students : `clear`
+
+**Clears all students** in StudentConnect.
+
+Format:
+```
+clear
+```
+
+Example:
+```
+clear
+```
+<figure>
+  <img src="images/Clear.png" alt="Clear" style="margin-right:5%;">
+  <figcaption><em>Clears all entries</em></figcaption>
+</figure>
+
+## Managing Lessons
+
+### Adding lesson : `addlesson`
+
+**Adds a lesson** to a student in StudentConnect.
+
+Format:
+```
+addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION
+```
+
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+> * `NAME`: Alphanumeric characters only.
+> * `DAY`: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday` (case-insensitive).
+> * `TIME`: In **hh:mm** format.
+> * `LOCATION`: Alphanumeric characters only.
+
+Example:
+```
+addlesson 1 n/Math d/Monday t/12:00 loc/RoomA
+```
+<figure>
+  <img src="images/Addlesson.png" alt="Addlesson" style="margin-right:5%;">
+  <figcaption><em>Adds a lesson with name <code>Math</code> on <code>Monday</code> <code>12:00</code> at
+    <code>RoomA</code> to the 1st person in the displayed student list</em></figcaption>
+</figure>
 
 ### Marking attendance : `mark`
 
-Marks attendance for the specified person from the application.
+**Marks the attendance** for a student in StudentConnect.
 
-Format: `mark INDEX s/STATUS`
+Format:
+```
+mark INDEX s/STATUS
+```
 
-* Marks attendance for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* `STATUS` must be either `present` or `absent`.
-* `STATUS` is case-insensitive.
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+> * `STATUS`: `present` or `absent` (case-insensitive).
 
-Examples:
-* `mark 1 s/present` marks the 1st person in the application as `present`.
+Example:
+```
+mark 1 s/present
+```
+<figure>
+  <img src="images/Mark.png" alt="Mark" style="margin-right:5%;">
+  <figcaption><em>Marks the 1st person in the displayed student list as present</em></figcaption>
+</figure>
 
 ### Viewing weekly schedule : `schedule`
 
-Shows all lessons in the current week (Mon–Sun), sorted by day and time.
+**Shows the weekly schedule of lessons** in StudentConnect.
 
-Format: `schedule`
+Format:
+```
+schedule
+```
 
-### Updating outstanding fees : `addfee`
+> 💡 **Tip:**
+> * This uses your computer’s current date to determine the week window.
+> * Only lessons that fall within this week (Mon–Sun) are shown, sorted by day and time.
+> * If there are no lessons this week, an empty schedule message is displayed.
 
-Updates (or adds) the outstanding amount owed by a student.
+Example:
+```
+schedule
+```
+<figure>
+  <img src="images/Schedule.png" alt="Schedule" style="margin-right:5%;">
+  <figcaption><em>Shows the weekly schedule of lessons</em></figcaption>
+</figure>
 
-Format: `addfee INDEX amt/AMOUNT`
+## Managing Finances
 
-* `INDEX` is the number of the person listed on the main GUI window.
-* The amount must be a positive number.
+### Adding outstanding fee : `addfee`
 
-Examples:
-* `addfee 1 amt/150` — Adds \$150 to the first student’s outstanding amount.
-* `addfee 3 amt/89.50` — Adds \$89.50 to the third student’s outstanding amount.
+**Adds an outstanding fee** owed by a student in StudentConnect.
 
-### Add payment made by client: `pay`
+Format:
+```
+addfee INDEX amt/AMOUNT
+```
 
-Add the payment made by a particular client,
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+> * `AMOUNT`: A number up to 2 decimal places between 0.00 and 1,000,000.00 (inclusive). Maximum outstanding amount is
+> $1,000,000.00.
 
-Format: `pay INDEX amt/AMOUNT`
+Example:
+```
+addfee 1 amt/150
+```
+<figure>
+  <img src="images/Addfee.png" alt="Addfee" style="margin-right:5%;">
+  <figcaption><em>Adds $150 of outstanding fee to the 1st person in the displayed student list</em></figcaption>
+</figure>
 
-* `INDEX` is the number of the person listed on the main GUI window.
-* Specify the amount `AMOUNT`
+### Adding payment : `pay`
+
+**Adds a payment** made by a student in StudentConnect.
+
+Format:
+```
+pay INDEX amt/AMOUNT
+```
+
+> 💡 **Tip:**
+> * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+> * `AMOUNT`: A number up to 2 decimal places between 0.00 and current owed amount (inclusive).
+
+Example:
+```
+pay 1 amt/150
+```
+<figure>
+  <img src="images/Pay.png" alt="Pay" style="margin-right:5%;">
+  <figcaption><em>Deducts $150 of outstanding amount from the 1st person in the displayed student list</em></figcaption>
+</figure>
 
 ### Viewing payment history : `payments`
 
-Shows the payment history (newest first).
+**Shows the payment history** in StudentConnect.
 
-Format: `payments`
+Format:
+```
+payments
+```
 
-### View outstanding payments: `outstanding`
+> 💡 **Tip:**<br>
+> This shows payment history sorted by latest.
 
-Shows outstanding payments of all clients
+Example:
+```
+payments
+```
+<figure>
+  <img src="images/Payments.png" alt="Payments" style="margin-right:5%;">
+  <figcaption><em>Shows the payment history</em></figcaption>
+</figure>
 
-Format: `outstanding`
+### Viewing outstanding payments : `outstanding`
 
-* Shows a list of people with amount owed right below the search bar
+**Shows all the outstanding payments** in StudentConnect.
 
-### Clearing all entries : `clear`
+Format:
+```
+outstanding
+```
 
-Clears all entries from the application.
+Example:
+```
+outstanding
+```
+<figure>
+  <img src="images/Outstanding.png" alt="Outstanding" style="margin-right:5%;">
+  <figcaption><em>Shows all outstanding payments</em></figcaption>
+</figure>
 
-Format: `clear`
- 
-### Exiting the program : `exit`
+## Managing data files
 
-Exits the program.
+### Saving data
+
+StudentConnect **automatically** saves your data after any action that makes changes. You don’t need to worry about saving
+manually.
+
+### Importing data file
+
+**Imports a data file** into StudentConnect.
+
+1. Go to `File->Import`.
+2. Select the `.json` file that you want to import.
+
+> 💡 **Tip:**
+> * On success, the imported data will overwrite current data.
+> * On failure, an error message will appear and no data is changed.
+> * Only JSON files following StudentConnect's format will be accepted.
+> * You should create a backup using export.
+
+### Exporting data file
+
+**Exports the current data** from StudentConnect.
+
+1. Go to `File->Export`.
+2. Choose the folder that you want to export the file to.
+
+> 💡 **Tip:**
+> * Exported files can be used on any computer with StudentConnect.
+> * Export does not change your current data.
+> * You can keep multiple timestamped exports as backups.
+
+### Editing data file
+
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/StudentConnect.json`. Advanced users
+are welcome to update data directly by editing that data file.
+
+> ⚠️ **Warning:**<br>
+> If your changes to the data file makes its format invalid, StudentConnect will discard the invalid data and only load
+> the valid data. Hence, it is recommended to take a backup of the file before editing it. Furthermore, certain edits
+> can cause the StudentConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
+> Therefore, edit the data file only if you are confident that you can update it correctly.
+
+## Exiting
+
+### Exiting program : `exit`
+
+**Exits the program**.
 
 Format: `exit`
 
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/studentconnect.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+> 💡 **Tip:**
+> There are other ways to exit the program, such as `File->Exit` or `X` button.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and import the data file that is exported by your previous StudentConnect.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Multiple Screens**: If you move the application to a secondary screen, and later switch to using only
+the primary screen, the GUI will open off-screen. You should just delete the `preferences.json` file created by the
+application before running the application again.
+2. **Help Window**: If you minimize the help window and then run the `help` command (or use the `Help` menu, or the
+keyboard shortcut `F1`) again, the original Help Window will remain minimized. You should just restore the help window
+manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com addr/123, Clementi Rd, 1234665 tag/friend tag/colleague`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find by tag** | `findtag TAG_NAME [MORE_TAGNAMES]`<br> e.g., `find math important`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Add lesson** | `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 l/RoomA`
-**Mark attendance** | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`
-**View schedule** | `schedule`
-**Add fee** | `addfee INDEX amt/AMOUNT`<br>e.g., `addfee 1 amt/150`
-**Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
-**View payment history** | `payments`
-**View outstanding payments** | `outstanding`
-**Clear** | `clear`
-**Exit** | `exit`
+| Action                           | Format, Examples                                                                                                                                           |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Adding student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` |
+| **Editing student**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                                     |
+| **Finding students by name**     | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find alex david`                                                                                              |
+| **Finding students by tag**      | `findtag TAG_NAME [MORE_TAGNAMES]...`<br> e.g., `findtag friends`                                                                                          |
+| **Deleting student**             | `delete INDEX`<br> e.g., `delete 1`                                                                                                                        |
+| **Listing all students**         | `list`<br> e.g., `list`                                                                                                                                    |
+| **Clearing all students**        | `clear`<br> e.g., `clear`                                                                                                                                  |
+| **Adding lesson**                | `addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 loc/RoomA`                                               |
+| **Marking attendance**           | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`                                                                                                         |
+| **Viewing weekly schedule**      | `schedule`<br> e.g., `schedule`                                                                                                                            |
+| **Adding outstanding fee**       | `addfee INDEX amt/AMOUNT`<br>e.g., `addfee 1 amt/150`                                                                                                      |
+| **Adding payment**               | `pay INDEX amt/AMOUNT`<br> e.g., `pay 1 amt/150`                                                                                                           |
+| **Viewing payment history**      | `payments`<br> e.g., `payments`                                                                                                                            |
+| **Viewing outstanding payments** | `outstanding`<br> e.g., `outstanding`                                                                                                                      |
+| **Exiting program**              | `exit`<br> e.g., `exit`                                                                                                                                    |
