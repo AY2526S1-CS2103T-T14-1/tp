@@ -92,13 +92,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the application.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the application.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`
 
@@ -144,7 +144,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the application.
 
 Format: `delete INDEX`
 
@@ -153,12 +153,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Adding new lesson : `addlesson`
 
-Adds lesson to the specified person from the address book.
+Adds lesson to the specified person from the application.
 
 Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
 
@@ -171,11 +171,11 @@ Format: `addlesson INDEX n/NAME d/DAY t/TIME l/LOCATION`
 * `TIME` must be in **hh:mm** format.
 
 Examples:
-* `addlesson 1 n/Math d/Monday t/12:00 l/RoomA` adds a lesson with name `Math` on `Monday` `1200` at `RoomA` to the 1st person in the address book.
+* `addlesson 1 n/Math d/Monday t/12:00 l/RoomA` adds a lesson with name `Math` on `Monday` `1200` at `RoomA` to the 1st person in the application.
 
 ### Marking attendance : `mark`
 
-Marks attendance for the specified person from the address book.
+Marks attendance for the specified person from the application.
 
 Format: `mark INDEX s/STATUS`
 
@@ -186,7 +186,7 @@ Format: `mark INDEX s/STATUS`
 * `STATUS` is case-insensitive.
 
 Examples:
-* `mark 1 s/present` marks the 1st person in the address book as `present`.
+* `mark 1 s/present` marks the 1st person in the application as `present`.
 
 ### Viewing weekly schedule : `schedule`
 
@@ -232,7 +232,7 @@ Format: `outstanding`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the application.
 
 Format: `clear`
  
