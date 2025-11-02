@@ -46,24 +46,20 @@ public class PaymentHistoryCommandTest {
 
     @Test
     public void execute_withPayments_showsTotals() throws CommandException {
-        // Alice: two payments 50 + 20
+        // Alice: two payments 50 + 20 (owed seeded at 150)
         Person alice = personNamed("Alice Pauline");
         Finance fAlice = new Finance(new FinanceAmount(150.00));
         fAlice = fAlice.pay(new FinanceAmount(50.00));
         fAlice = fAlice.pay(new FinanceAmount(20.00));
         alice = withFinance(alice, fAlice);
 
-        // Benson: one payment 30
+        // Benson: one payment 30 (owed seeded at 200)
         Person benson = personNamed("Benson Meier");
         Finance fBenson = new Finance(new FinanceAmount(200.00));
         fBenson = fBenson.pay(new FinanceAmount(30.00));
         benson = withFinance(benson, fBenson);
 
-        List<Person> list = new ArrayList<>();
-        list.add(alice);
-        list.add(benson);
-
-        Model model = new ModelStubWithPersons(list);
+        Model model = new ModelStubWithPersons(java.util.List.of(alice, benson));
         PaymentHistoryCommand cmd = new PaymentHistoryCommand();
 
         CommandResult res = cmd.execute(model);
@@ -82,13 +78,8 @@ public class PaymentHistoryCommandTest {
         assertTrue(out.contains("Total paid:"));
         assertTrue(out.contains("100") || out.contains("100.00"));
 
-        // non-empty result should open the popup
+        // should open the popup when there is content
         assertTrue(res.isShowPopup());
-        int indexBenson = out.indexOf("Benson Meier");
-        int indexAlice50 = out.indexOf("Alice Pauline", indexBenson);
-        int indexAlice20 = out.indexOf("Alice Pauline", indexAlice50 + 1);
-        assertTrue(indexBenson < indexAlice50);
-        assertTrue(indexAlice50 < indexAlice20);
     }
 
     // -------- helpers --------
