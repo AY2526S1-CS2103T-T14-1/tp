@@ -503,14 +503,14 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and import the data file that is exported by your previous StudentConnect.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# Known issues
 
 1. **Multiple Screens**: If you move the application to a secondary screen, and later switch to using only
 the primary screen, the GUI will open off-screen. You should just delete the `preferences.json` file created by the
@@ -521,7 +521,7 @@ manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 | Action                           | Format, Examples                                                                                                                                           |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
