@@ -447,7 +447,7 @@ outstanding
   <figcaption><em>Shows all outstanding payments</em></figcaption>
 </figure>
 
-## Managing data files
+## Managing Data Files
 
 ### Saving data
 
