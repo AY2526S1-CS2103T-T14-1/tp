@@ -110,6 +110,11 @@ Format: `list`
 
 Edits an existing person in the application.
 
+Before running the command:
+<img src="images/editcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
+After running the command:
+<img src="images/aftereditcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
+
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
