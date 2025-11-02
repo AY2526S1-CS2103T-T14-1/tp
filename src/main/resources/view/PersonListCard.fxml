@@ -38,7 +38,7 @@
         </VBox.margin>
       </Label>
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="lesson" styleClass="cell_small_label" text="\$lesson" wrapText="true"/>
       <Label fx:id="finance" styleClass="cell_small_label" text="\$finance" />
     </VBox>

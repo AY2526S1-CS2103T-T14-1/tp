@@ -59,7 +59,7 @@ public class ViewOutstandingPaymentsCommandTest {
                 expected.append(p.getFinance().get()).append("\n");
             }
         }
-        
+
     }
 
     @Test
