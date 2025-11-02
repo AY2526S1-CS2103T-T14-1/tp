@@ -28,9 +28,8 @@ public class Attendance {
 
     /**
      * Constructs a new {@code Attendance} with specified details.
-     *
      * @param totalLessons Total lessons.
-     * @param totalAttendances Total attended lessons.
+     * @param totalAttendances Total attendances.
      * @throws IllegalArgumentException if totalAttendances > totalLessons or if either value is negative.
      */
     public Attendance(int totalLessons, int totalAttendances) {

@@ -31,9 +31,6 @@ public class Date {
 
     /**
      * Returns true if a given string is a valid date.
-     *
-     * @param test Date to be tested.
-     * @return True is date is valid.
      */
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -42,10 +42,8 @@ public class MarkAttendanceCommand extends Command {
     private final AttendanceStatus attendanceStatus;
 
     /**
-     * Creates an {@code MarkAttendanceCommand} to be executed.
-     *
-     * @param index of the person in the filtered person list to mark attendance for.
-     * @param attendanceStatus status to mark the student with.
+     * @param index of the person in the filtered person list to mark attendance for
+     * @param attendanceStatus status to mark the student with
      */
     public MarkAttendanceCommand(Index index, AttendanceStatus attendanceStatus) {
         requireAllNonNull(index, attendanceStatus);

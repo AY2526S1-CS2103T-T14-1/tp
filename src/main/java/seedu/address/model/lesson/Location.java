@@ -33,9 +33,6 @@ public class Location {
 
     /**
      * Returns true if a given string is a valid location.
-     *
-     * @param test Location to be tested.
-     * @return True if location is valid.
      */
     public static boolean isValidLocation(String test) {
         return test.matches(VALIDATION_REGEX);

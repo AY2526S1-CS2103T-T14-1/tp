@@ -92,12 +92,6 @@ public class Person {
 
     /**
      * Returns a new Person object with a new Lesson assigned to them.
-     *
-     * @param lessonName Name of lesson.
-     * @param date Date of lesson.
-     * @param time Time of lesson.
-     * @param location Location of lesson.
-     * @return A new Person object with a new Lesson.
      */
     public Person setLesson(String lessonName, String date, String time, String location) {
         Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),

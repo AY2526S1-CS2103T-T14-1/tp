@@ -35,13 +35,7 @@ public class Lesson {
     }
 
     /**
-     * Constructs a {@code Lesson}.
-     *
-     * @param lessonName A valid lesson name.
-     * @param date A valid date.
-     * @param time A valid time.
-     * @param location A valid location.
-     * @param attendance A valid attendance.
+     * Constructs a {@code Lesson} with specified attendance.
      */
     public Lesson(LessonName lessonName, Date date, Time time, Location location, Attendance attendance) {
         requireAllNonNull(lessonName, date, time, location, attendance);
@@ -88,9 +82,6 @@ public class Lesson {
 
     /**
      * Returns a new Lesson instance with updated attendance.
-     *
-     * @param attendanceStatus A valid attendance status.
-     * @return A new Lesson with updated attendance.
      */
     public Lesson markAttendance(AttendanceStatus attendanceStatus) {
         Attendance updated = this.attendance.mark(attendanceStatus);
