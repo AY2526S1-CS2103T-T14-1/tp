@@ -35,7 +35,7 @@ class JsonAdaptedAttendance {
     }
 
     /**
-     * Converts this Jackson-friendly adapted lesson object into the model's {@code Attendance} object.
+     * Converts this Jackson-friendly adapted attendance object into the model's {@code Attendance} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */

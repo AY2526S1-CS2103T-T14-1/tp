@@ -7,8 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.logic.commands.AddLessonCommand.AddLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 
@@ -17,6 +22,8 @@ import seedu.address.model.lesson.Lesson;
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(AddLessonCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddLessonCommand
      * and returns a AddLessonCommand object for execution.
@@ -24,6 +31,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      */
     public AddLessonCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        logger.log(Level.FINE, "Parsing AddLessonCommand with args: {0}", args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_LOCATION);
 
@@ -34,10 +42,11 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
         }
+        assert index.getOneBased() > 0 : "Index must be positive";
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_LOCATION);
 
-        AddLessonCommand.AddLessonDescriptor addLessonDescriptor = new AddLessonCommand.AddLessonDescriptor();
+        AddLessonDescriptor addLessonDescriptor = new AddLessonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 || argMultimap.getValue(PREFIX_DATE).isEmpty()
