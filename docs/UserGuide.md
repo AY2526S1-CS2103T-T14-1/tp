@@ -200,9 +200,16 @@ Examples:
 
 ### Viewing weekly schedule : `schedule`
 
-Shows all lessons in the current week (Mon–Sun), sorted by day and time.
+Shows all lessons in **the current calendar week (Mon–Sun)**, sorted by day and time.
 
 Format: `schedule`
+
+* Uses your computer’s current date to determine the week window.
+* Only lessons that fall within **this week** are shown.
+* If there are no lessons this week, an empty schedule message is displayed.
+
+**Examples:**
+* `schedule` — Displays this week’s lessons grouped by day and ordered by time.
 
 ### Updating outstanding fees : `addfee`
 
