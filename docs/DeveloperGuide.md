@@ -208,7 +208,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor   | search by student name                                               | quickly find their record           |
 | `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
 | `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
-| `* *`    | tutor   | see a daily/weekly schedule                                          | plan my teaching                    |
+| `* *`    | tutor   | see a weekly schedule                                                | plan my teaching                    |
 | `* *`    | tutor   | view a student’s details                                             | reach them easily                   |
 | `*`      | tutor   | import student data from a spreadsheet                               | save time entering existing records |
 | `*`      | tutor   | create groups of students                                            | manage group lessons                |
@@ -369,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to view schedule.
-2. System displays daily/weekly schedule of lessons.
+2. System displays weekly schedule of lessons.
 
     Use case ends.
 
