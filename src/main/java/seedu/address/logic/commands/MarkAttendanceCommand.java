@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -28,9 +28,9 @@ public class MarkAttendanceCommand extends Command {
             + ": Marks the attendance of the student "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_STUDENT + "STATUS (must be 'present' or 'absent')\n"
+            + PREFIX_STATUS + "STATUS (must be 'present' or 'absent')\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENT + "present";
+            + PREFIX_STATUS + "present";
 
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance for Student %1$s: %2$s";
     public static final String MESSAGE_PERSON_HAS_NO_LESSON = "Cannot mark attendance. "

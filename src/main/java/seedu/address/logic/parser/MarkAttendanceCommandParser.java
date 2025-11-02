@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAttendanceCommand;
@@ -21,7 +21,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
      */
     public MarkAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
 
         Index index;
         try {
@@ -31,12 +31,14 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
+
+        if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
-        String status = argMultimap.getValue(PREFIX_STUDENT).get();
+        String status = argMultimap.getValue(PREFIX_STATUS).get();
         AttendanceStatus attendanceStatus = ParserUtil.parseAttendance(status);
 
         return new MarkAttendanceCommand(index, attendanceStatus);
