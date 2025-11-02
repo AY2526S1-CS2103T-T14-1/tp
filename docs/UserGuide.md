@@ -347,7 +347,7 @@ Format:
 schedule
 ```
 
-> 💡 **Tip:**<br>
+> 💡 **Tip:**
 > * This uses your computer’s current date to determine the week window.
 > * Only lessons that fall within this week (Mon–Sun) are shown, sorted by day and time.
 > * If there are no lessons this week, an empty schedule message is displayed.
