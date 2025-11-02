@@ -33,6 +33,9 @@ public class LessonName {
 
     /**
      * Returns true if a given string is a valid name.
+     *
+     * @param test Lesson name to be tested.
+     * @return True if lesson name is valid.
      */
     public static boolean isValidLessonName(String test) {
         return test.matches(VALIDATION_REGEX);

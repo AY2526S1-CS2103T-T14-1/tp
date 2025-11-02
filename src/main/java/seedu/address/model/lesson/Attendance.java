@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Represents a student's attendance status for a lesson.
- * Guarantees: immutable; value is either "present" or "absent"
+ * Guarantees: immutable;
  */
 public class Attendance {
 
@@ -27,8 +27,9 @@ public class Attendance {
 
     /**
      * Constructs a new {@code Attendance} with specified details.
+     *
      * @param totalLessons Total lessons.
-     * @param totalAttendances Total attendances.
+     * @param totalAttendances Total attended lessons.
      */
     public Attendance(int totalLessons, int totalAttendances) {
         this.totalLessons = totalLessons;
@@ -37,6 +38,7 @@ public class Attendance {
 
     /**
      * Returns a new {@code Attendance} updated based on the given status.
+     *
      * @param status A valid attendance status ("PRESENT" or "ABSENT").
      * @return A new Attendance object with updated counts.
      */

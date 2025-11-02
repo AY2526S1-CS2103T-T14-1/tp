@@ -92,7 +92,12 @@ public class Person {
 
     /**
      * Returns a new Person object with a new Lesson assigned to them.
-     * The attendance for the new lesson will automatically be set to "Absent".
+     *
+     * @param lessonName Name of lesson.
+     * @param date Date of lesson.
+     * @param time Time of lesson.
+     * @param location Location of lesson.
+     * @return A new Person object with a new Lesson.
      */
     public Person setLesson(String lessonName, String date, String time, String location) {
         Optional<Lesson> updatedLesson = Optional.of(new Lesson(new LessonName(lessonName), new Date(date),
@@ -103,11 +108,12 @@ public class Person {
 
     /**
      * Returns a new Person object with the attendance of their lesson updated.
-     * Throws an IllegalStateException if the person has no lesson assigned.
+     *
      * @param attendanceStatus The attendance status ("PRESENT" or "ABSENT").
      * @return A new Person object with the updated lesson attendance.
+     * @throws IllegalStateException if the person has no lesson assigned.
      */
-    public Person markAttendance(AttendanceStatus attendanceStatus) {
+    public Person markAttendance(AttendanceStatus attendanceStatus) throws IllegalStateException {
         if (lesson.isEmpty()) {
             throw new IllegalStateException(
                     "This person has no lesson assigned to mark attendance for.");

@@ -103,12 +103,6 @@ public class Finance {
         return new Finance(new FinanceAmount(newAmount), newHistory);
     }
 
-    /**
-     * Returns true if this {@code Finance} is equal to another object.
-     *
-     * @param other The object to compare with.
-     * @return True if both objects represent the same finance record.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -124,21 +118,11 @@ public class Finance {
                 && history.equals(otherFinance.history);
     }
 
-    /**
-     * Returns the hash code for this {@code Finance}.
-     *
-     * @return Hash code of the Finance object.
-     */
     @Override
     public int hashCode() {
         return Objects.hash(owedAmount, history);
     }
 
-    /**
-     * Returns a string representation of this {@code Finance}.
-     *
-     * @return A formatted string showing the owed amount and history count.
-     */
     @Override
     public String toString() {
         return String.format("[Owed Amount: %.2f, Payments: %d]",

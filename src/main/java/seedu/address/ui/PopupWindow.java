@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Very small window that shows the text produced by the {@code schedule} and {@code payments} commands.
@@ -21,6 +24,8 @@ public class PopupWindow extends UiPart<AnchorPane> {
     private static final String FXML = "PopupWindow.fxml";
 
     private final Stage dialogStage;
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private TextArea contentArea;
@@ -44,11 +49,13 @@ public class PopupWindow extends UiPart<AnchorPane> {
 
     @FXML
     private void handleClose() {
+        logger.log(Level.FINE, "Closing PopupWindow");
         dialogStage.close();
     }
 
     @FXML
     private void handleCopyContent() {
+        logger.log(Level.FINE, "Copying content to Clipboard");
         String text = contentArea.getText();
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();

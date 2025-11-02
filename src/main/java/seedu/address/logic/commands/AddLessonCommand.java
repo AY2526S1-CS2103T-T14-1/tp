@@ -59,6 +59,8 @@ public class AddLessonCommand extends Command {
     private final AddLessonDescriptor addLessonDescriptor;
 
     /**
+     * Creates an {@code AddLessonCommand} to be executed.
+     *
      * @param index of the person in the filtered person list to edit
      * @param addLessonDescriptor details to add lesson with
      */
@@ -66,20 +68,33 @@ public class AddLessonCommand extends Command {
         requireNonNull(index);
         requireNonNull(addLessonDescriptor);
 
+        assert index.getOneBased() > 0 : "Index must be positive";
+        assert addLessonDescriptor.getLesson() != null : "Lesson in descriptor should not be null";
+
         this.index = index;
         this.addLessonDescriptor = new AddLessonDescriptor(addLessonDescriptor);
+        logger.log(Level.FINE, "Created AddLessonCommand with index: {0} and descriptor: {1}",
+                new Object[]{index, addLessonDescriptor});
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.log(Level.INFO, "Executing AddLessonCommand for index: {0}", index);
+
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null : "Filtered person list should not be null";
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.SEVERE, "Invalid index: {0}, list size: {1}",
+                    new Object[]{index.getZeroBased(), lastShownList.size()});
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToAddLesson = lastShownList.get(index.getZeroBased());
+        assert personToAddLesson != null : "Person to edit must not be null";
+        logger.log(Level.FINE, "Target person before adding lesson: {0}", personToAddLesson);
+
         Person editedPerson = createEditedPerson(personToAddLesson, addLessonDescriptor);
 
         String feedback = "";
@@ -89,8 +104,14 @@ public class AddLessonCommand extends Command {
             feedback = "Warning: " + String.format(MESSAGE_OVERWRITING, editedPerson.getName(), originalLesson) + "\n";
         }
 
-        model.setPerson(personToAddLesson, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        try {
+            model.setPerson(personToAddLesson, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            logger.log(Level.INFO, "Lesson successfully added to {0}", editedPerson.getName());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to update person in model: {0}", e.getMessage());
+            throw new CommandException("Failed to add lesson: " + e.getMessage(), e);
+        }
 
         feedback += String.format(MESSAGE_ADD_LESSON_SUCCESS, editedPerson.getName(), editedPerson.getLesson()
                 .map(Lesson::toString).orElse(""));
@@ -99,11 +120,18 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToAddLesson}
-     * edited with {@code addLessonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code addLessonDescriptor}.
+     *
+     * @param personToEdit Person to be edited.
+     * @param addLessonDescriptor Lesson details.
+     * @return A {@code Person} with the details of {@code personToEdit} edited with {@code addLessonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, AddLessonDescriptor addLessonDescriptor) {
-        assert personToEdit != null;
+        requireNonNull(personToEdit);
+        requireNonNull(addLessonDescriptor);
+        assert addLessonDescriptor.getLesson() != null : "Lesson in descriptor must not be null";
+
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
@@ -150,14 +178,17 @@ public class AddLessonCommand extends Command {
         public AddLessonDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copies an {@code AddLessonDescriptor} and return an {@code AddLessonDescriptor}.
+         *
+         * @param toCopy {@code AddLessonDescriptor} to be copied.
          */
         public AddLessonDescriptor(AddLessonDescriptor toCopy) {
+            requireNonNull(toCopy);
             setLesson(toCopy.lesson);
         }
 
         public void setLesson(Lesson lesson) {
+            requireNonNull(lesson);
             this.lesson = lesson;
         }
 

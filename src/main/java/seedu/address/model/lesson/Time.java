@@ -28,7 +28,10 @@ public class Time {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid time.
+     *
+     * @param test Time to be tested.
+     * @return True if time is valid.
      */
     public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -36,6 +39,8 @@ public class Time {
 
     /**
      * Returns this time as a {@link LocalTime}.
+     *
+     * @return LocalTime representation of this time.
      */
     public LocalTime asLocalTime() {
         return LocalTime.parse(value);
