@@ -22,7 +22,8 @@ import seedu.address.model.person.Person;
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Show all lessons in the week, sorted in date and time.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all lessons in the current week (Mon–Sun), "
+            + "sorted by day and time.\n"
             + "Example: " + COMMAND_WORD;
 
     @Override
