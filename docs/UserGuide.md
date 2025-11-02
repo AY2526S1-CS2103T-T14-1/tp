@@ -148,11 +148,11 @@ Example:
 ```
 add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01
 ```
-<figure>
-  <img src="images/Add.png" alt="Add" style="margin-right:5%;">
-  <figcaption><em>Adds a student with name <code>John Doe</code>, phone <code>98765432</code>, email
-    <code>johnd@example.com</code> and address <code>John street, block 123, #01-01</code></em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Add.png" alt="Add" style="width:80%;">
+</div>
+<p><em>Adds a student with name <code>John Doe</code>, phone <code>98765432</code>, email <code>johnd@example.com</code>
+    and address <code>John street, block 123, #01-01</code></em></p>
 
 ### Editing student : `edit`
 
@@ -174,11 +174,11 @@ Example:
 ```
 edit 1 p/91234567 e/johndoe@example.com
 ```
-<figure>
-  <img src="images/Edit.png" alt="Edit" style="margin-right:5%;">
-  <figcaption><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
-    <code>johndoe@example.com</code> respectively</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Edit.png" alt="Edit" style="width:80%;">
+</div>
+<p><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
+    <code>johndoe@example.com</code> respectively</em></p>
 
 ### Finding students by name : `find`
 
@@ -200,10 +200,10 @@ Example:
 ```
 find alex david
 ```
-<figure>
-  <img src="images/findAlexDavidResult.png" alt="Find" style="margin-right:5%;">
-  <figcaption><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/findAlexDavidResult.png" alt="findAlexDavidResult" style="width:80%;">
+</div>
+<p><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></p>
 
 ### Finding students by tag : `findtag`
 
@@ -225,10 +225,10 @@ Example:
 ```
 findtag friends
 ```
-<figure>
-  <img src="images/Findtag.png" alt="Findtag" style="margin-right:5%;">
-  <figcaption><em>Finds students whose tags partially match <code>friends</code></em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/FindTag.png" alt="FindTag" style="width:80%;">
+</div>
+<p><em>Finds students whose tags partially match <code>friends</code></em></p>
 
 ### Deleting student : `delete`
 
@@ -246,11 +246,11 @@ Example:
 ```
 delete 1
 ```
-<figure>
-  <img src="images/Delete1.png" alt="Delete1" width="45%" style="margin-right:5%;">
-  <img src="images/Delete2.png" alt="Delete2" width="45%">
-  <figcaption><em>Deletes the 1st person in the displayed student list</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Delete1.png" alt="Delete1" style="width:45%;">
+  <img src="images/Delete2.png" alt="Delete2" style="width:45%;">
+</div>
+<p><em>Deletes the 1st person in the displayed student list</em></p>
 
 ### Listing all students : `list`
 
@@ -265,10 +265,10 @@ Example:
 ```
 list
 ```
-<figure>
-  <img src="images/List.png" alt="List" style="margin-right:5%;">
-  <figcaption><em>Lists all students</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/List.png" alt="List" style="width:80%;">
+</div>
+<p><em>Lists all students</em></p>
 
 ### Clearing all students : `clear`
 
@@ -283,10 +283,10 @@ Example:
 ```
 clear
 ```
-<figure>
-  <img src="images/Clear.png" alt="Clear" style="margin-right:5%;">
-  <figcaption><em>Clears all entries</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Clear.png" alt="Clear" style="width:80%;">
+</div>
+<p><em>Clears all students</em></p>
 
 ## Managing Lessons
 
@@ -310,11 +310,11 @@ Example:
 ```
 addlesson 1 n/Math d/Monday t/12:00 loc/RoomA
 ```
-<figure>
-  <img src="images/Addlesson.png" alt="Addlesson" style="margin-right:5%;">
-  <figcaption><em>Adds a lesson with name <code>Math</code> on <code>Monday</code> <code>12:00</code> at
-    <code>RoomA</code> to the 1st person in the displayed student list</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Addlesson.png" alt="Addlesson" style="width:80%;">
+</div>
+<p><em>Adds a lesson with name <code>Math</code> on <code>Monday</code> <code>12:00</code> at <code>RoomA</code> to the
+    1st person in the displayed student list</em></p>
 
 ### Marking attendance : `mark`
 
@@ -333,10 +333,10 @@ Example:
 ```
 mark 1 s/present
 ```
-<figure>
-  <img src="images/Mark.png" alt="Mark" style="margin-right:5%;">
-  <figcaption><em>Marks the 1st person in the displayed student list as present</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Mark.png" alt="Mark" style="width:80%;">
+</div>
+<p><em>Marks the 1st person in the displayed student list as present</em></p>
 
 ### Viewing weekly schedule : `schedule`
 
@@ -356,10 +356,10 @@ Example:
 ```
 schedule
 ```
-<figure>
-  <img src="images/Schedule.png" alt="Schedule" style="margin-right:5%;">
-  <figcaption><em>Shows the weekly schedule of lessons</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Schedule.png" alt="Schedule" style="width:80%;">
+</div>
+<p><em>Shows the weekly schedule of lessons</em></p>
 
 ## Managing Finances
 
@@ -381,10 +381,10 @@ Example:
 ```
 addfee 1 amt/150
 ```
-<figure>
-  <img src="images/Addfee.png" alt="Addfee" style="margin-right:5%;">
-  <figcaption><em>Adds $150 of outstanding fee to the 1st person in the displayed student list</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Addfee.png" alt="Addfee" style="width:80%;">
+</div>
+<p><em>Adds $150 of outstanding fee to the 1st person in the displayed student list</em></p>
 
 ### Adding payment : `pay`
 
@@ -403,10 +403,10 @@ Example:
 ```
 pay 1 amt/150
 ```
-<figure>
-  <img src="images/Pay.png" alt="Pay" style="margin-right:5%;">
-  <figcaption><em>Deducts $150 of outstanding amount from the 1st person in the displayed student list</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Pay.png" alt="Pay" style="width:80%;">
+</div>
+<p><em>Deducts $150 of outstanding amount from the 1st person in the displayed student list</em></p>
 
 ### Viewing payment history : `payments`
 
@@ -424,10 +424,10 @@ Example:
 ```
 payments
 ```
-<figure>
-  <img src="images/Payments.png" alt="Payments" style="margin-right:5%;">
-  <figcaption><em>Shows the payment history</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Payments.png" alt="Payments" style="width:80%;">
+</div>
+<p><em>Shows the payment history</em></p>
 
 ### Viewing outstanding payments : `outstanding`
 
@@ -442,10 +442,10 @@ Example:
 ```
 outstanding
 ```
-<figure>
-  <img src="images/Outstanding.png" alt="Outstanding" style="margin-right:5%;">
-  <figcaption><em>Shows all outstanding payments</em></figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="images/Outstanding.png" alt="Outstanding" style="width:80%;">
+</div>
+<p><em>Shows all outstanding payments</em></p>
 
 ## Managing Data Files
 
