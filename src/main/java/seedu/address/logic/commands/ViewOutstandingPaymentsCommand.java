@@ -50,7 +50,7 @@ public class ViewOutstandingPaymentsCommand extends Command {
             return new CommandResult("No outstanding payments found.");
         }
 
-        return new CommandResult(outstandingPayments.toString());
+        return new CommandResult(outstandingPayments.toString(), false, false, true);
     }
 
     @Override

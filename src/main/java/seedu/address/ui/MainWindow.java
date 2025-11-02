@@ -175,8 +175,8 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setFeedbackToUser("Successfully imported data from: " + selectedFile.getAbsolutePath());
                 logger.info("Import successful from: " + selectedFile.getAbsolutePath());
             } catch (Exception e) {
-                resultDisplay.setFeedbackToUser("Failed to import data: " + e.getMessage());
-                logger.warning("Import failed: " + e.getMessage());
+                resultDisplay.setFeedbackToUser("Failed to import data!");
+                logger.warning("Import failed!");
             }
         }
     }
