@@ -199,13 +199,13 @@ edit 1 p/91234567 e/johndoe@example.com
 <p><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
     <code>johndoe@example.com</code> respectively</em></p>
 
-### Finding students by name : `find`
+### Finding students by name : `findname`
 
 **Finds existing students by name** in StudentConnect.
 
 Format:
 ```
-find KEYWORD [MORE_KEYWORDS]...
+findname KEYWORD [MORE_KEYWORDS]...
 ```
 
 <div markdown="span" class="alert alert-primary">
@@ -219,7 +219,7 @@ find KEYWORD [MORE_KEYWORDS]...
 
 Example:
 ```
-find alex david
+findname alex david
 ```
 <div style="display: flex; justify-content: space-between; align-items: center;">
   <img src="images/findAlexDavidResult.png" alt="findAlexDavidResult" style="width:80%;">
@@ -652,7 +652,7 @@ manually.
 |----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Adding student**               | `add n/NAME p/PHONE e/EMAIL addr/ADDRESS [tag/TAG]…` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` |
 | **Editing student**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                              |
-| **Finding students by name**     | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find alex david`                                                                                       |
+| **Finding students by name**     | `findname KEYWORD [MORE_KEYWORDS]...`<br> e.g., `findname alex david`                                                                               |
 | **Finding students by tag**      | `findtag TAG_NAME [MORE_TAGNAMES]...`<br> e.g., `findtag friends`                                                                                   |
 | **Deleting student**             | `delete INDEX`<br> e.g., `delete 1`                                                                                                                 |
 | **Listing all students**         | `list`<br> e.g., `list`                                                                                                                             |

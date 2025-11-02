@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -51,11 +52,13 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
+    public void readAddressBook_invalidPersonAddressBook_success() {
+        assertDoesNotThrow(() -> readAddressBook("invalidPersonAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
+    public void readAddressBook_invalidAndValidPersonAddressBook_success() {
+        assertDoesNotThrow(() -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
     @Test
