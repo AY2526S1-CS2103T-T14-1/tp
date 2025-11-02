@@ -81,7 +81,7 @@ e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<b
 e.g. `[t/TAG]…` can be used as `t/friend`, `t/friend t/family` or not used at all.<br>
 <br>
 * **Parameters can be in any order.**<br>
-e.g. `n/NAME p/PHONE_NUMBER` is the same as `p/PHONE_NUMBER n/NAME`.<br>
+e.g. `n/NAME p/PHONE` is the same as `p/PHONE n/NAME`.<br>
 <br>
 * **Extra parameters are ignored** for simple commands like `help`, `list`, `exit` and `clear`.<br>
 e.g. `help 123` will be interpreted as `help`.<br>
@@ -112,7 +112,7 @@ The interface is designed to be intuitive and efficient for managing your studen
 | 10 | Exit StudentConnect |
 
 > 💡 **Tip:**<br>
-> Scroll through long lists using the scroll bars.
+> You should scroll through long list using the scroll bar.
 
 ### Key Features
 
@@ -134,12 +134,12 @@ of contacts and events.
 
 **Format:**
 ```
-add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…
+add n/NAME p/PHONE e/EMAIL addr/ADDRESS [tag/TAG]…
 ```
 
 > 💡 **Tip:**
-> * `NAME`: Alphanumeric characters  with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
-> * `PHONE_NUMBER`: Numbers only, at least 3 digits. Maximum 20 digits.
+> * `NAME`: Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
+> * `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
 > * `EMAIL`: Valid email format. Maximum 50 characters.
 > * `ADDRESS`: Can be any alphanumeric value with `/`, `#`, `-`, `.` and `,`.
 > * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
@@ -165,10 +165,17 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…
 
 > 💡 **Tip:**
 > * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the student will be overwritten.
-> * To remove all the student’s tags, type `tag/` without specifying any tags after it.
+> * `NAME`: Alphanumeric characters  with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
+> * `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
+> * `EMAIL`: Valid email format. Maximum 50 characters.
+> * `ADDRESS`: Can be any alphanumeric value with `/`, `#`, `-`, `.` and `,`.
+> * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
+> * **At least one** of the optional fields must be provided.
+> * To remove all the student’s tags, you should type `tag/` without specifying any tags after it.
+
+> ⚠️ **Warning:**<br>
+> This will **overwrite** the existing tags. Please be **very sure** before you enter the command. To **append** a new
+> tag, you should retype existing tags with the new tag to append.
 
 Example:
 ```
@@ -193,7 +200,7 @@ find KEYWORD [MORE_KEYWORDS]...
 > * The search is case-insensitive.
 > * The order of the keywords does not matter.
 > * Only the name is searched.
-> * Only full words will be matched.
+> * Only full words will be matched. **This is different from `findtag`.**
 > * Students matching at least one keyword will be returned (i.e. `OR` search).
 
 Example:
@@ -218,7 +225,7 @@ findtag TAG_NAME [MORE_TAGNAMES]...
 > * The search is case-insensitive.
 > * The order of the keywords does not matter.
 > * Only the tag is searched.
-> * Partial words will be matched.
+> * Partial words will be matched. **This is different from `find`.**
 > * Students matching at least one keyword will be returned (i.e. `OR` search).
  
 Example:
@@ -241,6 +248,9 @@ delete INDEX
 
 > 💡 **Tip:**
 > * `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+
+> ⚠️ **Warning:**<br>
+> This will **delete** the existing student. Please be **very sure** before you enter the command.
 
 Example:
 ```
@@ -279,6 +289,9 @@ Format:
 clear
 ```
 
+> ⚠️ **Warning:**<br>
+> This will **clear** all existing students. Please be **very sure** before you enter the command.
+
 Example:
 ```
 clear
@@ -305,6 +318,10 @@ addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION
 > * `DAY`: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday` (case-insensitive).
 > * `TIME`: In **hh:mm** format.
 > * `LOCATION`: Alphanumeric characters only.
+
+> ⚠️ **Warning:**<br>
+> A student can only have **1** lesson. This will **overwrite** any existing lesson for the student. Please be
+> **very sure** before you enter the command.
 
 Example:
 ```
@@ -505,6 +522,70 @@ Format: `exit`
 
 # FAQ
 
+**Q**: I don’t know how to open the Command Prompt (Windows) or Terminal (Mac). What should I do?<br>
+**A**:
+* **Windows**: Click the **Start** button → type `cmd` → press **Enter**.
+* **Mac**: Press **Command + Space** → type `Terminal` → press **Enter**.<br>
+Once opened, you can type commands as shown in this guide.
+
+**Q**: How do I know where I saved the `.jar` file?<br>
+**A**: Look in your **Downloads** folder first, that’s usually where files go when downloaded. If you still can’t find it,
+search your computer for `studentconnect.jar`.
+
+**Q**: When I type the command to open StudentConnect, it says “file not found.” What do I do?<br>
+**A**: You may not be in the right folder. Try typing `dir` (Windows) or `ls` (Mac) to see a list of files. If you don’t see
+`studentconnect.jar`, move into the correct folder using `cd path_to_your_folder` before running the command again.
+
+**Q**: I can’t type or paste properly in the Command Prompt.<br>
+**A**: Try clicking inside the Command Prompt window first. To paste text:
+* **Windows**: Right-click anywhere in the window.
+* **Mac Terminal**: Press Command + V.
+
+**Q**: I don’t understand what `cd` means.<br>
+**A**: `cd` means “change directory.” It tells your computer to go into a specific folder.
+
+**Q**: Do I have to type everything exactly the same as in the examples?<br>
+**A**: Not exactly, you can replace words like NAME or ADDRESS with your own. However, make sure to type the command
+format **exactly** (e.g., spaces and `/` symbols matter).
+
+**Q**: Can I close the app by clicking the “X” button instead of typing `exit`?<br>
+**A**: Yes! Both work. You can click the **X** in the top-right corner of the window or type `exit` and press **Enter**.
+
+**Q**: Will I lose my data if I close the app?<br>
+**A**: No. StudentConnect automatically saves your data every time you make a change, even if you close the app without
+typing `exit`.
+
+**Q**: What should I do if the app doesn’t open?<br>
+**A**: Try these steps one by one:
+1. Check that **Java 17 or newer** is installed.
+2. Make sure you typed the command correctly:
+```bash
+java -jar studentconnect.jar
+```
+3. If it still doesn’t work, move the `.jar` file to a simple folder like `C:\StudentConnect` (Windows) or `Documents`
+(Mac) and try again. 
+4. If the error message mentions Java, reinstall Java from the links in the **Quick Start** section.
+
+**Q**: How can I make a backup of my data?<br>
+**A**: Use the **Export** option (`File -> Export`) and save the file somewhere safe, like your Desktop or a USB drive.
+You can import it later if anything goes wrong.
+
+**Q**: What happens if I delete the wrong student or clear all data?<br>
+**A**: Once deleted, data cannot be recovered unless you have a backup. That’s why it’s a good idea to
+**export your data regularly**.
+
+**Q**: I accidentally edited or deleted something. Can I undo it?<br>
+**A**: Currently, StudentConnect does not support an “undo” feature. To restore data, you can **re-import** a backup
+file if you have one.
+
+**Q**: The screen looks too small or too big. How do I fix it?<br>
+**A**: You can resize the window by clicking and dragging its corners. If the text is too small, you can increase your
+computer’s display zoom in the system settings.
+
+**Q**: What should I do if I see a lot of red error messages?<br>
+**A**: Don’t worry! It just means the app couldn’t understand your command. Read the message, it usually tells you what
+went wrong. You can also type `help` to see the correct command format.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and import the data file that is exported by your previous StudentConnect.
 
@@ -523,20 +604,20 @@ manually.
 
 # Command summary
 
-| Action                           | Format, Examples                                                                                                                                           |
-|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Adding student**               | `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` |
-| **Editing student**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                                     |
-| **Finding students by name**     | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find alex david`                                                                                              |
-| **Finding students by tag**      | `findtag TAG_NAME [MORE_TAGNAMES]...`<br> e.g., `findtag friends`                                                                                          |
-| **Deleting student**             | `delete INDEX`<br> e.g., `delete 1`                                                                                                                        |
-| **Listing all students**         | `list`<br> e.g., `list`                                                                                                                                    |
-| **Clearing all students**        | `clear`<br> e.g., `clear`                                                                                                                                  |
-| **Adding lesson**                | `addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 loc/RoomA`                                               |
-| **Marking attendance**           | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`                                                                                                         |
-| **Viewing weekly schedule**      | `schedule`<br> e.g., `schedule`                                                                                                                            |
-| **Adding outstanding fee**       | `addfee INDEX amt/AMOUNT`<br>e.g., `addfee 1 amt/150`                                                                                                      |
-| **Adding payment**               | `pay INDEX amt/AMOUNT`<br> e.g., `pay 1 amt/150`                                                                                                           |
-| **Viewing payment history**      | `payments`<br> e.g., `payments`                                                                                                                            |
-| **Viewing outstanding payments** | `outstanding`<br> e.g., `outstanding`                                                                                                                      |
-| **Exiting program**              | `exit`<br> e.g., `exit`                                                                                                                                    |
+| Action                           | Format, Examples                                                                                                                                    |
+|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Adding student**               | `add n/NAME p/PHONE e/EMAIL addr/ADDRESS [tag/TAG]…` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01` |
+| **Editing student**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                              |
+| **Finding students by name**     | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find alex david`                                                                                       |
+| **Finding students by tag**      | `findtag TAG_NAME [MORE_TAGNAMES]...`<br> e.g., `findtag friends`                                                                                   |
+| **Deleting student**             | `delete INDEX`<br> e.g., `delete 1`                                                                                                                 |
+| **Listing all students**         | `list`<br> e.g., `list`                                                                                                                             |
+| **Clearing all students**        | `clear`<br> e.g., `clear`                                                                                                                           |
+| **Adding lesson**                | `addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION`<br> e.g., `addlesson 1 n/Math d/Monday t/12:00 loc/RoomA`                                        |
+| **Marking attendance**           | `mark INDEX s/STATUS`<br> e.g., `mark 1 s/present`                                                                                                  |
+| **Viewing weekly schedule**      | `schedule`<br> e.g., `schedule`                                                                                                                     |
+| **Adding outstanding fee**       | `addfee INDEX amt/AMOUNT`<br>e.g., `addfee 1 amt/150`                                                                                               |
+| **Adding payment**               | `pay INDEX amt/AMOUNT`<br> e.g., `pay 1 amt/150`                                                                                                    |
+| **Viewing payment history**      | `payments`<br> e.g., `payments`                                                                                                                     |
+| **Viewing outstanding payments** | `outstanding`<br> e.g., `outstanding`                                                                                                               |
+| **Exiting program**              | `exit`<br> e.g., `exit`                                                                                                                             |
