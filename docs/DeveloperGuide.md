@@ -248,17 +248,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor selects a student to delete.
-2. System requests confirmation.
-3. Actor confirms deletion.
-4. System deletes the student and shows a success message.
+2. System deletes the student and shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Actor cancels deletion.
+* 1a. Actor cancels deletion.
 
-    * 2a1. System closes deletion process.
+    * 1a1. System closes deletion process.
 
       Use case ends.
 
