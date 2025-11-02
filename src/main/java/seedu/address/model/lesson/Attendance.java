@@ -46,7 +46,6 @@ public class Attendance {
 
     /**
      * Returns a new {@code Attendance} updated based on the given status.
-     *
      * @param status A valid attendance status ("PRESENT" or "ABSENT").
      * @return A new Attendance object with updated counts.
      */
