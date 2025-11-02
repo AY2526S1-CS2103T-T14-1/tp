@@ -43,7 +43,7 @@ public class Lesson {
         this.date = date;
         this.time = time;
         this.location = location;
-        this.attendance = attendance; // 외부에서 'present' 상태의 Attendance 객체를 받아올 수 있음
+        this.attendance = attendance;
     }
 
     /**

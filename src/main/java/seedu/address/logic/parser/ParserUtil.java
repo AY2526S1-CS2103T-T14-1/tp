@@ -160,7 +160,7 @@ public class ParserUtil {
      * Parses a {@code String lessonName} into a {@code LessonName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code lessonName} is invalid.
      */
     public static LessonName parseLessonName(String lessonName) throws ParseException {
         requireNonNull(lessonName);
@@ -175,7 +175,7 @@ public class ParserUtil {
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException if the given {@code Date} is invalid.
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
@@ -190,7 +190,7 @@ public class ParserUtil {
      * Parses a {@code String time} into a {@code Time}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code time} is invalid.
+     * @throws ParseException if the given {@code Time} is invalid.
      */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
@@ -205,7 +205,7 @@ public class ParserUtil {
      * Parses a {@code String location} into a {@code Location}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code location} is invalid.
+     * @throws ParseException if the given {@code Location} is invalid.
      */
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
@@ -231,7 +231,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String status} into an {@code Attendance}.
+     * Parses a {@code String status} into an {@code AttendanceStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code status} is invalid.

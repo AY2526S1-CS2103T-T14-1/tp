@@ -266,6 +266,40 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Importing data file
+
+Imports a StudentConnect data file (.json) into the app.
+
+**How it works:**
+
+1. Go to **Files** -> **Import**.
+2. Select the .json file that you have previously exported from StudentConnect.
+3. Confirm the prompt.
+
+**Result**
+
+On success, the data should replace the current content and a success message will appear.
+On failure, an error message will appear and no data is changed.
+
+**Note**
+1. Only JSON files following StudentConnect's format will be accepted.
+2. Consider creating a backup using export (See below).
+
+### Exporting data file
+
+Exports your current StudentConnect data to a JSON file.
+
+**How it works:**
+
+1. Go to **Files** -> **Export**.
+2. Choose the folder you would like to save the file in.
+3. StudentConnect saves a JSON file named like StudentConnect_YYYYMMDD_HHMMSS.json and shows a success message with the full path.
+
+**Note**
+1. Exported files can be used on any computer with StudentConnect.
+2. Export does not change your current data.
+3. You can keep multiple timestamped exports as backups.
+
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/studentconnect.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -309,5 +343,7 @@ Action | Format, Examples
 **Pay** | `pay INDEX amt/AMOUNT`<br> e.g., `pay 2 amt/150`
 **View payment history** | `payments`
 **View outstanding payments** | `outstanding`
+**Import** | Menu: **File → Import** → select a valid StudentConnect JSON file
+**Export** | Menu: **File → Export** → choose destination folder (file named `StudentConnect_YYYYMMDD_HHMMSS.json`)
 **Clear** | `clear`
 **Exit** | `exit`

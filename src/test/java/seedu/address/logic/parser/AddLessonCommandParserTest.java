@@ -120,9 +120,6 @@ public class AddLessonCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
-        // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
-
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + INVALID_LESSON_DESC_1 + VALID_LESSON_NAME_DESC_1;
@@ -134,7 +131,7 @@ public class AddLessonCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + VALID_LESSON_NAME_DESC_1 + VALID_LESSON_NAME_DESC_2 + VALID_DATE_DESC
                 + VALID_TIME_DESC + VALID_LOCATION_DESC;
 

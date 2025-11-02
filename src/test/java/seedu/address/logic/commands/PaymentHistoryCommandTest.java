@@ -80,6 +80,9 @@ public class PaymentHistoryCommandTest {
 
         // should open the popup when there is content
         assertTrue(res.isShowPopup());
+        int indexBenson = out.indexOf("Benson Meier");
+        int indexAlice50 = out.indexOf("Alice Pauline", indexBenson);
+        int indexAlice20 = out.indexOf("Alice Pauline", indexAlice50 + 1);
     }
 
     // -------- helpers --------
