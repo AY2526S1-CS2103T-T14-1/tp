@@ -62,7 +62,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -224,29 +224,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to add a new student.
-2. System requests student details (name, contact, subject, hourly rate).
-3. Actor enters the details.
-4. System saves the details and displays a success message.
+2. Actor enters the details in format specified
+3. System saves the details and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. System detects missing or invalid details.
+* 2a. System detects missing or invalid details.
 
-    * 3a1. System requests correct details.
+    * 2a1. System requests correct details.
 
-    * 3a2. Actor re-enters details.
+    * 2a2. Actor re-enters details.
 
       Use case resumes at step 4.
 
 * *a. At any time, Actor cancels the operation.
 
-    * *a1. System requests confirmation.
-
-    * *a2. Actor confirms.
-
-      Use case ends.
+    Use case ends.
 
 **UC2: Delete Student**
 
@@ -328,24 +323,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. System shows students with outstanding fees.
-2. Actor selects a student with outstanding fees.
-3. Actor enters payment details (amount, date, method).
-4. System records payment and updates balance.
+1. Actor selects a student with outstanding fees.
+2. Actor enters payment details (amount, date, method).
+3. System records payment and updates balance.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Payment is made for student who does not owe any fees.
+* 1a. Payment is made for student who does not owe any fees.
 
-    * 2a1. System displays error, showing that selected student does not owe.
+    * 1a1. System displays error, showing that selected student does not owe.
 
-* 3a. Payment details invalid.
+* 2a. Payment details invalid.
 
-    * 3a1. System prompts for correction.
+    * 2a1. System prompts for correction.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **UC7: View Outstanding Payments**
 
@@ -442,6 +436,23 @@ Use case ends.
   
       Use case ends.
 
+**UC12: Find using tag**
+
+**MSS**
+
+1. Actor searches using specific command and tag name(s).
+2. System retrieves all students with the specified tag(s).
+
+Use case ends.
+
+**Extensions**
+
+* 2a. No students with the tag exist.
+
+    * 2a1. System displays shows a blank list.
+
+      Use case ends.
+     
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
