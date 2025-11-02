@@ -9,8 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any non-blank alphanumeric values with "
-            + "/, #, -, . and ,";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any alphanumeric values with /, #, -, . and ,";
 
     /*
      * The first character of the address must not be a whitespace,
