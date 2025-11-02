@@ -18,9 +18,6 @@ class JsonAdaptedAttendance {
 
     /**
      * Constructs a {@code JsonAdaptedAttendance} with the given attendance details.
-     *
-     * @param totalLessons Total lessons.
-     * @param totalAttendances Total attended lessons.
      */
     @JsonCreator
     public JsonAdaptedAttendance(@JsonProperty("totalLessons") int totalLessons,
@@ -31,8 +28,6 @@ class JsonAdaptedAttendance {
 
     /**
      * Converts a given {@code Attendance} into this class for Jackson use.
-     *
-     * @param source Attendance to be converted.
      */
     public JsonAdaptedAttendance(Attendance source) {
         totalLessons = source.getTotalLessons();
@@ -42,7 +37,6 @@ class JsonAdaptedAttendance {
     /**
      * Converts this Jackson-friendly adapted attendance object into the model's {@code Attendance} object.
      *
-     * @return Attendance representation of this object.
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Attendance toModelType() throws IllegalValueException {
