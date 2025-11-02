@@ -80,6 +80,11 @@ Format: `help`
 
 Adds a person to the student list.
 
+Before running the command:
+<img src="images/beforeaddperson.png" alt="before running add command" style="width: 400px; max-width: 100%;">
+After running the command:
+<img src="images/addperson.png" alt="after running add command" style="width: 400px; max-width: 100%;">
+
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL addr/ADDRESS [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -88,11 +93,16 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01`
-* `add n/Betsy Crowe tag/friend p/1234567 e/betsycrowe@example.com addr/Newgate Prison tag/criminal `
+* `add n/Betsy Crowe tag/friend p/1234567 e/betsycrowe@example.com addr/Boulder Heights tag/Math`
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the application.
+
+Before running the command:
+<img src="images/listcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
+After running the command:
+<img src="images/afterlistcommand.png" alt="after running add command" style="width: 400px; max-width: 100%;">
 
 Format: `list`
 
