@@ -49,47 +49,26 @@ public class MarkAttendanceCommand extends Command {
      */
     public MarkAttendanceCommand(Index index, AttendanceStatus attendanceStatus) {
         requireAllNonNull(index, attendanceStatus);
-        assert index.getOneBased() > 0 : "Index must be positive";
-        assert attendanceStatus != null : "AttendanceStatus must not be null";
         this.index = index;
         this.attendanceStatus = attendanceStatus;
-        logger.log(Level.FINE, "Created MarkAttendanceCommand with index: {0}, status: {1}",
-                new Object[]{index, attendanceStatus});
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        logger.log(Level.INFO, "Executing MarkAttendanceCommand for index: {0}", index);
-
         List<Person> lastShownList = model.getFilteredPersonList();
-        assert lastShownList != null : "Filtered person list should not be null";
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            logger.log(Level.SEVERE, "Invalid person index {0}, list size is {1}",
-                    new Object[]{index.getZeroBased(), lastShownList.size()});
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        assert personToEdit != null : "Person to edit must not be null";
-        logger.log(Level.FINE, "Retrieved person for attendance marking: {0}", personToEdit.getName());
 
         if (personToEdit.getLesson().isEmpty()) {
-            logger.log(Level.WARNING, "Attempted to mark attendance for {0} with no lesson assigned",
-                    personToEdit.getName());
             throw new CommandException(String.format(MESSAGE_PERSON_HAS_NO_LESSON, personToEdit.getName()));
         }
 
-        Person editedPerson;
-        try {
-            editedPerson = personToEdit.markAttendance(this.attendanceStatus);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to mark attendance for {0}: {1}",
-                    new Object[]{personToEdit.getName(), e.getMessage()});
-            throw new CommandException("Failed to mark attendance: " + e.getMessage(), e);
-        }
-        assert editedPerson != null : "Edited person must not be null";
+        Person editedPerson = personToEdit.markAttendance(this.attendanceStatus);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
