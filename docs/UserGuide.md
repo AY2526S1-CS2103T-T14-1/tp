@@ -148,7 +148,7 @@ add n/NAME p/PHONE e/EMAIL addr/ADDRESS [tag/TAG]…
 * `NAME`: Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
 * `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
 * `EMAIL`: Valid email format. Maximum 50 characters.
-* `ADDRESS`: Can be any alphanumeric value with `/`, `#`, `-`, `.` and `,`.
+* `ADDRESS`: Alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only.
 * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
 </div>
 
@@ -177,7 +177,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…
 * `NAME`: Alphanumeric characters  with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
 * `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
 * `EMAIL`: Valid email format. Maximum 50 characters.
-* `ADDRESS`: Can be any alphanumeric value with `/`, `#`, `-`, `.` and `,`.
+* `ADDRESS`: Alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only.
 * `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
 * **At least one** of the optional fields must be provided.
 * To remove all the student’s tags, you should type `tag/` without specifying any tags after it.
