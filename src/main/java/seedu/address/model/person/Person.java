@@ -102,10 +102,9 @@ public class Person {
 
     /**
      * Returns a new Person object with the attendance of their lesson updated.
-     *
+     * Throws an IllegalStateException if the person has no lesson assigned.
      * @param attendanceStatus The attendance status ("PRESENT" or "ABSENT").
      * @return A new Person object with the updated lesson attendance.
-     * @throws IllegalStateException if the person has no lesson assigned.
      */
     public Person markAttendance(AttendanceStatus attendanceStatus) throws IllegalStateException {
         if (lesson.isEmpty()) {

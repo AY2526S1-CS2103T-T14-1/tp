@@ -76,8 +76,7 @@ public class AddLessonCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        AddLessonDescriptor descriptor = new AddLessonDescriptorBuilder()
-                .withLesson("Math", "Monday", "14:00", "RoomA").build();
+        AddLessonDescriptor descriptor = new AddLessonDescriptorBuilder().withLesson("A", "Monday", "14:00", "A").build();
         AddLessonCommand addLessonCommand = new AddLessonCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(addLessonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -95,7 +94,7 @@ public class AddLessonCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(outOfBoundIndex,
-                new AddLessonDescriptorBuilder().withLesson("Math", "Monday", "14:00", "RoomA").build());
+                new AddLessonDescriptorBuilder().withLesson("A", "Monday", "14:00", "A").build());
 
         assertCommandFailure(addLessonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -129,7 +128,7 @@ public class AddLessonCommandTest {
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         AddLessonDescriptor addLessonDescriptor = new AddLessonDescriptorBuilder()
-                .withLesson("Math", "Monday", "14:00", "RoomA").build();
+                .withLesson("A", "Monday", "14:00", "A").build();
         AddLessonCommand addLessonCommand = new AddLessonCommand(index, addLessonDescriptor);
         String expected = AddLessonCommand.class.getCanonicalName() + "{index=" + index + ", addLessonDescriptor="
                 + addLessonDescriptor + "}";
