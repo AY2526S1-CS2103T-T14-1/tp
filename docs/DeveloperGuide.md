@@ -9,7 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+AI was used throughout the development of this project:
+- GitHub Copilot was used for auto-completing code snippets.
+- Claude Sonnet 4.5 was used to generate the unit tests.
+- Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
 
 --------------------------------------------------------------------------------------------------------------------
 
