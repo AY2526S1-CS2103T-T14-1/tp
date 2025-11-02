@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -47,6 +48,7 @@ public class PaymentHistoryCommand extends Command {
             for (PaymentEntry pe : history) {
                 rows.add(new Row(
                         pe.getDate(),
+                        pe.getTime(),
                         pe.getAmount().getAmount(),
                         pe.getNote(),
                         p.getName().toString()
@@ -58,7 +60,7 @@ public class PaymentHistoryCommand extends Command {
             return new CommandResult(PAYMENT_EMPTY);
         }
 
-        rows.sort(Comparator.comparing(Row::getDate).reversed().thenComparing(Row::getStudent));
+        rows.sort(Comparator.comparing(Row::getDate).reversed().thenComparing(Row::getTime).reversed());
 
         String output = "Payment History (newest first): \n";
         LocalDate current = null;
@@ -85,12 +87,14 @@ public class PaymentHistoryCommand extends Command {
 
     private static final class Row {
         private final LocalDate date;
+        private final LocalTime time;
         private final double amount;
         private final String note;
         private final String student;
 
-        public Row(LocalDate date, double amount, String note, String student) {
+        public Row(LocalDate date, LocalTime time, double amount, String note, String student) {
             this.date = date;
+            this.time = time;
             this.amount = amount;
             this.note = note == null ? "" : note;
             this.student = student;
@@ -98,6 +102,10 @@ public class PaymentHistoryCommand extends Command {
 
         public LocalDate getDate() {
             return date;
+        }
+
+        public LocalTime getTime() {
+            return time;
         }
 
         public String getStudent() {
