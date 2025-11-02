@@ -206,6 +206,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor   | record fee payments                                                  | know who has paid                   |
 | `* * *`  | tutor   | see outstanding payments                                             | follow up with students/parents     |
 | `* * *`  | tutor   | search by student name                                               | quickly find their record           |
+| `* * *`  | tutor   | search by tag                                                        | quickly find their record           |
 | `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
 | `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
 | `* *`    | tutor   | see a weekly schedule                                                | plan my teaching                    |
@@ -343,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Actor chooses to view outstanding payments.
+1. Actor enters command to view outstanding payments.
 2. System retrieves and displays a list of unpaid fees by student.
 
     Use case ends.
@@ -453,7 +454,7 @@ Use case ends.
      
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17`
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The interface should follow familiar patterns (e.g., similar to phone contacts apps) with clear navigation, searchable fields, and minimal clicks to add/view a student. Aim for a learnability time of under 5 minutes for new users.
