@@ -62,7 +62,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -206,9 +206,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor   | record fee payments                                                  | know who has paid                   |
 | `* * *`  | tutor   | see outstanding payments                                             | follow up with students/parents     |
 | `* * *`  | tutor   | search by student name                                               | quickly find their record           |
+| `* * *`  | tutor   | search by tag                                                        | quickly find their record           |
 | `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
 | `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
-| `* *`    | tutor   | see a daily/weekly schedule                                          | plan my teaching                    |
+| `* *`    | tutor   | see a weekly schedule                                                | plan my teaching                    |
 | `* *`    | tutor   | view a student’s details                                             | reach them easily                   |
 | `*`      | tutor   | import student data from a spreadsheet                               | save time entering existing records |
 | `*`      | tutor   | create groups of students                                            | manage group lessons                |
@@ -224,46 +225,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to add a new student.
-2. System requests student details (name, contact, subject, hourly rate).
-3. Actor enters the details.
-4. System saves the details and displays a success message.
+2. Actor enters the details in format specified
+3. System saves the details and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. System detects missing or invalid details.
+* 2a. System detects missing or invalid details.
 
-    * 3a1. System requests correct details.
+    * 2a1. System requests correct details.
 
-    * 3a2. Actor re-enters details.
+    * 2a2. Actor re-enters details.
 
       Use case resumes at step 4.
 
 * *a. At any time, Actor cancels the operation.
 
-    * *a1. System requests confirmation.
-
-    * *a2. Actor confirms.
-
-      Use case ends.
+    Use case ends.
 
 **UC2: Delete Student**
 
 **MSS**
 
 1. Actor selects a student to delete.
-2. System requests confirmation.
-3. Actor confirms deletion.
-4. System deletes the student and shows a success message.
+2. System deletes the student and shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Actor cancels deletion.
+* 1a. Actor cancels deletion.
 
-    * 2a1. System closes deletion process.
+    * 1a1. System closes deletion process.
 
       Use case ends.
 
@@ -328,30 +322,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. System shows students with outstanding fees.
-2. Actor selects a student with outstanding fees.
-3. Actor enters payment details (amount, date, method).
-4. System records payment and updates balance.
+1. Actor selects a student with outstanding fees.
+2. Actor enters payment details (amount, date, method).
+3. System records payment and updates balance.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Payment is made for student who does not owe any fees.
+* 1a. Payment is made for student who does not owe any fees.
 
-    * 2a1. System displays error, showing that selected student does not owe.
+    * 1a1. System displays error, showing that selected student does not owe.
 
-* 3a. Payment details invalid.
+* 2a. Payment details invalid.
 
-    * 3a1. System prompts for correction.
+    * 2a1. System prompts for correction.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **UC7: View Outstanding Payments**
 
 **MSS**
 
-1. Actor chooses to view outstanding payments.
+1. Actor enters command to view outstanding payments.
 2. System retrieves and displays a list of unpaid fees by student.
 
     Use case ends.
@@ -369,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to view schedule.
-2. System displays daily/weekly schedule of lessons.
+2. System displays weekly schedule of lessons.
 
     Use case ends.
 
@@ -442,9 +435,26 @@ Use case ends.
   
       Use case ends.
 
+**UC12: Find using tag**
+
+**MSS**
+
+1. Actor searches using specific command and tag name(s).
+2. System retrieves all students with the specified tag(s).
+
+Use case ends.
+
+**Extensions**
+
+* 2a. No students with the tag exist.
+
+    * 2a1. System displays shows a blank list.
+
+      Use case ends.
+     
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17`
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The interface should follow familiar patterns (e.g., similar to phone contacts apps) with clear navigation, searchable fields, and minimal clicks to add/view a student. Aim for a learnability time of under 5 minutes for new users.
@@ -494,7 +504,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
