@@ -25,10 +25,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
     private static final Logger logger = LogsCenter.getLogger(AddLessonCommandParser.class);
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddLessonCommand.
-     *
-     * @param args Arguments.
-     * @return A AddLessonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddLessonCommand
+     * and returns a AddLessonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddLessonCommand parse(String args) throws ParseException {

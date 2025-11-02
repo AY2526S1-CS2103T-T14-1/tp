@@ -59,8 +59,6 @@ public class AddLessonCommand extends Command {
     private final AddLessonDescriptor addLessonDescriptor;
 
     /**
-     * Creates an {@code AddLessonCommand} to be executed.
-     *
      * @param index of the person in the filtered person list to edit
      * @param addLessonDescriptor details to add lesson with
      */
@@ -120,12 +118,8 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
-     * {@code addLessonDescriptor}.
-     *
-     * @param personToEdit Person to be edited.
-     * @param addLessonDescriptor Lesson details.
-     * @return A {@code Person} with the details of {@code personToEdit} edited with {@code addLessonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToAddLesson}
+     * edited with {@code addLessonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, AddLessonDescriptor addLessonDescriptor) {
         requireNonNull(personToEdit);
