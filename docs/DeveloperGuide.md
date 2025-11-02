@@ -10,9 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 AI was used throughout the development of this project:
-- GitHub Copilot was used for auto-completing code snippets.
-- Claude Sonnet 4.5 was used to generate the unit tests.
-- Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
+* GitHub Copilot was used for auto-completing code snippets.
+* Claude Sonnet 4.5 was used to generate the unit tests.
+* Claude Haiku 4.5 was used to review long documents and tool-use to ensure document consistency.
 * This is a brownfield project based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project developed by SE-EDU.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Supporting Documentation**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
