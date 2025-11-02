@@ -40,7 +40,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            logger.log(Level.WARNING, "Invalid index provided in AddLessonCommand input: {0}", args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
         }
         assert index.getOneBased() > 0 : "Index must be positive";
@@ -53,7 +52,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                 || argMultimap.getValue(PREFIX_DATE).isEmpty()
                 || argMultimap.getValue(PREFIX_TIME).isEmpty()
                 || argMultimap.getValue(PREFIX_LOCATION).isEmpty()) {
-            logger.log(Level.WARNING, "Missing required lesson fields in AddLessonCommand: {0}", args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddLessonCommand.MESSAGE_USAGE));
         }
@@ -62,13 +60,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         String date = argMultimap.getValue(PREFIX_DATE).get();
         String time = argMultimap.getValue(PREFIX_TIME).get();
         String location = argMultimap.getValue(PREFIX_LOCATION).get();
-        logger.log(Level.FINE, "Extracted lesson fields - Name: {0}, Date: {1}, Time: {2}, Location: {3}",
-                new Object[]{lessonName, date, time, location});
         Lesson lesson = ParserUtil.parseLesson(lessonName, date, time, location);
 
         addLessonDescriptor.setLesson(lesson);
-        logger.log(Level.INFO, "Successfully parsed AddLessonCommand for index {0} with lesson {1}",
-                new Object[]{index, lesson});
 
         return new AddLessonCommand(index, addLessonDescriptor);
     }

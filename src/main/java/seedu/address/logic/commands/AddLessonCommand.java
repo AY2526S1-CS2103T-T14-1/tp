@@ -71,8 +71,6 @@ public class AddLessonCommand extends Command {
 
         this.index = index;
         this.addLessonDescriptor = new AddLessonDescriptor(addLessonDescriptor);
-        logger.log(Level.FINE, "Created AddLessonCommand with index: {0} and descriptor: {1}",
-                new Object[]{index, addLessonDescriptor});
     }
 
     @Override
@@ -84,14 +82,11 @@ public class AddLessonCommand extends Command {
         assert lastShownList != null : "Filtered person list should not be null";
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            logger.log(Level.SEVERE, "Invalid index: {0}, list size: {1}",
-                    new Object[]{index.getZeroBased(), lastShownList.size()});
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToAddLesson = lastShownList.get(index.getZeroBased());
         assert personToAddLesson != null : "Person to edit must not be null";
-        logger.log(Level.FINE, "Target person before adding lesson: {0}", personToAddLesson);
 
         Person editedPerson = createEditedPerson(personToAddLesson, addLessonDescriptor);
 
@@ -102,14 +97,8 @@ public class AddLessonCommand extends Command {
             feedback = "Warning: " + String.format(MESSAGE_OVERWRITING, editedPerson.getName(), originalLesson) + "\n";
         }
 
-        try {
-            model.setPerson(personToAddLesson, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            logger.log(Level.INFO, "Lesson successfully added to {0}", editedPerson.getName());
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to update person in model: {0}", e.getMessage());
-            throw new CommandException("Failed to add lesson: " + e.getMessage(), e);
-        }
+        model.setPerson(personToAddLesson, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         feedback += String.format(MESSAGE_ADD_LESSON_SUCCESS, editedPerson.getName(), editedPerson.getLesson()
                 .map(Lesson::toString).orElse(""));
@@ -122,8 +111,8 @@ public class AddLessonCommand extends Command {
      * edited with {@code addLessonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, AddLessonDescriptor addLessonDescriptor) {
-        requireNonNull(personToEdit);
-        requireNonNull(addLessonDescriptor);
+        assert personToEdit != null;
+        assert addLessonDescriptor != null;
         assert addLessonDescriptor.getLesson() != null : "Lesson in descriptor must not be null";
 
 
