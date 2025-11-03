@@ -13,7 +13,7 @@ commands, and your information appears neatly on the screen.
 you from installing the program to getting started. You’ll be up and running in just a few minutes.
 
 <div markdown="1" class="alert alert-primary">
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
 Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
 examples so you can easily follow along.
@@ -58,9 +58,9 @@ You can jump to any section using the **Table of Contents** below.
         ```
    * The app will open in a few seconds and show some sample data so you can try it out.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="1" class="alert alert-primary">
 :bulb: **Tip:**<br>
-Start by typing <code>help</code> and pressing Enter to see this guide anytime you need help!
+Start by typing `help` and pressing Enter to see this guide anytime you need help!
 </div>
 
 ## Command Format
@@ -159,11 +159,11 @@ Example:
 ```
 add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Add.png" alt="Add" style="width:80%;">
-</div>
-<p><em>Adds a student with name <code>John Doe</code>, phone <code>98765432</code>, email <code>johnd@example.com</code>
+  <p><em>Adds a student with name <code>John Doe</code>, phone <code>98765432</code>, email <code>johnd@example.com</code>
     and address <code>John street, block 123, #01-01</code></em></p>
+</div>
 
 ### Editing student : `edit`
 
@@ -195,11 +195,11 @@ Example:
 ```
 edit 1 p/91234567 e/johndoe@example.com
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Edit.png" alt="Edit" style="width:80%;">
-</div>
-<p><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
+  <p><em>Edits the phone number and email address of the 1st person to be <code>91234567</code> and
     <code>johndoe@example.com</code> respectively</em></p>
+</div>
 
 ### Finding students by name : `findname`
 
@@ -223,10 +223,10 @@ Example:
 ```
 findname alex david
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="images/findAlexDavidResult.png" alt="findAlexDavidResult" style="width:80%;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <img src="images/Findname.png" alt="Findname" style="width:80%;">
+  <p><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></p>
 </div>
-<p><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></p>
 
 ### Finding students by tag : `findtag`
 
@@ -242,7 +242,7 @@ findtag TAG_NAME [MORE_TAGNAMES]...
 - The search is case-insensitive.
 - The order of the keywords does not matter.
 - Only the tag is searched.
-- Partial words will be matched. **This is different from `find`.**
+- Partial words will be matched. **This is different from `findname`.**
 - Students matching at least one keyword will be returned (i.e. `OR` search).
 </div> 
 
@@ -250,10 +250,10 @@ Example:
 ```
 findtag friends
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Findtag.png" alt="Findtag" style="width:80%;">
+  <p><em>Finds students whose tags partially match <code>friends</code></em></p>
 </div>
-<p><em>Finds students whose tags partially match <code>friends</code></em></p>
 
 ### Deleting student : `delete`
 
@@ -278,11 +278,13 @@ Example:
 ```
 delete 1
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="images/Delete1.png" alt="Delete1" style="width:45%;">
-  <img src="images/Delete2.png" alt="Delete2" style="width:45%;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 1rem;">
+    <img src="images/Delete1.png" alt="Delete1" style="width:45%;">
+    <img src="images/Delete2.png" alt="Delete2" style="width:45%;">
+  </div>
+  <p><em>Deletes the 1st person in the displayed student list</em></p>
 </div>
-<p><em>Deletes the 1st person in the displayed student list</em></p>
 
 ### Listing all students : `list`
 
@@ -297,10 +299,10 @@ Example:
 ```
 list
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/List.png" alt="List" style="width:80%;">
+  <p><em>Lists all students</em></p>
 </div>
-<p><em>Lists all students</em></p>
 
 ### Clearing all students : `clear`
 
@@ -320,10 +322,10 @@ Example:
 ```
 clear
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Clear.png" alt="Clear" style="width:80%;">
+  <p><em>Clears all students</em></p>
 </div>
-<p><em>Clears all students</em></p>
 
 ## Managing Lessons
 
@@ -355,11 +357,11 @@ Example:
 ```
 addlesson 1 n/Math d/Monday t/12:00 loc/RoomA
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Addlesson.png" alt="Addlesson" style="width:80%;">
-</div>
-<p><em>Adds a lesson with name <code>Math</code> on <code>Monday</code> <code>12:00</code> at <code>RoomA</code> to the
+  <p><em>Adds a lesson with name <code>Math</code> on <code>Monday</code> <code>12:00</code> at <code>RoomA</code> to the
     1st person in the displayed student list</em></p>
+</div>
 
 ### Marking attendance : `mark`
 
@@ -380,10 +382,10 @@ Example:
 ```
 mark 1 s/present
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Mark.png" alt="Mark" style="width:80%;">
+  <p><em>Marks the 1st person in the displayed student list as present</em></p>
 </div>
-<p><em>Marks the 1st person in the displayed student list as present</em></p>
 
 ### Viewing weekly schedule : `schedule`
 
@@ -405,10 +407,10 @@ Example:
 ```
 schedule
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Schedule.png" alt="Schedule" style="width:80%;">
+  <p><em>Shows the weekly schedule of lessons</em></p>
 </div>
-<p><em>Shows the weekly schedule of lessons</em></p>
 
 ## Managing Finances
 
@@ -432,10 +434,10 @@ Example:
 ```
 addfee 1 amt/150
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Addfee.png" alt="Addfee" style="width:80%;">
+  <p><em>Adds $150 of outstanding fee to the 1st person in the displayed student list</em></p>
 </div>
-<p><em>Adds $150 of outstanding fee to the 1st person in the displayed student list</em></p>
 
 ### Adding payment : `pay`
 
@@ -456,10 +458,10 @@ Example:
 ```
 pay 1 amt/150
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Pay.png" alt="Pay" style="width:80%;">
+  <p><em>Deducts $150 of outstanding amount from the 1st person in the displayed student list</em></p>
 </div>
-<p><em>Deducts $150 of outstanding amount from the 1st person in the displayed student list</em></p>
 
 ### Viewing payment history : `payments`
 
@@ -479,10 +481,10 @@ Example:
 ```
 payments
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Payments.png" alt="Payments" style="width:80%;">
+  <p><em>Shows the payment history</em></p>
 </div>
-<p><em>Shows the payment history</em></p>
 
 ### Viewing outstanding payments : `outstanding`
 
@@ -497,10 +499,10 @@ Example:
 ```
 outstanding
 ```
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Outstanding.png" alt="Outstanding" style="width:80%;">
+  <p><em>Shows all outstanding payments</em></p>
 </div>
-<p><em>Shows all outstanding payments</em></p>
 
 ## Managing Data Files
 
@@ -610,7 +612,7 @@ java -jar studentconnect.jar
 ```
 3. If it still doesn’t work, move the `.jar` file to a simple folder like `C:\StudentConnect` (Windows) or `Documents`
 (Mac) and try again. 
-4. If the error message mentions Java, **reinstall Java** from the links in the **Quick Start** section.
+4. If the error message mentions Java, **reinstall Java** from the links in the [_**Quick Start**_](#quick-start) section.
 
 **Q**: How can I make a backup of my data?<br>
 **A**: Use the **Export** option (`File -> Export`) and save the file somewhere safe, like your Desktop or a USB drive.
