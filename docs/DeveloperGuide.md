@@ -131,19 +131,28 @@ The `Model` component,
 * stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-#### Field Validation Constraints
+**Field Validation Constraints**
 
 Each `Person` object contains validated fields with the following constraints to prevent UI overflow and ensure data integrity:
 
-| Field     | Validation Rules                                                                       | Max Length            |
-|-----------|----------------------------------------------------------------------------------------|-----------------------|
-| `Name`    | Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Cannot be blank.      | 50 characters         |
-| `Phone`   | Numeric digits only. Minimum 3 digits.                                                 | 20 digits             |
-| `Email`   | Valid email format (local-part@domain).                                                | 50 characters         |
-| `Address` | alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only. Cannot be blank. | No limit              |
-| `Tag`     | Alphanumeric characters only.                                                          | 15 characters per tag |
+| Field           | Validation Rules                                                                                    | Max Length            |
+|-----------------|-----------------------------------------------------------------------------------------------------|-----------------------|
+| `Name`          | Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Cannot be blank.                   | 50 characters         |
+| `Phone`         | Numeric digits only. Minimum 3 digits.                                                              | 20 digits             |
+| `Email`         | Valid email format (local-part@domain).                                                             | 50 characters         |
+| `Address`       | Alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only. Cannot be blank.              | -                     |
+| `Tag`           | Alphanumeric characters only. Cannot be blank.                                                      | 15 characters per tag |
+| `LessonName`    | Alphanumeric characters and spaces only. Cannot be blank.                                           | -                     |
+| `Date`          | `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturaday` or `Sunday` (case-insensitive). | -                     |
+| `Time`          | `hh:mm` format.                                                                                     | -                     |
+| `Location`      | Alphanumeric characters and spaces only. Cannot be blank.                                           | -                     |
+| `FinanceAmount` | Number up to 2 decimals between 0.00 and 1,000,000.00                                               | -                     |
 
-These constraints are enforced at the model level in their respective classes (`Name`, `Phone`, `Email`, `Tag`) through the `isValid*()` methods.
+These constraints are enforced at the model level in their respective classes through the `isValid*()` methods.
+
+Note that:
+- `Attendance` has no constraints as it is a class that is not edited by user directly.
+- `PaymentEntry` has no constraints as it is a class with other validated classes as attributes.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
