@@ -544,7 +544,7 @@ Use case ends.
 * *a. At any time, Actor cancels the operation.
 
   Use case ends.
-     
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 17 installed.
@@ -621,7 +621,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. 
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     2. Test case: `edit 1 n/John Doe`<br>
        Expected: 1st displayed student's name is changed to `John Doe`.

@@ -244,7 +244,7 @@ findtag TAG_NAME [MORE_TAGNAMES]...
 - Only the tag is searched.
 - Partial words will be matched. **This is different from `findname`.**
 - Students matching at least one keyword will be returned (i.e. `OR` search).
-</div> 
+</div>
 
 Example:
 ```
@@ -611,7 +611,7 @@ typing `exit`.
 java -jar studentconnect.jar
 ```
 3. If it still doesn’t work, move the `.jar` file to a simple folder like `C:\StudentConnect` (Windows) or `Documents`
-(Mac) and try again. 
+(Mac) and try again.
 4. If the error message mentions Java, **reinstall Java** from the links in the [_**Quick Start**_](#quick-start) section.
 
 **Q**: How can I make a backup of my data?<br>
