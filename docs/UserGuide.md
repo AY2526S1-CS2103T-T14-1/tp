@@ -612,7 +612,7 @@ java -jar studentconnect.jar
 ```
 3. If it still doesn’t work, move the `.jar` file to a simple folder like `C:\StudentConnect` (Windows) or `Documents`
 (Mac) and try again. 
-4. If the error message mentions Java, **reinstall Java** from the links in the **Quick Start** section.
+4. If the error message mentions Java, **reinstall Java** from the links in the [_**Quick Start**_](#quick-start) section.
 
 **Q**: How can I make a backup of my data?<br>
 **A**: Use the **Export** option (`File -> Export`) and save the file somewhere safe, like your Desktop or a USB drive.
