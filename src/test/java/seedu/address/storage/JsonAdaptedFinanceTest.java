@@ -86,8 +86,8 @@ public class JsonAdaptedFinanceTest {
         String d2 = "2025-10-15";
         String t2 = "14:45:00";
         List<JsonAdaptedPaymentEntry> history = Arrays.asList(
-                new JsonAdaptedPaymentEntry(d1, t1, "25.50", "first payment"),
-                new JsonAdaptedPaymentEntry(d2, t2, "10.00", "")
+                new JsonAdaptedPaymentEntry(d1, t1, "25.50"),
+                new JsonAdaptedPaymentEntry(d2, t2, "10.00")
         );
 
         JsonAdaptedFinance adapted = new JsonAdaptedFinance("100.00", history);
@@ -99,7 +99,6 @@ public class JsonAdaptedFinanceTest {
         assertEquals(2, restored.size());
         assertEquals(LocalDate.parse(d1), restored.get(0).getDate());
         assertEquals(25.50, restored.get(0).getAmount().getAmount(), 0.001);
-        assertEquals("first payment", restored.get(0).getNote());
         assertEquals(LocalDate.parse(d2), restored.get(1).getDate());
         assertEquals(10.00, restored.get(1).getAmount().getAmount(), 0.001);
     }

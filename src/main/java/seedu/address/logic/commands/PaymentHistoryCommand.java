@@ -50,7 +50,6 @@ public class PaymentHistoryCommand extends Command {
                         pe.getDate(),
                         pe.getTime(),
                         pe.getAmount().getAmount(),
-                        pe.getNote(),
                         p.getName().toString()
                 ));
             }
@@ -74,9 +73,6 @@ public class PaymentHistoryCommand extends Command {
             total += row.amount;
 
             output += "  - [" + row.student + "] " + String.format("%.2f", row.amount);
-            if (!row.note.isEmpty()) {
-                output += " - " + row.note;
-            }
             output += "\n";
         }
 
@@ -89,14 +85,12 @@ public class PaymentHistoryCommand extends Command {
         private final LocalDate date;
         private final LocalTime time;
         private final double amount;
-        private final String note;
         private final String student;
 
-        public Row(LocalDate date, LocalTime time, double amount, String note, String student) {
+        public Row(LocalDate date, LocalTime time, double amount, String student) {
             this.date = date;
             this.time = time;
             this.amount = amount;
-            this.note = note == null ? "" : note;
             this.student = student;
         }
 

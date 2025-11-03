@@ -429,10 +429,9 @@ Use case ends.
       Use case ends.
 
 * 2b. Some entries are linked to students that were deleted or corrupted.
-
-    * 2b1. System skips invalid entries and logs a warning.
-    * 2b2. System displays remaining valid entries.
   
+    * 2b1. System skips those invalid entries (no warning is shown).
+    * 2b2. System displays remaining valid entries.
       Use case ends.
 
 **UC12: Find using tag**
@@ -467,7 +466,6 @@ Use case ends.
 * **Student**: A person receiving tuition from the tutor.
 * **Lesson**: A scheduled teaching session between tutor and one or more students.
 * **Attendance**: A record of whether a student was present or absent for a lesson.
-* **Progress Tracking**: A feature that allows tutors to note student learning milestones and monitor improvement.
 * **Outstanding Fees**: Tuition fees owed by a student that are not yet paid.
 * **MVP (Minimum Viable Product)**: The smallest functional version of StudentConnect that delivers core value to users.
 
