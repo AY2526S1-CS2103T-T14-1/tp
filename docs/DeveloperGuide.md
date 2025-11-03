@@ -192,29 +192,32 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * Comfortable using command-line style applications
 
 **Value Proposition**:
-Enable tutors and teachers to manage student contacts, notes, and tuition records **faster and more efficiently** than traditional GUI-based apps.
+Enable tutors and teachers to manage student contacts, lessons, and finances **faster and more efficiently** than traditional GUI-based apps.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                         | So that I can…​                     |
-|----------|---------|----------------------------------------------------------------------|-------------------------------------|
-| `* * *`  | tutor   | add a new student with details (name, contact, subject, hourly rate) | manage them in the system           |
-| `* * *`  | tutor   | delete a student permanently                                         | reduce clutter                      |
-| `* * *`  | tutor   | add a lesson with date, time, and location                           | track when and where I teach        |
-| `* * *`  | tutor   | record fee payments                                                  | know who has paid                   |
-| `* * *`  | tutor   | see outstanding payments                                             | follow up with students/parents     |
-| `* * *`  | tutor   | search by student name                                               | quickly find their record           |
-| `* * *`  | tutor   | search by tag                                                        | quickly find their record           |
-| `* *`    | tutor   | mark attendance for a lesson                                         | know if the student showed up       |
-| `* *`    | tutor   | add tuition fees per lesson or per month                             | track income                        |
-| `* *`    | tutor   | see a weekly schedule                                                | plan my teaching                    |
-| `* *`    | tutor   | view a student’s details                                             | reach them easily                   |
-| `*`      | tutor   | import student data from a spreadsheet                               | save time entering existing records |
-| `*`      | tutor   | create groups of students                                            | manage group lessons                |
-| `*`      | tutor   | assign different hourly rates to different students                  | reflect actual arrangements         |
-| `*`      | tutor   | export a fee report for a particular time period eg. a month         | manage my finances better.          |
+| Priority | As a …   | I want to …                                             | So that I can…                                                |
+|----------|----------|---------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | tutor    | add a new student with details (name, contact, address) | manage them in the system                                     |
+| `* * *`  | tutor    | view a student’s details                                | reach them easily                                             |
+| `* * *`  | tutor    | delete a student permanently                            | reduce clutter                                                |
+| `* * *`  | tutor    | search by student name                                  | quickly find their record                                     |
+| `* * *`  | tutor    | search by tag                                           | quickly find their record                                     |
+| `* * *`  | tutor    | add a lesson with date, time, and location              | track when and where I teach                                  |
+| `* * *`  | tutor    | see a weekly schedule                                   | plan my teaching                                              |
+| `* * *`  | tutor    | add outstanding tuition fees                            | track income                                                  |
+| `* * *`  | tutor    | record fee payments                                     | know who has paid                                             |
+| `* * *`  | tutor    | see outstanding payments                                | follow up with students/parents                               |
+| `* * *`  | tutor    | resume usage after months away                          | pick up without losing my data                                |
+| `* *`    | tutor    | edit student details                                    | keep their profile up-to-date                                 |
+| `* *`    | tutor    | mark attendance for a lesson                            | know if the student showed up                                 |
+| `* *`    | tutor    | export a financial report                               | manage my finances better                                     |
+| `*`      | new user | see sample student data                                 | understand how the system works before adding my own students |
+| `* `     | user     | purge all sample data                                   | start clean with my own student information                   |
+| `*`      | tutor    | import student data                                     | save time entering existing records                           |
+| `*`      | tutor    | create groups of students                               | manage group lessons                                          |
 
 ### Use cases
 
@@ -225,8 +228,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Actor chooses to add a new student.
-2. Actor enters the details in format specified
-3. System saves the details and displays a success message.
+2. Actor enters the details in format specified.
+3. System adds the student and displays a success message.
 
     Use case ends.
 
@@ -236,187 +239,261 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. System requests correct details.
 
-    * 2a2. Actor re-enters details.
-
-      Use case resumes at step 4.
+      Use case resumes at step 2.
 
 * *a. At any time, Actor cancels the operation.
 
     Use case ends.
 
-**UC2: Delete Student**
+**UC2: Edit Student**
 
 **MSS**
 
-1. Actor selects a student to delete.
-2. System deletes the student and shows a success message.
+1. Actor chooses to edit a student.
+2. Actor enters the details in format specified.
+3. System saves the details and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System detects missing or invalid details.
+
+    * 2a1. System requests correct details.
+
+      Use case resumes at step 2.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC3: Search Student By Name**
+
+**MSS**
+
+1. Actor chooses to search a student by name.
+2. Actor enters the details in format specified.
+3. System searches for matching student records.
+4. System displays results.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. No matching student found.
+
+    * 3a1. System displays empty list.
+
+      Use case ends.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC4: Search Student By Tag**
+
+**MSS**
+
+1. Actor chooses to search a student by tag.
+2. Actor enters the details in format specified.
+3. System searches for matching student records.
+4. System displays results.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. No matching student found.
+
+    * 3a1. System displays empty list.
+
+      Use case ends.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC5: Delete Student**
+
+**MSS**
+
+1. Actor chooses to delete a student.
+2. Actor enters the details in format specified.
+3. System deletes the student and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Actor cancels deletion.
+* 2a. System detects missing or invalid details.
 
-    * 1a1. System closes deletion process.
+    * 2a1. System requests correct details.
+
+      Use case resumes at step 2.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC6: List Students**
+
+**MSS**
+
+1. Actor chooses to list all students.
+2. System lists the students and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System has no students.
+
+    * 1a1. System displays "List is empty".
 
       Use case ends.
 
-**UC3: Add Lesson**
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC7: Clear Students**
+
+**MSS**
+
+1. Actor chooses to clear all students.
+2. System clears the students and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC8: Add Lesson**
 
 **MSS**
 
 1. Actor chooses to add a new lesson.
-2. System requests details (date, time, location, student).
-3. Actor enters lesson details.
-4. System saves the lesson and confirms creation.
+2. Actor enters the details in format specified.
+3. System adds the lesson and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. System detects invalid/missing lesson details.
+* 2a. System detects invalid/missing details.
 
-    * 3a1. System requests correction.
-
-      Use case resumes at step 3.
-
-**UC4: Mark Attendance**
-
-**MSS**
-
-1. Actor selects a lesson.
-2. System displays the lesson and attendance options.
-3. Actor marks student as present or absent.
-4. System saves attendance record.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. Actor changes attendance after marking.
-
-    * 3a1. System updates the record accordingly.
-
-      Use case resumes at step 4.
-
-**UC5: Add Tuition Fees**
-
-**MSS**
-
-1. Actor selects student and chooses to add tuition fees.
-2. System requests fee details (per lesson or per month).
-3. Actor enters fee details.
-4. System saves fee record.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. Invalid or incomplete fee details.
-
-    * 3a1. System prompts for correction.
-
-      Use case resumes at step 3.
-
-**UC6: Record Fee Payment**
-
-**MSS**
-
-1. Actor selects a student with outstanding fees.
-2. Actor enters payment details (amount, date, method).
-3. System records payment and updates balance.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. Payment is made for student who does not owe any fees.
-
-    * 1a1. System displays error, showing that selected student does not owe.
-
-* 2a. Payment details invalid.
-
-    * 2a1. System prompts for correction.
+    * 2a1. System requests correction.
 
       Use case resumes at step 2.
 
-**UC7: View Outstanding Payments**
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC9: Mark Attendance**
 
 **MSS**
 
-1. Actor enters command to view outstanding payments.
-2. System retrieves and displays a list of unpaid fees by student.
+1. Actor chooses to mark attendance.
+2. Actor enters the details in format specified.
+3. System saves attendance record and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No outstanding payments.
+* 2a. System detects invalid/missing details.
 
-    * 2a1. System displays “No pending fees.”
+    * 2a1. System requests correction.
 
-      Use case ends.
+      Use case resumes at step 2.
 
-**UC8: View Schedule**
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC10: View Schedule**
 
 **MSS**
 
 1. Actor chooses to view schedule.
-2. System displays weekly schedule of lessons.
+2. System displays weekly schedule of lessons and a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. No lessons scheduled.
+* 1a. No lessons scheduled.
 
-    * 2a1. System displays “No lessons scheduled.”
+    * 1a1. System displays “NO LESSONS FOUND THIS WEEK!”
 
       Use case ends.
 
-**UC9: Search Student**
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC11: Add Tuition Fee**
 
 **MSS**
 
-1. Actor enters student name into search bar.
-2. System searches for matching student records.
-3. System displays results.
+1. Actor chooses to add tuition fee.
+2. Actor enters the details in format specified.
+3. System saves fee record and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No matching student found.
+* 2a. System detects invalid/missing details.
 
-    * 2a1. System displays “No student found.”
+    * 2a1. System requests correction.
 
-      Use case ends.
+      Use case resumes at step 2.
 
-**UC10: View Student Details**
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC12: Record Fee Payment**
 
 **MSS**
 
-1. Actor selects a student.
-2. System displays student details (name, contact, subject, fees, history).
+1. Actor chooses to record fee payment.
+2. Actor enters the details in format specified.
+3. System records payment and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Student record is missing/corrupted.
+* 2a. Payment is made for student who does not owe any fee.
 
-    * 2a1. System displays error message.
+    * 2a1. System displays error, showing that selected student does not owe any fee.
 
       Use case ends.
 
-**UC11: View Payment History**
+* 2b. System detects invalid/missing details.
+
+    * 2b1. System requests correction.
+
+      Use case resumes at step 2.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC13: View Payment History**
 
 **MSS**
 
 1. Actor chooses to view all recorded payments.
 2. System gets payment entries from all students.
 3. System sorts the payments by date, newest first.
-4. System displays the payment group by dates and shows a total paid amount.
+4. System displays the payment history and displays a success message.
 
 Use case ends.
 
@@ -424,50 +501,64 @@ Use case ends.
 
 * 2a. No Payment record exist.
 
-    * 2a1. System displays “No payments recorded.”
-  
+    * 2a1. System displays “No payments records found.”
+
       Use case ends.
 
 * 2b. Some entries are linked to students that were deleted or corrupted.
-  
-    * 2b1. System skips those invalid entries (no warning is shown).
-    * 2b2. System displays remaining valid entries.
-      Use case ends.
 
-**UC12: Find using tag**
+    * 2b1. System skips those invalid entries (no warning is shown).
+
+      Use case resumes at step 3.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
+
+**UC14: View Outstanding Payments**
 
 **MSS**
 
-1. Actor searches using specific command and tag name(s).
-2. System retrieves all students with the specified tag(s).
+1. Actor chooses to view outstanding payments.
+2. System displays a list of unpaid fees by student and a success message.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. No students with the tag exist.
+* 1a. No outstanding payments.
 
-    * 2a1. System displays shows a blank list.
+    * 1a1. System displays “No outstanding payments found.”
 
       Use case ends.
+
+* *a. At any time, Actor cancels the operation.
+
+  Use case ends.
      
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17`
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The interface should follow familiar patterns (e.g., similar to phone contacts apps) with clear navigation, searchable fields, and minimal clicks to add/view a student. Aim for a learnability time of under 5 minutes for new users.
+1. Should work on any _mainstream OS_ as long as it has Java `17` installed.
+2. Should be able to hold up to 1000 persons with 1 second response time for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The interface should follow familiar patterns (e.g., similar to phone contacts apps). Aim for a learnability time of under 5 minutes for new users.
 5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
-6. The data should be stored locally and should be in a human editable text file.
+6. The data should be stored locally and should be in a human editable file.
 7. Package everything into a single JAR file.
 
 ### Glossary
 
-* **Student**: A person receiving tuition from the tutor.
-* **Lesson**: A scheduled teaching session between tutor and one or more students.
-* **Attendance**: A record of whether a student was present or absent for a lesson.
-* **Outstanding Fees**: Tuition fees owed by a student that are not yet paid.
-* **MVP (Minimum Viable Product)**: The smallest functional version of StudentConnect that delivers core value to users.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others
+* **Student**: A person receiving tuition from the tutor
+* **Tutor**: A person giving tuition
+* **Tag**: An identifier given to student
+* **Lesson**: A scheduled teaching session between tutor and student
+* **Attendance**: Record of whether a student was present or absent for a lesson
+* **Schedule**: Timetable of lessons
+* **Outstanding Fee**: Tuition fee owed by a student that are not yet paid
+* **Payment**: A record of transaction from student to tutor
+* **Payment History**: Record of all past transactions
 
 --------------------------------------------------------------------------------------------------------------------
 
