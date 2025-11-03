@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch
+### Launching
 
 1. Initial launch
 
