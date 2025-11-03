@@ -647,6 +647,10 @@ application before running the application again.
 2. **Help Window**: If you minimize the help window and then run the `help` command (or use the `Help` menu, or the
 keyboard shortcut `F1`) again, the original Help Window will remain minimized. You should just restore the help window
 manually.
+3. **Large Index**: If you enter index larger than 2,147,483,647 but smaller than the size of the list, there will be an
+error. You should just keep the list smaller than 2,147,483,647 as it is unlikely that you have 2,147,483,647 students.
+4. **Missing Prefix**: If you enter a command with a required prefix missing, it will show an error message. This message
+is not specific to the required prefix. You should just find out which prefix is missing and fix it manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
