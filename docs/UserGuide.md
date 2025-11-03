@@ -13,16 +13,17 @@ commands, and your information appears neatly on the screen.
 you from installing the program to getting started. You’ll be up and running in just a few minutes.
 
 <div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
 For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
 Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
 examples so you can easily follow along.
-
+<br>
 For **experienced users**, check out the [_**Command Summary**_](#command-summary) to quickly look up any command
 format.
-
+<br>
 For **troubleshooting or common questions**, check out the [_**FAQ**_](#faq) and [_**Known Issues**_](#known-issues)
 sections at the end.
-
+<br>
 You can jump to any section using the **Table of Contents** below.
 </div>
 
