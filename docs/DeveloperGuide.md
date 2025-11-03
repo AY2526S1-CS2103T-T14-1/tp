@@ -429,10 +429,9 @@ Use case ends.
       Use case ends.
 
 * 2b. Some entries are linked to students that were deleted or corrupted.
-
-    * 2b1. System skips invalid entries and logs a warning.
-    * 2b2. System displays remaining valid entries.
   
+    * 2b1. System skips those invalid entries (no warning is shown).
+    * 2b2. System displays remaining valid entries.
       Use case ends.
 
 **UC12: Find using tag**
