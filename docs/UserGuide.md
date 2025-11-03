@@ -12,6 +12,7 @@ commands, and your information appears neatly on the screen.
 **_Don’t worry if you’re not good with computers!_** StudentConnect includes clear, step-by-step instructions to guide
 you from installing the program to getting started. You’ll be up and running in just a few minutes.
 
+<div markdown="span" class="alert alert-primary">
 For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
 Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
 examples so you can easily follow along.
@@ -23,6 +24,7 @@ For **troubleshooting or common questions**, check out the [_**FAQ**_](#faq) and
 sections at the end.
 
 You can jump to any section using the **Table of Contents** below.
+</div>
 
 * Table of Contents
 {:toc}
@@ -260,7 +262,7 @@ Example:
 findtag friends
 ```
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="images/FindTag.png" alt="FindTag" style="width:80%;">
+  <img src="images/Findtag.png" alt="Findtag" style="width:80%;">
 </div>
 <p><em>Finds students whose tags partially match <code>friends</code></em></p>
 
