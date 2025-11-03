@@ -23,6 +23,7 @@ Class JsonAdaptedTag
 Class JsonAdaptedLesson
 Class JsonAdaptedAttendance
 Class JsonAdaptedFinance
+Class JsonAdaptedPaymentEntry
 }
 
 }
@@ -44,5 +45,6 @@ JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 JsonAdaptedPerson --> "0..1" JsonAdaptedLesson
 JsonAdaptedPerson --> "0..1" JsonAdaptedFinance
-JsonAdaptedLesson --> JsonAdaptedAttendance
+JsonAdaptedLesson --> "1" JsonAdaptedAttendance
+JsonAdaptedFinance --> "*" JsonAdaptedPaymentEntry
 @enduml

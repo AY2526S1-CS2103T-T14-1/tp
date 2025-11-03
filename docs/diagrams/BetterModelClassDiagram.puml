@@ -14,10 +14,19 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "0..1" Lesson
 Person *--> "0..1" Finance
+
+Lesson *--> "1" LessonName
+Lesson *--> "1" Date
+Lesson *--> "1" Time
+Lesson *--> "1" Location
+Lesson *--> "1" Attendance
+
+Finance *--> "1" FinanceAmount
+Finance *--> "*" PaymentEntry
 @enduml
