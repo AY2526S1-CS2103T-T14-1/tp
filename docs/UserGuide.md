@@ -13,7 +13,7 @@ commands, and your information appears neatly on the screen.
 you from installing the program to getting started. You’ll be up and running in just a few minutes.
 
 <div markdown="1" class="alert alert-primary">
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
 Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
 examples so you can easily follow along.
@@ -58,9 +58,9 @@ You can jump to any section using the **Table of Contents** below.
         ```
    * The app will open in a few seconds and show some sample data so you can try it out.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="1" class="alert alert-primary">
 :bulb: **Tip:**<br>
-Start by typing <code>help</code> and pressing Enter to see this guide anytime you need help!
+Start by typing `help` and pressing Enter to see this guide anytime you need help!
 </div>
 
 ## Command Format
@@ -224,7 +224,7 @@ Example:
 findname alex david
 ```
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="images/findAlexDavidResult.png" alt="findAlexDavidResult" style="width:80%;">
+  <img src="images/Findname.png" alt="Findname" style="width:80%;">
 </div>
 <p><em>Finds students whose names match either <code>alex</code> or <code>david</code></em></p>
 
@@ -242,7 +242,7 @@ findtag TAG_NAME [MORE_TAGNAMES]...
 - The search is case-insensitive.
 - The order of the keywords does not matter.
 - Only the tag is searched.
-- Partial words will be matched. **This is different from `find`.**
+- Partial words will be matched. **This is different from `findname`.**
 - Students matching at least one keyword will be returned (i.e. `OR` search).
 </div> 
 
