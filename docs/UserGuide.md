@@ -12,7 +12,7 @@ commands, and your information appears neatly on the screen.
 **_Don’t worry if you’re not good with computers!_** StudentConnect includes clear, step-by-step instructions to guide
 you from installing the program to getting started. You’ll be up and running in just a few minutes.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="1" class="alert alert-primary">
 For **new users**, start with the [_**Quick Start**_](#quick-start) section to learn how to install and launch the app.
 Then, explore the [_**Features**_](#features) section to discover what you can do. Each command is explained with
 examples so you can easily follow along.
@@ -58,7 +58,7 @@ You can jump to any section using the **Table of Contents** below.
    * The app will open in a few seconds and show some sample data so you can try it out.
 
 <div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong><br>
+:bulb: **Tip:**<br>
 Start by typing <code>help</code> and pressing Enter to see this guide anytime you need help!
 </div>
 
@@ -90,8 +90,8 @@ e.g. `n/NAME p/PHONE` is the same as `p/PHONE n/NAME`.<br>
 * **Extra parameters are ignored** for simple commands like `help`, `list`, `exit` and `clear`.<br>
 e.g. `help 123` will be interpreted as `help`.<br>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong><br>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**<br>
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
 as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -117,8 +117,8 @@ The interface is designed to be intuitive and efficient for managing your studen
 | 9  | Export Student List |
 | 10 | Exit StudentConnect |
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong><br>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**<br>
 You should scroll through long list using the scroll bar.
 </div>
 
@@ -145,17 +145,13 @@ of contacts and events.
 add n/NAME p/PHONE e/EMAIL addr/ADDRESS [tag/TAG]…
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>NAME</code>: Alphanumeric characters with <code>/</code>, <code>'</code>, <code>.</code>, <code>-</code>
-    and spaces only. Maximum 50 characters.</li>
-    <li><code>PHONE</code>: Numbers only, at least 3 digits. Maximum 20 digits.</li>
-    <li><code>EMAIL</code>: Valid email format. Maximum 50 characters.</li>
-    <li><code>ADDRESS</code>: Alphanumeric characters with <code>/</code>, <code>#</code>, <code>-</code>,
-    <code>.</code>, <code>,</code> and spaces only.</li>
-    <li><code>TAG</code>: Alphanumeric characters only. Maximum 15 characters per tag.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `NAME`: Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
+- `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
+- `EMAIL`: Valid email format. Maximum 50 characters.
+- `ADDRESS`: Alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only.
+- `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
 </div>
 
 Example:
@@ -177,25 +173,21 @@ Format:
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [tag/TAG]…
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>NAME</code>: Alphanumeric characters with <code>/</code>, <code>'</code>, <code>.</code>, <code>-</code>
-    and spaces only. Maximum 50 characters.</li>
-    <li><code>PHONE</code>: Numbers only, at least 3 digits. Maximum 20 digits.</li>
-    <li><code>EMAIL</code>: Valid email format. Maximum 50 characters.</li>
-    <li><code>ADDRESS</code>: Alphanumeric characters with <code>/</code>, <code>#</code>, <code>-</code>,
-    <code>.</code>, <code>,</code> and spaces only.</li>
-    <li><code>TAG</code>: Alphanumeric characters only. Maximum 15 characters per tag.</li>
-    <li><strong>At least one</strong> of the optional fields must be provided.</li>
-    <li>To remove all the student’s tags, you should type <code>tag/</code> without specifying any tags after it.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `NAME`: Alphanumeric characters with `/`, `'`, `.`, `-` and spaces only. Maximum 50 characters.
+- `PHONE`: Numbers only, at least 3 digits. Maximum 20 digits.
+- `EMAIL`: Valid email format. Maximum 50 characters.
+- `ADDRESS`: Alphanumeric characters with `/`, `#`, `-`, `.`, `,` and spaces only.
+- `TAG`: Alphanumeric characters only. Maximum 15 characters per tag.
+- **At least one** of the optional fields must be provided.
+- To remove all the student’s tags, you should type `tag/` without specifying any tags after it.
 </div>
 
-<div markdown="span" class="alert alert-warning">
-:warning: <strong>Warning:</strong><br>
-This will <strong>overwrite</strong> the existing tags. Please be <strong>very sure</strong> before you enter the
-command. To <strong>append</strong> a new tag, you should retype existing tags with the new tag to append.
+<div markdown="1" class="alert alert-warning">
+:warning: **Warning:**<br>
+This will **overwrite** the existing tags. Please be **very sure** before you enter the
+command. To **append** a new tag, you should retype existing tags with the new tag to append.
 </div>
 
 Example:
@@ -217,15 +209,13 @@ Format:
 findname KEYWORD [MORE_KEYWORDS]...
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li>The search is case-insensitive.</li>
-    <li>The order of the keywords does not matter.</li>
-    <li>Only the name is searched.</li>
-    <li>Only full words will be matched. <strong>This is different from <code>findtag</code>.</strong></li>
-    <li>Students matching at least one keyword will be returned (i.e. <code>OR</code> search).</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- The search is case-insensitive.
+- The order of the keywords does not matter.
+- Only the name is searched.
+- Only full words will be matched. **This is different from `findtag`.**
+- Students matching at least one keyword will be returned (i.e. `OR` search).
 </div>
 
 Example:
@@ -246,15 +236,13 @@ Format:
 findtag TAG_NAME [MORE_TAGNAMES]...
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li>The search is case-insensitive.</li>
-    <li>The order of the keywords does not matter.</li>
-    <li>Only the tag is searched.</li>
-    <li>Partial words will be matched. <strong>This is different from <code>find</code>.</strong>></li>
-    <li>Students matching at least one keyword will be returned (i.e. <code>OR</code> search).</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- The search is case-insensitive.
+- The order of the keywords does not matter.
+- Only the tag is searched.
+- Partial words will be matched. **This is different from `find`.**
+- Students matching at least one keyword will be returned (i.e. `OR` search).
 </div> 
 
 Example:
@@ -275,16 +263,14 @@ Format:
 delete INDEX
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>INDEX</code>: Refers to the index number shown in the displayed student list (1, 2, 3, …).</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
 </div>
 
-<div markdown="span" class="alert alert-warning">
-️:warning: <strong>Warning:</strong><br>
-This will <strong>delete</strong> the existing student. Please be <strong>very sure</strong> before you enter the command.
+<div markdown="1" class="alert alert-warning">
+️:warning: **Warning:**<br>
+This will **delete** the existing student. Please be **very sure** before you enter the command.
 </div>
 
 Example:
@@ -324,9 +310,9 @@ Format:
 clear
 ```
 
-<div markdown="span" class="alert alert-warning">
-:warning: <strong></strong>Warning:**<br>
-This will <strong>clear</strong> all existing students. Please be <strong>very sure</strong>> before you enter the command.
+<div markdown="1" class="alert alert-warning">
+:warning: ****Warning:**<br>
+This will **clear** all existing students. Please be **very sure** before you enter the command.
 </div>
 
 Example:
@@ -349,21 +335,19 @@ Format:
 addlesson INDEX n/NAME d/DAY t/TIME loc/LOCATION
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>INDEX</code>: Refers to the index number shown in the displayed student list (1, 2, 3, …).</li>
-    <li><code>NAME</code>: Alphanumeric characters only.</li>
-    <li><code>DAY</code>: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> or <code>Sunday</code> (case-insensitive).</li>
-    <li><code>TIME</code>: In <strong>hh:mm</strong> format.</li>
-    <li><code>LOCATION</code>: Alphanumeric characters only.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+- `NAME`: Alphanumeric characters only.
+- `DAY`: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or `Sunday` (case-insensitive).
+- `TIME`: In **hh:mm** format.
+- `LOCATION`: Alphanumeric characters only.
 </div>
 
-<div markdown="span" class="alert alert-warning">
-:warning: <strong>Warning:</strong><br>
-A student can only have <strong>1</strong> lesson. This will <strong>overwrite</strong> any existing lesson for the student. Please be
-<strong>very sure</strong> before you enter the command.
+<div markdown="1" class="alert alert-warning">
+:warning: **Warning:**<br>
+A student can only have **1** lesson. This will **overwrite** any existing lesson for the student. Please be
+**very sure** before you enter the command.
 </div>
 
 Example:
@@ -385,12 +369,10 @@ Format:
 mark INDEX s/STATUS
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>INDEX</code>: Refers to the index number shown in the displayed student list (1, 2, 3, …).</li>
-    <li><code>STATUS</code>: <code>present</code> or <code>absent</code> (case-insensitive).</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+- `STATUS`: `present` or `absent` (case-insensitive).
 </div>
 
 Example:
@@ -411,13 +393,11 @@ Format:
 schedule
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li>This uses your computer’s current date to determine the week window.</li>
-    <li>Only lessons that fall within this week (Mon–Sun) are shown, sorted by day and time.</li>
-    <li>If there are no lessons this week, an empty schedule message is displayed.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- This uses your computer’s current date to determine the week window.
+- Only lessons that fall within this week (Mon–Sun) are shown, sorted by day and time.
+- If there are no lessons this week, an empty schedule message is displayed.
 </div>
 
 Example:
@@ -440,13 +420,11 @@ Format:
 addfee INDEX amt/AMOUNT
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>INDEX</code>: Refers to the index number shown in the displayed student list (1, 2, 3, …).</li>
-    <li><code>AMOUNT</code>: A number up to 2 decimal places between 0.00 and 1,000,000.00 (inclusive). Maximum outstanding amount
-    is $1,000,000.00.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+- `AMOUNT`: A number up to 2 decimal places between 0.00 and 1,000,000.00 (inclusive). Maximum outstanding amount
+is $1,000,000.00.
 </div>
 
 Example:
@@ -467,12 +445,10 @@ Format:
 pay INDEX amt/AMOUNT
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li><code>INDEX</code>: Refers to the index number shown in the displayed student list (1, 2, 3, …).</li>
-    <li><code>AMOUNT</code>: A number up to 2 decimal places between 0.00 and current owed amount (inclusive).</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- `INDEX`: Refers to the index number shown in the displayed student list (1, 2, 3, …).
+- `AMOUNT`: A number up to 2 decimal places between 0.00 and current owed amount (inclusive).
 </div>
 
 Example:
@@ -493,8 +469,8 @@ Format:
 payments
 ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong><br>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**<br>
 This shows payment history sorted by latest.
 </div>
 
@@ -539,14 +515,12 @@ manually.
 1. Go to `File->Import`.
 2. Select the `.json` file that you want to import.
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li>On success, the imported data will overwrite current data.</li>
-    <li>On failure, an error message will appear and no data is changed.</li>
-    <li>Only JSON files following StudentConnect's format will be accepted.</li>
-    <li>You should create a backup using export.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- On success, the imported data will overwrite current data.
+- On failure, an error message will appear and no data is changed.
+- Only JSON files following StudentConnect's format will be accepted.
+- You should create a backup using export.
 </div>
 
 ### Exporting data file
@@ -556,13 +530,11 @@ manually.
 1. Go to `File->Export`.
 2. Choose the folder that you want to export the file to.
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong>
-<ul>
-    <li>Exported files can be used on any computer with StudentConnect.</li>
-    <li>Export does not change your current data.</li>
-    <li>You can keep multiple timestamped exports as backups.</li>
-</ul>
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**
+- Exported files can be used on any computer with StudentConnect.
+- Export does not change your current data.
+- You can keep multiple timestamped exports as backups.
 </div>
 
 ### Editing data file
@@ -570,8 +542,8 @@ manually.
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/StudentConnect.json`. Advanced users
 are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
-:warning: <strong>Warning:</strong><br>
+<div markdown="1" class="alert alert-warning">
+:warning: **Warning:**<br>
 If your changes to the data file makes its format invalid, StudentConnect will discard the invalid data and only load
 the valid data. Hence, it is recommended to take a backup of the file before editing it. Furthermore, certain edits
 can cause the StudentConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
@@ -586,9 +558,9 @@ Therefore, edit the data file only if you are confident that you can update it c
 
 Format: `exit`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: <strong>Tip:</strong><br>
-There are other ways to exit the program, such as <code>File->Exit</code> or <code>X</code> button.
+<div markdown="1" class="alert alert-primary">
+:bulb: **Tip:**<br>
+There are other ways to exit the program, such as `File->Exit` or `X` button.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
