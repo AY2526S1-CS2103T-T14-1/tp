@@ -17,9 +17,9 @@ AI was used throughout the development of this project:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting Up_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -87,7 +87,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -118,7 +118,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -161,7 +161,7 @@ Note that:
 </div>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -172,7 +172,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
@@ -180,11 +180,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Supporting Documentation**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation Guide](Documentation.md)
+* [Testing Guide](Testing.md)
+* [Logging Guide](Logging.md)
+* [Configuration Guide](Configuration.md)
+* [DevOps Guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,7 +203,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 **Value Proposition**:
 Enable tutors and teachers to manage student contacts, lessons, and finances **faster and more efficiently** than traditional GUI-based apps.
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -228,7 +228,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tutor    | import student data                                     | save time entering existing records                           |
 | `*`      | tutor    | create groups of students                               | manage group lessons                                          |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `StudentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -573,7 +573,7 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -582,42 +582,451 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Adding Student
 
-1. Deleting a person while all persons are being shown
+1. Adding a student
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01`<br>
+       Expected: Student is added to the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    2. Test case: `add n/Bob Dylan p/99765432 e/bobd@example.com addr/Bo street, block 13, #01-31 tag/friend`<br>
+       Expected: Student is added to the list with a tag.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `add n/Bob Dylan p/99765432 e/bobd@example.com`<br>
+       Expected: No student is added. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Test case: `add n/Bob Dylan p/99765432 e/bobd@example.com addr/`<br>
+       Expected: No student is added. Error details shown in the status message. Status bar remains the same.
 
-### Adding a person
-1. Adding a person with all fields specified
+    5. Test case: `add`<br>
+       Expected: No student is added. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01`
-      Expected: Person is added to the list.
-    
-   2. Test case: `add n/Bob Dylan p/99765432 e/bobd@example.com addr/Bo street, block 13, #01-31 tag/friend`
-      Expected: Person is added to the list with a tag.
-    
+### Editing Student
+
+1. Editing a student while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. 
+
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: 1st displayed student's name is changed to `John Doe`.
+
+    3. Test case: `edit 1 tag/`<br>
+       Expected: 1st displayed student's tags are removed.
+
+    4. Test case: `edit 1 n/`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `edit -1 n/John Doe`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `edit 1`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `edit n/John Doe`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `edit`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+
+2. Editing a student while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: 1st displayed student's name is changed to `John Doe`.
+
+    3. Test case: `edit 1 tag/`<br>
+       Expected: 1st displayed student's tags are removed.
+
+    4. Test case: `edit 1 n/`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `edit -1 n/JohnDoe`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `edit 1`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `edit n/John Doe`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `edit`<br>
+       Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+
+### Finding Students By Name
+
+1. Finding a student by name
+
+    1. Prerequisites: List all students using the `list` command. Multiple students with names `David` and `Alex` in the list.
+
+    2. Test case: `findname David`<br>
+       Expected: All students whose names matching `David` are displayed.
+
+    3. Test case: `findname David Alex`<br>
+       Expected: All students whose names matching `David` or `Alex` are displayed.
+
+    4. Test case: `findname`<br>
+       Expected: Error details shown in the status message. Status bar remains the same.
+
+### Finding Students By Tag
+
+1. Finding a student by tag
+
+    1. Prerequisites: List all students using the `list` command. Multiple students with `Physics` and `Math` tags in the list.
+
+    2. Test case: `findtag Physics`<br>
+       Expected: All students whose tags matching `Physics` are displayed.
+
+    3. Test case: `findtag Physics Math`<br>
+       Expected: All students whose tags matching `Physics` or `Math` are displayed.
+
+    4. Test case: `findtag`<br>
+       Expected: Error details shown in the status message. Status bar remains the same.
+
+### Deleting Student
+
+1. Deleting a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+   2. Test case: `delete 1`<br>
+      Expected: First displayed contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   3. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+   4. Test case: `delete`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+2. Deleting a student while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `delete 1`<br>
+       Expected: First displayed contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+    3. Test case: `delete 0`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `delete`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Listing All Students
+
+1. Listing all students
+
+    1. Prerequisites: Multiple students in the list.
+
+    2. Test case: `list`<br>
+       Expected: All students are listed.
+
+### Clearing All Students
+
+1. Clearing all students
+
+    1. Prerequisites: Multiple students in the list.
+
+    2. Test case: `clear`<br>
+       Expected: All students are cleared.
+
+### Adding Lesson
+
+1. Adding a lesson while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `addlesson 1 n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: A lesson with name `Math` on `Monday` `12:00` at `RoomA` is added to the first displayed contact.
+
+    3. Test case: `addlesson 1 n/Math d/Monday t/12:00`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `addlesson 1 n/ d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `addlesson -1 n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `addlesson 1`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `addlesson n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `addlesson`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+2. Adding a lesson while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `addlesson 1 n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: A lesson with name `Math` on `Monday` `12:00` at `RoomA` is added to the first displayed contact.
+
+    3. Test case: `addlesson 1 n/Math d/Monday t/12:00`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `addlesson 1 n/ d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `addlesson -1 n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `addlesson 1`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `addlesson n/Math d/Monday t/12:00 loc/RoomA`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `addlesson`<br>
+       Expected: No lesson is added. Error details shown in the status message. Status bar remains the same.
+
+### Marking Attendance
+
+1. Marking an attendance while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `mark 1 s/present`<br>
+       Expected: Marks the first displayed contact as present.
+
+    3. Test case: `mark 1 s/late`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `mark 1 s/`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `mark -1 s/present`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `mark 1`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `mark s/present`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `mark`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+2. Marking an attendance while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `mark 1 s/present`<br>
+       Expected: Marks the first displayed contact as present.
+
+    3. Test case: `mark 1 s/late`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `mark 1 s/`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `mark -1 s/present`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `mark 1`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `mark s/present`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `mark`<br>
+       Expected: No attendance is marked. Error details shown in the status message. Status bar remains the same.
+
+### Viewing Weekly Schedule
+
+1. Viewing weekly schedule
+
+    1. Prerequisites: There are some lessons for some students.
+
+    2. Test case: `schedule`<br>
+       Expected: A popup window with the schedule is shown.
+
+### Adding Outstanding Fee
+
+1. Adding an outstanding fee while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `addfee 1 amt/100`<br>
+       Expected: Adds fee of $100 to the first displayed contact.
+
+    3. Test case: `addfee 1 amt/-100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `addfee 1 amt/`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `addfee -1 amt/100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `addfee 1`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `addfee amt/100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `addfee`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+2. Adding an outstanding fee while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `addfee 1 amt/100`<br>
+       Expected: Adds fee of $100 to the first displayed contact.
+
+    3. Test case: `addfee 1 amt/-100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `addfee 1 amt/`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `addfee -1 amt/100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `addfee 1`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `addfee amt/100`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `addfee`<br>
+       Expected: No fee is added. Error details shown in the status message. Status bar remains the same.
+
+### Adding Payment
+
+1. Recording a payment made while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `pay 1 amt/100`<br>
+       Expected: Deducts $100 from the first displayed contact's owed amount.
+
+    3. Test case: `pay 1 amt/-100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `pay 1 amt/`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `pay -1 amt/100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `pay 1`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `pay amt/100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `pay`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+2. Recording a payment made while some students are being shown
+
+    1. Prerequisites: List some students using the `findname` command. Multiple students in the list.
+
+    2. Test case: `pay 1 amt/100`<br>
+       Expected: Deducts $100 from the first displayed contact's owed amount.
+
+    3. Test case: `pay 1 amt/-100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `pay 1 amt/`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `pay -1 amt/100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    6. Test case: `pay 1`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    7. Test case: `pay amt/100`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+    8. Test case: `pay`<br>
+       Expected: No payment is recorded. Error details shown in the status message. Status bar remains the same.
+
+### Viewing Payment History
+
+1. Viewing payment history
+
+    1. Prerequisites: There are some recorded payments for some students.
+
+    2. Test case: `payments`<br>
+       Expected: A popup window with the payment history is shown.
+
+### Viewing Outstanding Payments
+
+1. Viewing outstanding payments
+
+    1. Prerequisites: There are some outstanding payments for some students.
+
+    2. Test case: `outstanding`<br>
+       Expected: A popup window with the outstanding payments is shown.
+
+### Saving Data
+
+1. Relaunch the app
+
+    1. Prerequisites: Multiple students in the list.
+
+    2. Relaunch the app.<br>
+       Expected: The students remains in the list.
+
+### Importing Data File
+
+1. Import the list of students
+
+    1. Prerequisites: A `.json` file in StudentConnect format.
+
+    2. Go to `File->Import`.<br>
+       Expected: The students in the selected `.json` file are imported into StudentConnect.
+
+### Exporting Data File
+
+1. Export the list of students
+
+    1. Prerequisites: Multiple students in the list.
+
+    2. Go to `File->Export`.<br>
+       Expected: A `.json` file containing all the students is exported to the destination selected.
+
+### Editing Data File
+
+1. Corrupted data
+
+    1. Prerequisites: The data file contains corrupted entries.
+
+    2. Launch the app.<br>
+       Expected: The students that are corrupted are skipped and the others are loaded.
+
+### Exiting
+
+1. Exiting the program
+
+    1. Test case: `exit`<br>
+       Expected: The program closes and exits.
+
+    2. Test case: `File->Exit`<br>
+       Expected: The program closes and exits.
+
+    3. Test case: `X` button<br>
+       Expected: The program closes and exits.
