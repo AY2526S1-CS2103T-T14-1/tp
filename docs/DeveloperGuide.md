@@ -508,7 +508,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. No Payment record exist.
+* 2a. No payment record exist.
 
     * 2a1. System displays “No payments records found.”
 
