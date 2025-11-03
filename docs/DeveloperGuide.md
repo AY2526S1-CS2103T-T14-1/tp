@@ -467,7 +467,6 @@ Use case ends.
 * **Student**: A person receiving tuition from the tutor.
 * **Lesson**: A scheduled teaching session between tutor and one or more students.
 * **Attendance**: A record of whether a student was present or absent for a lesson.
-* **Progress Tracking**: A feature that allows tutors to note student learning milestones and monitor improvement.
 * **Outstanding Fees**: Tuition fees owed by a student that are not yet paid.
 * **MVP (Minimum Viable Product)**: The smallest functional version of StudentConnect that delivers core value to users.
 
