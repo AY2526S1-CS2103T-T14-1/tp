@@ -465,7 +465,7 @@ pay 1 amt/150
 
 ### Viewing payment history : `payments`
 
-**Shows the payment history** in StudentConnect.
+Shows **all recorded payments** across all students, from **newest to oldest**, grouped by date, and includes a final total. in StudentConnect.
 
 Format:
 ```
@@ -474,7 +474,7 @@ payments
 
 <div markdown="1" class="alert alert-primary">
 :bulb: **Tip:**<br>
-This shows payment history sorted by latest.
+Payments on the same date are shown under that date. A final line like <code>Total paid: 100.00</code>
 </div>
 
 Example:
@@ -483,7 +483,7 @@ payments
 ```
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="images/Payments.png" alt="Payments" style="width:80%;">
-  <p><em>Shows the payment history</em></p>
+  <p><em>Shows the payment history grouped by date, newest first, with a total</em></p>
 </div>
 
 ### Viewing outstanding payments : `outstanding`

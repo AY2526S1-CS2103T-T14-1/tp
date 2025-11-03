@@ -18,7 +18,6 @@ public class JsonAdaptedPaymentEntry {
     private final String date;
     private final String time;
     private final String amount;
-    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedPaymentEntry} from individual JSON properties.
@@ -26,17 +25,14 @@ public class JsonAdaptedPaymentEntry {
      * @param date   payment date in ISO-8601 (yyyy-MM-dd)
      * @param time   payment time in ISO-8601 (HH:mm:ss); may be null
      * @param amount payment amount as string with up to 2 dp
-     * @param note   optional note; may be null
      */
     @JsonCreator
     public JsonAdaptedPaymentEntry(@JsonProperty("date") String date,
                                     @JsonProperty("time") String time,
-                                    @JsonProperty("amount") String amount,
-                                    @JsonProperty("note") String note) {
+                                    @JsonProperty("amount") String amount) {
         this.date = date;
         this.time = time;
         this.amount = amount;
-        this.note = note == null ? "" : note;
     }
 
     /**
@@ -47,7 +43,6 @@ public class JsonAdaptedPaymentEntry {
     public JsonAdaptedPaymentEntry(PaymentEntry src) {
         this.date = src.getDate().toString();
         this.amount = src.getAmount().toString();
-        this.note = src.getNote();
         this.time = src.getTime().toString();
     }
 
@@ -75,8 +70,6 @@ public class JsonAdaptedPaymentEntry {
         }
         final FinanceAmount modelAmount = new FinanceAmount(amount);
 
-        final String modelNote = note == null ? "" : note;
-
-        return new PaymentEntry(modelDate, modelTime, modelAmount, modelNote);
+        return new PaymentEntry(modelDate, modelTime, modelAmount);
     }
 }
