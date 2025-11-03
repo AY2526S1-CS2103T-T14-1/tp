@@ -611,33 +611,33 @@ search your computer for `studentconnect.jar`.
 
 **Q**: I can’t type or paste properly in the Command Prompt.<br>
 **A**: Try clicking inside the Command Prompt window first. To paste text:
-* **Windows**: Right-click anywhere in the window.
-* **Mac Terminal**: Press Command + V.
+* **Windows**: **Right-click** anywhere in the window.
+* **Mac Terminal**: Press **Command + V**.
 
 **Q**: I don’t understand what `cd` means.<br>
-**A**: `cd` means “change directory.” It tells your computer to go into a specific folder.
+**A**: `cd` means **“change directory”**. It tells your computer to go into a specific folder.
 
 **Q**: Do I have to type everything exactly the same as in the examples?<br>
-**A**: Not exactly, you can replace words like NAME or ADDRESS with your own. However, make sure to type the command
-format **exactly** (e.g., spaces and `/` symbols matter).
+**A**: **Not exactly**, you can replace words like NAME or ADDRESS with your own. However, make sure to type the command
+format exactly (e.g., spaces and `/` symbols matter).
 
 **Q**: Can I close the app by clicking the “X” button instead of typing `exit`?<br>
-**A**: Yes! Both work. You can click the **X** in the top-right corner of the window or type `exit` and press **Enter**.
+**A**: **Yes!** Both work. You can click the **X** in the top-right corner of the window or type `exit` and press **Enter**.
 
 **Q**: Will I lose my data if I close the app?<br>
-**A**: No. StudentConnect automatically saves your data every time you make a change, even if you close the app without
+**A**: **No.** StudentConnect **automatically** saves your data every time you make a change, even if you close the app without
 typing `exit`.
 
 **Q**: What should I do if the app doesn’t open?<br>
 **A**: Try these steps one by one:
 1. Check that **Java 17 or newer** is installed.
-2. Make sure you typed the command correctly:
+2. Make sure you typed the command **correctly**:
 ```bash
 java -jar studentconnect.jar
 ```
 3. If it still doesn’t work, move the `.jar` file to a simple folder like `C:\StudentConnect` (Windows) or `Documents`
 (Mac) and try again. 
-4. If the error message mentions Java, reinstall Java from the links in the **Quick Start** section.
+4. If the error message mentions Java, **reinstall Java** from the links in the **Quick Start** section.
 
 **Q**: How can I make a backup of my data?<br>
 **A**: Use the **Export** option (`File -> Export`) and save the file somewhere safe, like your Desktop or a USB drive.
@@ -652,15 +652,15 @@ You can import it later if anything goes wrong.
 file if you have one.
 
 **Q**: The screen looks too small or too big. How do I fix it?<br>
-**A**: You can resize the window by clicking and dragging its corners. If the text is too small, you can increase your
+**A**: You can resize the window by **clicking and dragging its corners**. If the text is too small, you can increase your
 computer’s display zoom in the system settings.
 
 **Q**: What should I do if I see a lot of red error messages?<br>
-**A**: Don’t worry! It just means the app couldn’t understand your command. Read the message, it usually tells you what
+**A**: **Don’t worry!** It just means the app couldn’t understand your command. Read the message, it usually tells you what
 went wrong. You can also type `help` to see the correct command format.
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and import the data file that is exported by your previous StudentConnect.
+**A**: Install the app in the other computer and **import the data file that is exported** by your previous StudentConnect.
 
 --------------------------------------------------------------------------------------------------------------------
 
