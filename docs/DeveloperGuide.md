@@ -538,13 +538,15 @@ Use case ends.
      
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `17` installed.
-2. Should be able to hold up to 1000 persons with 1 second response time for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The interface should follow familiar patterns (e.g., similar to phone contacts apps). Aim for a learnability time of under 5 minutes for new users.
-5. Graceful handling of failures (e.g., invalid email entry) with user-friendly messages, plus backend logs for quick debugging.
-6. The data should be stored locally and should be in a human editable file.
-7. Package everything into a single JAR file.
+1. Should work on any mainstream OS as long as it has Java 17 installed.
+2. Should be able to hold up to 1000 persons with < 100 ms response time for typical usage.
+3. Should be faster to execute commands using keyboard than using mouse.
+4. Should have learnability time of under 5 minutes for new users.
+5. Should have graceful handling of failures.
+6. Should have backend logs for quick debugging.
+7. Should have local storage of data.
+8. Should have human editable data.
+9. Should be packaged into a single JAR file.
 
 ### Glossary
 
