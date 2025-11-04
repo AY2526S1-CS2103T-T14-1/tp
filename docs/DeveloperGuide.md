@@ -508,7 +508,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. No Payment record exist.
+* 2a. No payment record exist.
 
     * 2a1. System displays “No payments records found.”
 
@@ -544,7 +544,7 @@ Use case ends.
 * *a. At any time, Actor cancels the operation.
 
   Use case ends.
-     
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 17 installed.
@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch
+### Launching
 
 1. Initial launch
 
@@ -621,7 +621,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. 
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     2. Test case: `edit 1 n/John Doe`<br>
        Expected: 1st displayed student's name is changed to `John Doe`.
@@ -1030,3 +1030,10 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `X` button<br>
        Expected: The program closes and exits.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Handling of index larger than 2,147,483,647 but smaller than the size of the list.
+2. Specific error message with missing required prefix.
